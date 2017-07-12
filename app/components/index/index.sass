@@ -1,10 +1,22 @@
 video
-  width: 100%
+  transform: translateX(-50%) translateY(-50%)
+  position: absolute
+  top: 50%
+  left: 50%
+  min-width: 100%
+  min-height: 100%
+  width: auto
+  height: auto
+  background: #000
+
+.super-wrapper
+  height: 100vh
+  overflow: hidden
+  position: relative
 
 .control
   position: absolute
   text-align: center
-  background: red
   color: white
   width: 25rem
   height: 25rem
@@ -49,7 +61,6 @@ video
 .control__item
   cursor: pointer
   position: absolute
-  // background: rgba(255,255,255,.2)
   font: 1rem sans-serif
   font-weight: bold
   color: rgba(0,0,0,.5)
@@ -153,6 +164,7 @@ $blocks: 8
   text-align: center
   img
     opacity: 0
+    width: 100%
     animation: 1s fadeIn forwards
   &__text
     opacity: 0
@@ -243,6 +255,7 @@ $blocks: 8
 .kitchen
   text-align: center
   img
+    width: 100%
     opacity: 0
     animation: 1s fadeIn forwards
   &__text
@@ -255,7 +268,7 @@ $blocks: 8
     animation: 1s fadeIn forwards 1s
   .back-button
     opacity: 0
-    top: -50px
+    top: 20px
     position: absolute
     animation: 1s fadeIn forwards
 

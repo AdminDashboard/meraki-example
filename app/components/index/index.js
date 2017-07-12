@@ -20,9 +20,7 @@ function component() {
 	video.currentTime = 0;
 
 	video.addEventListener('play', function(e) {
-		var wait = true;
 		var time = 0;
-		var waitIterations = 0;
 
 		if (playItemMode === 'duration') {
 			time = TIMING[playItem]['duration'] / 1000 + TIMING[playItem]['startTime'];
@@ -31,7 +29,6 @@ function component() {
 		}
 
 		var interval = setInterval(() => {
-			console.log(video.currentTime, time);
 			if (video.currentTime >= time) {
 				video.pause();
 				clearInterval(interval);
@@ -48,35 +45,51 @@ function component() {
 	});
 
 	$('.back-button').click(function () {
-		$('.content__item').hide();
-		$('.control').removeClass('disabled');
-		goToNeutral();
+		goBackToHomeNav();
 	});
 
 	// append images
 	$('.about__image').append(`<img src='${aboutLogo}' alt='logo' />`);
 	$('.table-image').append(`<img src='${tableImage}' alt='logo' />`);
 
+	function goBackToHomeNav() {
+		$('.content__item').hide();
+		$('.control').removeClass('disabled');
+		goToNeutral();
+	}
+
 	function goToNeutral() {
 		playItem = lastItem;
 		playItemMode = 'fadeDuration';
 		lastItem = null;
-		video.currentTime = TIMING[playItem].fadeTime;
-		setTimeout(() => {
-			video.play();
-		}, 600);
+		video.play();
 	}
+
+	document.addEventListener('click', function () {
+		if ($('.control').hasClass('disabled')) {
+			goBackToHomeNav()
+		}
+	});
+
+	document.querySelector('.control, .content')
+		.addEventListener('click', function (e) {
+			e.stopPropagation();
+		});
 
 	return video;
 }
 
 function jumpToItem(e, video) {
 	var menuItem = e.target.getAttribute('data-item');
+
+	if (!menuItem) {
+		return;
+	}
+
 	$('.control').addClass('disabled');
 	setTimeout(() => $('.' + menuItem).show(), 1000);
 
 	if (lastItem) {
-		console.log('last item');
 		currentItem = menuItem;
 		playItem = lastItem;
 		playItemMode = 'fadeDuration';
@@ -90,6 +103,7 @@ function jumpToItem(e, video) {
 				playItemMode = 'duration';
 				video.play();
 				lastItem = menuItem;
+				video.currentTime = TIMING[playItem].fadeTime;
 			}, 1000);
 		}, 600);
 	} else {
@@ -104,4 +118,4 @@ function jumpToItem(e, video) {
 
 }
 
-document.body.appendChild(component());
+document.querySelector('.super-wrapper').appendChild(component());
