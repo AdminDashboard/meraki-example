@@ -8,6 +8,13 @@
 					</div>
 				</div>
 			</div>
+			<div class='section'>
+				<div class="products-grid">
+					<div class='products-grid__item' v-for='item in items.slice(0, 7)'>
+						<img v-bind:src='item.pic'>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 </template>
