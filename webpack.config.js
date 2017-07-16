@@ -8,6 +8,11 @@ module.exports = {
 		filename: 'bundle.js',
 		path: path.resolve(__dirname, 'app/dist')
 	},
+	resolve: {
+		alias: {
+			vue: 'vue/dist/vue.js'
+		}
+	},
 	plugins: [
 		new HtmlWebpackPlugin({
 			title: 'title',
@@ -23,6 +28,17 @@ module.exports = {
 	},
 	module: {
 		rules: [
+			{
+				test: /\.vue$/,
+				loader: 'vue-loader',
+				options: {
+					loaders: {
+						js: 'babel-loader',
+						scss: 'css!sass'
+					},
+					postcss: [require('postcss-cssnext')()],
+				}
+			},
 			{
 				test: /\.js$/,
 				exclude: /node_modules/,
@@ -43,7 +59,6 @@ module.exports = {
 							return [
 								require('postcss-import')({ root: loader.resourcePath }),
 								require('postcss-cssnext')(),
-								require('autoprefixer')(),
 								require('cssnano')()
 							]
 						}
