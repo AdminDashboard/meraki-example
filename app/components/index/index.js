@@ -2,9 +2,9 @@ import 'normalize.css';
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import $ from 'jquery';
-import Home from './app.vue';
-import Products from '../products/app.vue';
-import Product from '../product/app.vue';
+import Home from './home.vue';
+import Products from '../products/products.vue';
+import Product from '../product/product.vue';
 
 window.$ = window.jQuery = $;
 

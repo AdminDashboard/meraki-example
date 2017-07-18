@@ -1,5 +1,5 @@
 <template>
-	<div id='app'>
+	<div id='product'>
 		<header-nav></header-nav>
 		<div class="product">
 			<h1 class="product__title">product<br/>title</h1>
