@@ -1,0 +1,68 @@
+.dropdown-menu
+  position: relative
+  &__content
+    background: rgba(0,0,0,.2)
+    position: absolute
+    left: -180px
+    width: 240px
+    top: 47px
+    display: none
+  &__list
+    padding: 0
+    margin: 0
+  &__item
+    list-style: none
+  &__link
+    text-decoration: none
+    color: #fff
+    text-transform: uppercase
+    font-family: sans-serif
+    font-weight: lighter
+    padding: 10px
+    display: block
+    letter-spacing: 1px
+    &:hover
+      background: rgba(0,0,0,.2)
+  &__trigger
+    top: -5px
+    display: inline-block
+    cursor: pointer
+    position: relative
+    background: #fff
+    width: 35px
+    height: 5px
+    transition: all .3s ease-in-out
+    &:before
+      content: ''
+      position: absolute
+      background: #fff
+      width: 35px
+      height: 5px
+      top: -10px
+      transition: all .3s ease-in-out
+    &:after
+      content: ''
+      position: absolute
+      background: #fff
+      width: 35px
+      height: 5px
+      top: 10px
+      transition: all .3s ease-in-out
+    &_active
+      transform: rotate(45deg)
+      &:before
+        transform: rotate(90deg) translateX(10px)
+      &:after
+        opacity: 0
+
+.dropdown-menu__content_active
+  display: block
+  animation: .5s fadeUp forwards
+
+@keyframes fadeUp
+  0%
+    opacity: 0
+    transform: translateY(10px)
+  100%
+    opacity: 1
+    transform: translateY(0)

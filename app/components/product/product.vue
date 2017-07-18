@@ -39,7 +39,7 @@
 import './product.sass';
 import table from '../index/table.png';
 
-import Nav from '../nav/app.vue';
+import Nav from '../nav/nav.vue';
 
 export default {
 	data () {

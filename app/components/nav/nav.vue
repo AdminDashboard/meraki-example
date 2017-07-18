@@ -19,6 +19,7 @@
 			<div class="nav-logo">
 				<img v-bind:src="logo">
 			</div>
+			<dropdown-menu></dropdown-menu>
 		</div>
 	</div>
 </template>
@@ -27,12 +28,23 @@
 import './nav.sass';
 import logo from '../index/logo.png';
 
+import dropdown from './dropdown-menu/dropdown-menu.vue';
+
 export default {
 	data () {
 		return {
 			logo: logo,
+			dropdown: false,
 			items: []
 		}
+	},
+	methods: {
+		toggleDropdown() {
+			this.dropdown = this.dropdown ? false : true;
+		}
+	},
+	components: {
+		'dropdown-menu': dropdown
 	}
 }
 </script>

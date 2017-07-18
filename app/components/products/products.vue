@@ -26,7 +26,7 @@ import 'fullpage.js/dist/jquery.fullpage.js';
 import table from './table2.png';
 import hover from './hover.png';
 
-import Nav from '../nav/app.vue';
+import Nav from '../nav/nav.vue';
 
 export default {
 	data () {

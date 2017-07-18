@@ -69,7 +69,7 @@ import TIMING from './timing.js';
 import tableImage from './table.png';
 import aboutLogo from './logo-2.png';
 
-import Nav from '../nav/app.vue';
+import Nav from '../nav/nav.vue';
 
 export default {
 	data () {
