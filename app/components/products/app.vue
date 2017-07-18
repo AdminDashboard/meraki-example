@@ -1,5 +1,6 @@
 <template>
-	<div id='app'>
+	<div id='products'>
+		<header-nav></header-nav>
 		<div id='fullpage-grid'>
 			<div class='section'>
 				<div class="products-grid">
@@ -24,6 +25,8 @@ import './products.sass';
 import 'fullpage.js/dist/jquery.fullpage.js';
 import table from './table2.png';
 import hover from './hover.png';
+
+import Nav from '../nav/app.vue';
 
 export default {
 	data () {
@@ -66,6 +69,9 @@ export default {
 	},
 	destroyed () {
 		$.fn.fullpage.destroy('all');
+	},
+	components: {
+		'header-nav': Nav
 	}
 }
 </script>

@@ -1,5 +1,6 @@
 <template>
 	<div class='videoComponent'>
+		<header-nav></header-nav>
 		<div class='control'>
 			<ul>
 				<li class='control__item'
@@ -67,6 +68,8 @@ import videoFile from './BG.mp4';
 import TIMING from './timing.js';
 import tableImage from './table.png';
 import aboutLogo from './logo-2.png';
+
+import Nav from '../nav/app.vue';
 
 export default {
 	data () {
@@ -155,6 +158,9 @@ export default {
 				this.lastItem = to;
 			}
 		}
+	},
+	components: {
+		'header-nav': Nav
 	}
 }
 </script>
