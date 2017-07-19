@@ -7,10 +7,10 @@
 						<a href="#/" class="box-menu__link">home</a>
 					</li>
 					<li class="box-menu__item">
-						<a href="#/product" class="box-menu__link">products</a>
+						<a href="#/product" class="box-menu__link">product</a>
 					</li>
 					<li class="box-menu__item">
-						<a href="#/products" class="box-menu__link">product</a>
+						<a href="#/products" class="box-menu__link">products</a>
 					</li>
 				</ul>
 			</div>
