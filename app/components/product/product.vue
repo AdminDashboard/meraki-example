@@ -1,6 +1,6 @@
 <template>
 	<div id='product'>
-		<header-nav></header-nav>
+		<header-nav nav-style="black"></header-nav>
 		<div class="product">
 			<h1 class="product__title">product<br/>title</h1>
 			<div class="product__image"><img v-bind:src='table'></div>
@@ -30,6 +30,7 @@
 				</div>
 			</div>
 			<div class="product__section product__section_form">
+				<form-component></form-component>
 			</div>
 		</div>
 	</div>
@@ -40,6 +41,7 @@ import './product.sass';
 import table from '../index/table.png';
 
 import Nav from '../nav/nav.vue';
+import Form from '../form/form.vue';
 
 export default {
 	data () {
@@ -50,7 +52,8 @@ export default {
 		}
 	},
 	components: {
-		'header-nav': Nav
+		'header-nav': Nav,
+		'form-component': Form
 	}
 }
 </script>

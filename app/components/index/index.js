@@ -5,6 +5,8 @@ import $ from 'jquery';
 import Home from './home.vue';
 import Products from '../products/products.vue';
 import Product from '../product/product.vue';
+import 'font-awesome/css/font-awesome.css';
+import './fonts/fonts.sass';
 
 window.$ = window.jQuery = $;
 

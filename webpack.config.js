@@ -58,8 +58,8 @@ module.exports = {
 						plugins: function (loader) {
 							return [
 								require('postcss-import')({ root: loader.resourcePath }),
-								require('postcss-cssnext')(),
-								require('cssnano')()
+								require('postcss-cssnext')()
+								// require('cssnano')()
 							]
 						}
 					}},
@@ -68,6 +68,12 @@ module.exports = {
 			},
 			{
 				test: /\.(png|svg|jpg|gif|ico|mp4)$/,
+				use: [
+					'file-loader'
+				]
+			},
+			{
+				test: /\.(woff|woff2|eot|ttf|otf)$/,
 				use: [
 					'file-loader'
 				]

@@ -1,6 +1,6 @@
 <template>
 	<div id='products'>
-		<header-nav></header-nav>
+		<header-nav nav-style="black"></header-nav>
 		<div id='fullpage-grid'>
 			<div class='section'>
 				<div class="products-grid">

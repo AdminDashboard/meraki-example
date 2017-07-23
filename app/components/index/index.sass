@@ -61,12 +61,13 @@ video
 .control__item
   cursor: pointer
   position: absolute
-  font: 1rem sans-serif
   font-weight: bold
   color: rgba(0,0,0,.5)
   width: 8rem
   height: 8rem
-  font-weight: lighter
+  font-family: 'Raleway'
+  font-weight: normal
+  font-style: normal
   text-transform: uppercase
   font-size: 20px
   letter-spacing: 2px
@@ -89,14 +90,15 @@ $blocks: 8
     transform: rotate(#{360/$blocks*($i+1) - 90}deg) translateX(0) rotate(#{-360/$blocks*($i+1) + 90}deg)
 
   .control:hover .control__item:nth-child(#{$i + 1})
-    // background: none
     transform: rotate(#{360/$blocks*$i - 90}deg) translateX(200%) rotate(#{-360/$blocks*$i + 90}deg)
     transition-delay: #{$i * 0.04}s, #{$i * 0.08}s
 
 .content
+  font-family: 'Raleway'
+  font-weight: normal
+  font-style: normal
   p
-    font-family: sans-serif
-    font-weight: lighter
+    line-height: 25px
   &__item
     z-index: 2
     position: absolute
@@ -113,12 +115,12 @@ $blocks: 8
     width: 300px
     margin-bottom: 30px
     opacity: 0
-    animation: 1s fadeIn forwards 1s
+    animation: 1s fadeIn forwards .5s
     img
       width: 100%
   &__text
     opacity: 0
-    animation: 1s fadeIn forwards 1s
+    animation: 1s fadeIn forwards .5s
   &:before
     content: ''
     display: block
@@ -126,12 +128,12 @@ $blocks: 8
     width: 3px
     background: #000
     height: 100%
-    animation: about_line 2s
+    animation: about_line .5s
     margin-left: -30px
   .read-more-button
     margin-top: 20px
     opacity: 0
-    animation: 1s fadeIn forwards 1s
+    animation: 1s fadeIn forwards .5s
   .back-button
     position: absolute
     right: -100px
@@ -341,8 +343,10 @@ $blocks: 8
 @keyframes fadeIn
   0%
     opacity: 0
+    transform: translateY(10px)
   100%
     opacity: 1
+    transform: translateY(0)
 
 
 @keyframes about_line

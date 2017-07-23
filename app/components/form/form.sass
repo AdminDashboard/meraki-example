@@ -1,0 +1,73 @@
+.form
+  display: block
+  padding: 50px 10px 10px 10px
+  position: relative
+  &__fields
+    display: flex
+    flex-wrap: wrap
+    justify-content: space-between
+  &__group
+    position: relative
+    border-bottom: 1px solid #ccc
+    &_name, &_email, &_phone
+      width: 32%
+    &_message
+      width: 100%
+      margin-top: 50px
+    &_name, &_email, &_phone, &_message
+      box-sizing: border-box
+      padding: 0px 5px
+  &__input
+    box-sizing: border-box
+    width: 100%
+    border: none
+    font-size: .8em
+    &:focus
+      outline: none
+      + .form__label
+        transform: translateY(-20px)
+        font-size: .8em
+    &_has_value
+      + .form__label
+        transform: translateY(-20px)
+        font-size: .8em
+  &__label
+    position: absolute
+    top: 0px
+    color: #ccc
+    left: 5px
+    font-size: .9em
+    transition: transform .3s ease-in-out
+  &__check-buttons
+    display: flex
+    margin-top: 30px
+  &__check-group
+    position: relative
+    width: 200px
+  &__check-label
+    position: absolute
+    left: 20px
+    font-size: .8em
+    width: 150px
+    color: gray
+    top: 2px
+  &__submit
+    position: absolute
+    cursor: pointer
+    right: 20px
+    bottom: 0px
+    border: none
+    background: none
+    font-size: .9em
+    &:after
+      content: '\f178'
+      margin-left: 10px
+      display: inline-block
+      font-family: FontAwesome
+      transition: transform .3s ease-in-out
+    &:focus
+      outline: none
+    &:hover
+      &:after
+        transform: translateX(5px)
+
