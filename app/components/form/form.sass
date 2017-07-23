@@ -2,7 +2,7 @@
   display: block
   padding: 50px 10px 10px 10px
   position: relative
-  &__fields
+  &__fields, &__type-fields
     display: flex
     flex-wrap: wrap
     justify-content: space-between
@@ -40,17 +40,30 @@
     transition: transform .3s ease-in-out
   &__check-buttons
     display: flex
-    margin-top: 30px
+    margin-top: 60px
   &__check-group
     position: relative
     width: 200px
   &__check-label
     position: absolute
-    left: 20px
+    left: 23px
     font-size: .8em
     width: 150px
     color: gray
+    line-height: 18px
     top: 2px
+  &__type-group
+    cursor: pointer
+    margin-bottom: 60px
+    input
+      display: none
+    input:checked + .form__type-label
+      color: #000
+  &__type-label
+    color: lighten(#ccc, 5%)
+    font-family: 'Ailerons'
+    font-size: 25px
+    transition: color .2s ease-in-out
   &__submit
     position: absolute
     cursor: pointer

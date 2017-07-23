@@ -1,6 +1,16 @@
 <template>
 	<div class="form-wrapper">
 		<form action="" class="form">
+			<div class="form__type-fields">
+				<label class="form__type-group">
+					<input v-model="type" type="radio" value="order" name="type">
+					<span class="form__type-label">custom order</span>
+				</label>
+				<label class="form__type-group">
+					<input v-model="type" type="radio" value="info" name="type">
+					<span class="form__type-label">request more info</span>
+				</label>
+			</div>
 			<div class="form__fields">
 				<label class="form__group form__group_name">
 					<input required type="text" v-model="name" class="form__input" v-bind:class="{'form__input_has_value': name}" name="name">
@@ -44,6 +54,7 @@ import './form.sass';
 export default {
 	data () {
 		return {
+			type: 'order',
 			name: null,
 			email: null,
 			phone: null,
