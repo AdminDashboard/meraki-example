@@ -1,5 +1,5 @@
 <template>
-	<div class="dropdown-menu" v-on:click="toggleDropdown">
+	<div class="dropdown-menu" v-bind:class="wrapperMod" v-on:click="toggleDropdown">
 		<div class="dropdown-menu__trigger" v-bind:class="mods"></div>
 		<div class="dropdown-menu__content" v-bind:class="{'dropdown-menu__content_active': dropdown}">
 			<ul class="dropdown-menu__list">
@@ -30,6 +30,9 @@ export default {
 			return Object.assign({
 				'dropdown-menu__trigger_active': this.dropdown
 			}, modClass);
+		},
+		wrapperMod () {
+			return 'dropdown-menu_' + this.dStyle;
 		}
 	},
 	methods: {

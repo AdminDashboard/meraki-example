@@ -1,0 +1,29 @@
+.breadcrumbs-menu
+  color: gray
+  font-family: 'Ailerons'
+  font-size: 35px
+  &__list
+    margin: 0
+    padding: 0
+    display: flex
+  &__item
+    list-style: none
+    display: flex
+    align-items: center
+    &:last-child:after
+      content: '\f054'
+      font-family: 'FontAwesome'
+      font-size: .5em
+      display: inline-block
+      margin-left: 10px
+      position: relative
+      top: 2px
+  &__link
+    display: block
+    cursor: pointer
+    text-decoration: none
+    text-transform: uppercase
+    letter-spacing: 1px
+    font-size: .8em
+    position: relative
+    transition: transform .2s ease-in-out

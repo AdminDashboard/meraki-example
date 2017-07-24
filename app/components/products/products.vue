@@ -1,6 +1,6 @@
 <template>
 	<div id='products'>
-		<header-nav nav-style="black"></header-nav>
+		<header-nav nav-style="black" v-bind:nav-cats="categories"></header-nav>
 		<div v-bind:class="arrowTopMods" v-on:click="moveUp"></div>
 		<div id='fullpage-grid'>
 			<div class='section' v-for='section in sections'>
@@ -29,6 +29,7 @@ export default {
 		return {
 			itemsPerSection: 9,
 			currentSection: 0,
+			categories: ['tables'],
 			items: [
 				{
 					pic: table

@@ -1,19 +1,8 @@
 <template>
-	<div class="nav">
+	<div class="nav" v-bind:class="wrapperMod">
 		<div class="nav__left-side">
-			<div class="box-menu" v-bind:class="mod">
-				<ul class="box-menu__list">
-					<li class="box-menu__item">
-						<a href="#/" class="box-menu__link">home</a>
-					</li>
-					<li class="box-menu__item">
-						<a href="#/product" class="box-menu__link">product</a>
-					</li>
-					<li class="box-menu__item">
-						<a href="#/products" class="box-menu__link">products</a>
-					</li>
-				</ul>
-			</div>
+			<box-menu v-if="!navCats" v-bind:box-style="this.navStyle"></box-menu>
+			<breadcrumbs-menu v-if="navCats" v-bind:categories="navCats"></breadcrumbs-menu>
 		</div>
 		<div class="nav__right-side">
 			<div class="nav-logo">
@@ -29,7 +18,9 @@ import './nav.sass';
 import logoWhite from '../index/logo.png';
 import logoBlack from '../index/logo-2.png';
 
+import boxMenu from './box-menu/box-menu.vue';
 import dropdown from './dropdown-menu/dropdown-menu.vue';
+import breadMenu from './breadcrumbs-menu/breadcrumbs-menu.vue';
 
 export default {
 	data () {
@@ -40,7 +31,7 @@ export default {
 			items: []
 		}
 	},
-	props: ['navStyle'],
+	props: ['navStyle', 'navCats'],
 	methods: {
 		toggleDropdown() {
 			this.dropdown = this.dropdown ? false : true;
@@ -55,6 +46,9 @@ export default {
 				? styleClass + this.navStyle
 				: defaultMod;
 		},
+		wrapperMod () {
+			return 'nav_' + this.navStyle;
+		},
 		logo () {
 			return this.navStyle === 'black'
 				? logoBlack
@@ -62,7 +56,9 @@ export default {
 		}
 	},
 	components: {
-		'dropdown-menu': dropdown
+		'dropdown-menu': dropdown,
+		'box-menu': boxMenu,
+		'breadcrumbs-menu': breadMenu
 	}
 }
 </script>

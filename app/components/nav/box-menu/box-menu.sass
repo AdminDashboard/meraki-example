@@ -1,0 +1,33 @@
+.box-menu
+  &__list
+    margin: 0
+    padding: 0
+    display: flex
+  &__item
+    list-style: none
+    &:first-child .box-menu__link
+      left: 0
+    &:last-child .box-menu__link
+      left: -2px
+  &__link
+    display: block
+    text-decoration: none
+    font-family: sans-serif
+    font-weight: lighter
+    text-transform: uppercase
+    letter-spacing: 1px
+    font-size: .8em
+    padding: 10px 30px
+    position: relative
+    left: -1px
+    transition: transform .2s ease-in-out
+    &:hover
+      transform: translateY(-1.5px)
+  &_white
+    .box-menu__link
+      color: #fff
+      border: 1px solid #fff
+  &_black
+    .box-menu__link
+      color: #000
+      border: 1px solid #000
