@@ -1,0 +1,24 @@
+.image-modal
+  position: fixed
+  display: none
+  z-index: 100
+  &_active
+    display: block
+    top: 0
+    left: 0
+    right: 0
+    bottom: 0
+    background: rgba(0,0,0,.5)
+  &__image
+    position: absolute
+    animation: expand 1s forwards .1s
+    img
+      width: 100%
+
+@keyframes expand
+  0%
+  100%
+    width: 100%
+    top: 100px
+    left: 50%
+    transform: translateX(-50%)
