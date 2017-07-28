@@ -5,8 +5,8 @@
 		<div id='fullpage-grid'>
 			<div class='section' v-for='section in sections'>
 				<div class="products-grid">
-					<div class='products-grid__item'
-						v-bind:style="{'background-image': 'url(' + item.pic + ')'}"
+					<div v-bind:data-title="item.title" class='products-grid__item'
+						v-bind:style="{'background-image': 'url(' + item.url + ')'}"
 						v-for='item in section'>
 					</div>
 				</div>
@@ -21,71 +21,19 @@ import './products.sass';
 import 'fullpage.js/dist/jquery.fullpage.js';
 import table from './table2.png';
 import hover from './hover.png';
+import db from '../database-controller/database-controller.js';
 
 import Nav from '../nav/nav.vue';
 
 export default {
+	firebase: {
+		products: db.ref('products')
+	},
 	data () {
 		return {
 			itemsPerSection: 9,
 			currentSection: 0,
-			categories: ['tables'],
-			items: [
-				{
-					pic: table
-				},
-				{
-					pic: table
-				},
-				{
-					pic: table
-				},
-				{
-					pic: table
-				},
-				{
-					pic: table
-				},
-				{
-					pic: table
-				},
-				{
-					pic: table
-				},
-				{
-					pic: table
-				},
-				{
-					pic: table
-				},
-				{
-					pic: table
-				},
-				{
-					pic: table
-				},
-				{
-					pic: table
-				},
-				{
-					pic: table
-				},
-				{
-					pic: table
-				},
-				{
-					pic: table
-				},
-				{
-					pic: table
-				},
-				{
-					pic: table
-				},
-				{
-					pic: table
-				}
-			]
+			categories: ['tables']
 		}
 	},
 	mounted () {
@@ -105,17 +53,17 @@ export default {
 	},
 	computed: {
 		totalSections () {
-			return Math.floor(this.items.length / this.itemsPerSection);
+			return Math.floor(this.products.length / this.itemsPerSection);
 		},
 		sections () {
-			let mutableItems = this.items.map((item) => item);
+			let mutableItems = this.products.map((item) => item);
 			let sections = {};
 
 			for (let i = 0, l = this.totalSections; i < l; i++) {
 				sections[i] = mutableItems.splice(0, this.itemsPerSection);
 			}
 
-			if (this.items.length % this.itemsPerSection !== 0) {
+			if (this.products.length % this.itemsPerSection !== 0) {
 				sections[this.totalSections] = mutableItems;
 			}
 
@@ -135,7 +83,7 @@ export default {
 			return {
 				products__arrow: true,
 				products__arrow_top: true,
-				products__arrow_hidden: this.canMoveDown
+				products__arrow_hidden: this.canMoveDown || this.totalSections < 1
 			}
 		}
 	},

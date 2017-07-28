@@ -1,5 +1,6 @@
 import 'normalize.css';
 import Vue from 'vue';
+import VueFire from 'vuefire';
 import VueRouter from 'vue-router';
 import $ from 'jquery';
 import Home from './home.vue';
@@ -10,7 +11,7 @@ import './fonts/fonts.sass';
 
 window.$ = window.jQuery = $;
 
-const NotFound = { template: '<p>Page not found</p>' }
+const NotFound = { template: '<p>Page not found</p>' };
 
 const routes = [
   {path: '/', component: Home},
@@ -18,6 +19,7 @@ const routes = [
   {path: '/product', component: Product}
 ];
 
+Vue.use(VueFire);
 Vue.use(VueRouter);
 
 const router = new VueRouter({routes});
