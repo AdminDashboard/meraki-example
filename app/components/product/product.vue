@@ -1,6 +1,6 @@
 <template>
 	<div id='product'>
-		<header-nav nav-style="black"></header-nav>
+	<header-nav nav-style="black" v-bind:nav-cats="categories"></header-nav>
 		<div class="product">
 			<h1 class="product__title">product<br/>title</h1>
 			<div class="product__image"><img v-bind:src='table'></div>
@@ -55,6 +55,7 @@ export default {
 				src: null,
 				offsetData: null
 			},
+			categories: ['tables'],
 			items: [
 			]
 		}
