@@ -16,6 +16,8 @@ const NotFound = { template: '<p>Page not found</p>' };
 const routes = [
   {path: '/', component: Home},
   {path: '/products', component: Products},
+  {path: '/products/:cat', component: Products},
+  {path: '/products/:cat/items', component: Products, props: {single: true}},
   {path: '/product', component: Product}
 ];
 

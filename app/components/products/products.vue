@@ -5,7 +5,11 @@
 		<div id='fullpage-grid'>
 			<div class='section' v-for='section in sections'>
 				<div class="products-grid">
-					<div v-bind:data-title="item.title" class='products-grid__item'
+					<div class='products-grid__item'
+						v-on:click="moveTo"
+						v-bind:data-childCats="item.childCats"
+						v-bind:data-childItems="item.id"
+						v-bind:data-title="item.title"
 						v-bind:style="{'background-image': 'url(' + item.url + ')'}"
 						v-for='item in section'>
 					</div>
@@ -26,16 +30,38 @@ import db from '../database-controller/database-controller.js';
 import Nav from '../nav/nav.vue';
 
 export default {
-	firebase: {
-		products: db.ref('products')
+	firebase () {
+		const defaultRefName = 'parentCat';
+		const categoryType = this.categoryType;
+		let currentType = 'childCat';
+		let currentId = 'id';
+
+		if (this.single) {
+			currentType = 'products';
+			currentId = 'cat';
+		}
+
+		const ref = categoryType
+			? db.ref(currentType)
+				.orderByChild(currentId)
+				.equalTo(categoryType)
+			: db.ref(defaultRefName);
+
+		return {
+			products: ref
+		};
 	},
 	data () {
+		const categoryType = this.$route.params.cat;
+
 		return {
 			itemsPerSection: 9,
 			currentSection: 0,
-			categories: ['tables']
+			categories: null,
+			categoryType: categoryType
 		}
 	},
+	props: ['single'],
 	mounted () {
 		const _this = this;
 
@@ -49,6 +75,29 @@ export default {
 	destroyed () {
 		if ($.fn.fullpage.length) {
 			$.fn.fullpage.destroy('all');
+		}
+	},
+	watch: {
+		$route () {
+			const currentCat = this.$route.params.cat;
+			let ref = db.ref('parentCat');
+			let currentType = 'childCat';
+			let currentId = 'id';
+
+			this.categoryType = currentCat;
+
+			if (this.single) {
+				currentType = 'products';
+				currentId = 'cat';
+			}
+
+			if (currentCat) {
+				ref = db.ref(currentType)
+					.orderByChild(currentId)
+					.equalTo(currentCat);
+			}
+
+			this.$bindAsArray('products', ref);
 		}
 	},
 	computed: {
@@ -88,6 +137,31 @@ export default {
 		}
 	},
 	methods: {
+		moveTo (e) {
+			const childCats = e.target.getAttribute('data-childCats');
+			const childItems = e.target.getAttribute('data-childItems');
+			const singleItem = e.target.getAttribute('data-singleItem');
+
+			let move;
+
+			if (childCats) {
+				move = `/products/${childCats}`;
+			}
+
+			if (childItems) {
+				move = `/products/${this.categoryType}/items`;
+			}
+
+			if (singleItem) {
+				move = `/product/${singleItem}`;
+			}
+
+			if (!move) {
+				return;
+			}
+
+			this.$router.push({path: move});
+		},
 		moveDown () {
 			$.fn.fullpage.moveSectionDown();
 		},

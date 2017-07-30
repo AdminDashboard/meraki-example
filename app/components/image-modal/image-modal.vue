@@ -48,11 +48,6 @@ export default {
 		close () {
 			this.imageData.active = false;
 		}
-	},
-	watch: {
-		isActive () {
-			// alert();
-		}
 	}
 }
 </script>
