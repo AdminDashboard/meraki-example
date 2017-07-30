@@ -49,6 +49,10 @@ import db from '../database-controller/database-controller.js';
 
 export default {
 	firebase () {
+		if (!this.itemId) {
+			return;
+		}
+
 		return {
 			product: db.ref('products')
 				.orderByChild('name')
@@ -69,6 +73,10 @@ export default {
 		}
 	},
 	mounted: function () {
+		if (!this.itemId) {
+			return;
+		}
+
 		db.ref('products')
 			.once('value', snapshot => {
 				console.log('loaded');
@@ -100,6 +108,10 @@ export default {
 		title () {
 			if (!this.loading) {
 				return this.product[0].title;
+			}
+
+			if (!this.itemId) {
+				return 'static page';
 			}
 
 			return 'loading...';
