@@ -9,6 +9,7 @@
 						v-on:click="moveTo"
 						v-bind:data-childCats="item.childCats"
 						v-bind:data-childItems="item.id"
+						v-bind:data-singleItem="item.name"
 						v-bind:data-title="item.title"
 						v-bind:style="{'background-image': 'url(' + item.url + ')'}"
 						v-for='item in section'>
@@ -30,6 +31,9 @@ import db from '../database-controller/database-controller.js';
 import Nav from '../nav/nav.vue';
 
 export default {
+	// start: firebase related stuff
+	// instead of firebase you can use simple ajax request
+	// to fill products
 	firebase () {
 		const defaultRefName = 'parentCat';
 		const categoryType = this.categoryType;
@@ -51,6 +55,7 @@ export default {
 			products: ref
 		};
 	},
+	// start: end related stuff
 	data () {
 		const categoryType = this.$route.params.cat;
 
@@ -97,6 +102,7 @@ export default {
 					.equalTo(currentCat);
 			}
 
+			// firebase
 			this.$bindAsArray('products', ref);
 		}
 	},
@@ -143,6 +149,7 @@ export default {
 			const singleItem = e.target.getAttribute('data-singleItem');
 
 			let move;
+			let props = false;
 
 			if (childCats) {
 				move = `/products/${childCats}`;
@@ -160,7 +167,7 @@ export default {
 				return;
 			}
 
-			this.$router.push({path: move});
+			this.$router.push({path: move, params: {itemId: singleItem}});
 		},
 		moveDown () {
 			$.fn.fullpage.moveSectionDown();

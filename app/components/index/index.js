@@ -18,6 +18,7 @@ const routes = [
   {path: '/products', component: Products},
   {path: '/products/:cat', component: Products},
   {path: '/products/:cat/items', component: Products, props: {single: true}},
+  {path: '/product/:item', component: Product, props: (route) => ({ itemId: route.params.item})},
   {path: '/product', component: Product}
 ];
 

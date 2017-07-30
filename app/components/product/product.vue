@@ -2,7 +2,7 @@
 	<div id='product'>
 	<header-nav nav-style="black" v-bind:nav-cats="categories"></header-nav>
 		<div class="product">
-			<h1 class="product__title">product<br/>title</h1>
+			<h1 class="product__title">{{this.title}}</h1>
 			<div class="product__image"><img v-bind:src='table'></div>
 			<div class="product__section product__section_1">
 				<div class="product__section_left">
@@ -45,21 +45,37 @@ import Nav from '../nav/nav.vue';
 import Form from '../form/form.vue';
 import ImageModal from '../image-modal/image-modal.vue';
 
+import db from '../database-controller/database-controller.js';
+
 export default {
+	firebase () {
+		return {
+			product: db.ref('products')
+				.orderByChild('name')
+				.equalTo(this.itemId)
+		};
+	},
 	data () {
 		return {
 			table: table,
 			recentImage: null,
+			loading: true,
 			imageController: {
 				active: false,
 				src: null,
 				offsetData: null
 			},
-			categories: ['tables'],
-			items: [
-			]
+			categories: ['tables']
 		}
 	},
+	mounted: function () {
+		db.ref('products')
+			.once('value', snapshot => {
+				console.log('loaded');
+				this.loading = false;
+		});
+	},
+	props: ['itemId'],
 	methods: {
 		showFullImage (event, image) {
 			const target = event.target;
@@ -80,6 +96,13 @@ export default {
 	computed: {
 		isClosed () {
 			return !this.imageController.active;
+		},
+		title () {
+			if (!this.loading) {
+				return this.product[0].title;
+			}
+
+			return 'loading...';
 		}
 	},
 	watch: {
