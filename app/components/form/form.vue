@@ -106,7 +106,7 @@ export default {
 					this.sentMod = false;
 					this.invalidationCheck = false;
 					this.clearData();
-				}, 2000);
+				}, 3000);
 			}
 		}
 	}

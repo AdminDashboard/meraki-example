@@ -15,6 +15,7 @@
   display: block
   padding: 50px 10px 10px 10px
   position: relative
+  transition: filter .2s ease-in-out
   &__fields, &__type-fields
     display: flex
     flex-wrap: wrap
@@ -76,7 +77,7 @@
     color: lighten(#ccc, 5%)
     font-family: 'Ailerons'
     font-size: 25px
-    transition: color .2s ease-in-out
+    transition: color .3s ease-in-out
   &__submit
     position: absolute
     cursor: pointer
@@ -99,6 +100,7 @@
   &__dialog
     position: absolute
     top: 0
+    animation: .3s fadeIn backwards .3s
     left: 0
     right: 0
     bottom: 150px
