@@ -1,3 +1,16 @@
+.form-wrapper
+  position: relative
+  &_sent
+    .form
+      filter: blur(10px)
+    .form__dialog
+      display: flex
+  &_check
+    .form__group_check-invalid .form__check-label
+      color: red
+    .form__group_invalid
+      border-bottom: 1px solid red !important
+
 .form
   display: block
   padding: 50px 10px 10px 10px
@@ -83,4 +96,15 @@
     &:hover
       &:after
         transform: translateX(5px)
+  &__dialog
+    position: absolute
+    top: 0
+    left: 0
+    right: 0
+    bottom: 150px
+    display: none
+    align-items: center
+    justify-content: center
+    color: #000
+    font-size: 30px
 
