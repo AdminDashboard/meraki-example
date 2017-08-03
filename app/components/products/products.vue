@@ -7,11 +7,9 @@
 				<div class="products-grid">
 					<div class='products-grid__item'
 						v-on:click="moveTo"
-						v-bind:data-childCats="item.childCats"
-						v-bind:data-childItems="item.id"
-						v-bind:data-singleItem="item.name"
+						v-bind:data-id="item.id"
 						v-bind:data-title="item.title"
-						v-bind:style="{'background-image': 'url(' + item.url + ')'}"
+						v-bind:style="{'background-image': 'url(' + item.image_url + ')'}"
 						v-for='item in section'>
 					</div>
 				</div>
@@ -30,29 +28,15 @@ import db from '../database-controller/database-controller.js';
 
 import Nav from '../nav/nav.vue';
 
+const DEFAULT_REF_NAME = 'parentCat';
+
 export default {
 	// start: firebase related stuff
 	// instead of firebase you can use simple ajax request
 	// to fill products
 	firebase () {
-		const defaultRefName = 'parentCat';
-		const categoryType = this.categoryType;
-		let currentType = 'childCat';
-		let currentId = 'id';
-
-		if (this.single) {
-			currentType = 'products';
-			currentId = 'cat';
-		}
-
-		const ref = categoryType
-			? db.ref(currentType)
-				.orderByChild(currentId)
-				.equalTo(categoryType)
-			: db.ref(defaultRefName);
-
 		return {
-			products: ref
+			rawProducts: this.depthResolver(this.depth)
 		};
 	},
 	// start: end related stuff
@@ -63,10 +47,11 @@ export default {
 			itemsPerSection: 9,
 			currentSection: 0,
 			categories: null,
-			categoryType: categoryType
+			categoryType: categoryType,
+			categoryFilter: null
 		}
 	},
-	props: ['single'],
+	props: ['depth'],
 	mounted () {
 		const _this = this;
 
@@ -84,29 +69,18 @@ export default {
 	},
 	watch: {
 		$route () {
-			const currentCat = this.$route.params.cat;
-			let ref = db.ref('parentCat');
-			let currentType = 'childCat';
-			let currentId = 'id';
-
-			this.categoryType = currentCat;
-
-			if (this.single) {
-				currentType = 'products';
-				currentId = 'cat';
-			}
-
-			if (currentCat) {
-				ref = db.ref(currentType)
-					.orderByChild(currentId)
-					.equalTo(currentCat);
-			}
-
-			// firebase
-			this.$bindAsArray('products', ref);
+			this.depthResolver(this.depth, true);
 		}
 	},
 	computed: {
+		products () {
+			if (this.categoryFilter && this.depth === 'super') {
+				return this.rawProducts
+					.filter(item => ~this.categoryFilter.indexOf(item.id));
+			}
+
+			return this.rawProducts;
+		},
 		totalSections () {
 			return Math.floor(this.products.length / this.itemsPerSection);
 		},
@@ -143,31 +117,56 @@ export default {
 		}
 	},
 	methods: {
+		depthResolver (depthLevel, bind) {
+			const categoryName = this.$route.params.cat;
+
+			if (!depthLevel) {
+				return bind
+					? this.$bindAsArray('rawProducts', db.ref(DEFAULT_REF_NAME))
+					: db.ref(DEFAULT_REF_NAME);
+			}
+
+			if (depthLevel === 'super') {
+				db.ref(DEFAULT_REF_NAME)
+					.orderByChild('id')
+					.equalTo(categoryName)
+					.once('child_added', snapshot => {
+						const cats = snapshot.val().sub_cats;
+
+						this.$bindAsArray('rawProducts', db.ref('subCat'));
+
+						this.categoryFilter = cats.reduce((result, item) => {
+							result.push(item.id);
+							return result;
+						}, []);
+					});
+
+				return db.ref(DEFAULT_REF_NAME);
+			}
+		},
 		moveTo (e) {
-			const childCats = e.target.getAttribute('data-childCats');
-			const childItems = e.target.getAttribute('data-childItems');
-			const singleItem = e.target.getAttribute('data-singleItem');
+			const itemId = e.target.getAttribute('data-id');
 
 			let move;
-			let props = false;
 
-			if (childCats) {
-				move = `/products/${childCats}`;
+			// if depth is empty, move to super category
+			if (!this.depth) {
+				move = `/products/${itemId}`;
 			}
 
-			if (childItems) {
-				move = `/products/${this.categoryType}/items`;
-			}
+			// if (childItems) {
+			// 	move = `/products/${this.categoryType}/items`;
+			// }
 
-			if (singleItem) {
-				move = `/product/${singleItem}`;
-			}
+			// if (singleItem) {
+			// 	move = `/product/${singleItem}`;
+			// }
 
 			if (!move) {
 				return;
 			}
 
-			this.$router.push({path: move, params: {itemId: singleItem}});
+			this.$router.push({path: move});
 		},
 		moveDown () {
 			$.fn.fullpage.moveSectionDown();

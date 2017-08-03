@@ -15,10 +15,11 @@ const NotFound = { template: '<p>Page not found</p>' };
 
 const routes = [
   {path: '/', component: Home},
-  {path: '/products', component: Products},
-  {path: '/products/:cat', component: Products},
-  {path: '/products/:cat/items', component: Products, props: {single: true}},
-  {path: '/product/:item', component: Product, props: (route) => ({ itemId: route.params.item})},
+  {path: '/products', component: Products, props: {depth: null}},
+  {path: '/products/:cat', component: Products, props: {depth: 'super'}},
+  {path: '/products/:cat/items', component: Products, props: {depth: 'products'}},
+  {path: '/products/:cat/:sub/items', component: Products, props: {depth: 'sub'}},
+  {path: '/product/:item', component: Product, props: (route) => ({ itemId: route.params.i})},
   {path: '/product', component: Product}
 ];
 
