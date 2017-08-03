@@ -19,7 +19,7 @@ const routes = [
   {path: '/products/:cat', component: Products, props: {depth: 'super'}},
   {path: '/products/:cat/items', component: Products, props: {depth: 'products'}},
   {path: '/products/:cat/:sub/items', component: Products, props: {depth: 'sub'}},
-  {path: '/product/:item', component: Product, props: (route) => ({ itemId: route.params.i})},
+  {path: '/product/:item', component: Product},
   {path: '/product', component: Product}
 ];
 

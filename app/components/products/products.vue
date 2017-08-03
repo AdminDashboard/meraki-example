@@ -143,24 +143,29 @@ export default {
 
 				return db.ref(DEFAULT_REF_NAME);
 			}
+
+			if (depthLevel === 'products') {
+				this.$bindAsArray('rawProducts', db.ref('products'));
+			}
 		},
 		moveTo (e) {
 			const itemId = e.target.getAttribute('data-id');
 
 			let move;
+			let props;
 
 			// if depth is empty, move to super category
 			if (!this.depth) {
 				move = `/products/${itemId}`;
 			}
 
-			// if (childItems) {
-			// 	move = `/products/${this.categoryType}/items`;
-			// }
+			if (this.depth === 'super') {
+				move = `/products/${itemId}/items`;
+			}
 
-			// if (singleItem) {
-			// 	move = `/product/${singleItem}`;
-			// }
+			if (this.depth === 'products') {
+				move = `/product/${itemId}`;
+			}
 
 			if (!move) {
 				return;

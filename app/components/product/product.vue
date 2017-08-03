@@ -55,7 +55,7 @@ export default {
 
 		return {
 			product: db.ref('products')
-				.orderByChild('name')
+				.orderByChild('id')
 				.equalTo(this.itemId)
 		};
 	},
@@ -64,6 +64,7 @@ export default {
 			table: table,
 			recentImage: null,
 			loading: true,
+			itemId: this.$route.params.item,
 			imageController: {
 				active: false,
 				src: null,
@@ -83,7 +84,6 @@ export default {
 				this.loading = false;
 		});
 	},
-	props: ['itemId'],
 	methods: {
 		showFullImage (event, image) {
 			const target = event.target;
