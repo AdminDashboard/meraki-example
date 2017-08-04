@@ -6,6 +6,7 @@ import $ from 'jquery';
 import Home from './home.vue';
 import Products from '../products/products.vue';
 import Product from '../product/product.vue';
+import Admin from '../admin/admin.vue';
 import 'font-awesome/css/font-awesome.css';
 import './fonts/fonts.sass';
 
@@ -20,7 +21,8 @@ const routes = [
   {path: '/products/:cat/items', component: Products, props: {depth: 'products'}},
   {path: '/products/:cat/:sub/items', component: Products, props: {depth: 'sub'}},
   {path: '/product/:item', component: Product},
-  {path: '/product', component: Product}
+  {path: '/product', component: Product},
+  {path: '/admin', component: Admin}
 ];
 
 Vue.use(VueFire);
