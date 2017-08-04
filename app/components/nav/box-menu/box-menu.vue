@@ -10,6 +10,9 @@
 			<li class="box-menu__item">
 				<a href="#/products" class="box-menu__link">products</a>
 			</li>
+			<li class="box-menu__item">
+				<a href="#/admin" class="box-menu__link">admin</a>
+			</li>
 		</ul>
 	</div>
 </template>
