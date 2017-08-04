@@ -29,7 +29,7 @@
 						<input type="checkbox" v-bind:value="JSON.stringify(sub)" @change='change'>
 					</label>
 				</div>
-				<button type="submit" v-on:click.stop="submit">Send</button>
+				<button type="submit" v-on:click.stop="submit">Create new</button>
 			</form>
 		</div>
 	</div>

@@ -2,7 +2,7 @@
 	<div class="admin">
 		<header-nav nav-style="black"></header-nav>
 		<div class="admin__content-wrapper">
-			<h1>Admin page</h1>
+			<h1>Admin page. Super categories</h1>
 			<super-categories></super-categories>
 		</div>
 	</div>
