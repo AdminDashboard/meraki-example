@@ -41,8 +41,6 @@ video
     right: 0
     bottom: 0
 
-  &:hover:before
-    animation: pulsebig 3s infinite
   &.disabled
     pointer-events: none
     opacity: 0
@@ -79,9 +77,8 @@ video
   box-shadow: 0
   transition: all 1s cubic-bezier(0.50, -1, 0.50, 2), background .6s
   transition-delay: 0s
-  opacity: 0
-  .control:hover &
-    opacity: 1
+  opacity: 1
+
 
 $blocks: 8
 @for $i from 0 through ($blocks - 1)
@@ -89,9 +86,9 @@ $blocks: 8
     z-index: #{$blocks - $i}
     transform: rotate(#{360/$blocks*($i+1) - 90}deg) translateX(0) rotate(#{-360/$blocks*($i+1) + 90}deg)
 
-  .control:hover .control__item:nth-child(#{$i + 1})
-    transform: rotate(#{360/$blocks*$i - 90}deg) translateX(200%) rotate(#{-360/$blocks*$i + 90}deg)
-    transition-delay: #{$i * 0.04}s, #{$i * 0.08}s
+  .control .control__item:nth-child(#{$i + 1})
+    transform: rotate(#{360/$blocks*$i - 90}deg) translateX(250%) rotate(#{-360/$blocks*$i + 90}deg)
+    transition-delay: #{$i * 0.04}s, #{$i * 0.08}
 
 .content
   font-family: 'Raleway'
