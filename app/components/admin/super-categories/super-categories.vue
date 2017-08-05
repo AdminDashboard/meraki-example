@@ -3,7 +3,7 @@
 		<div class="super-categories__items">
 			<div class='super-categories__item' v-for='category in categories'>
 				<div class="super-category">
-					<div class="super-category__image" @click="deleteItem(category)" v-bind:style="{'background-image': 'url(' + category.image_url + ')'}">
+					<div class="super-category__image" @click="deleteItem(category)" v-bind:style="{'background-image': 'url(' + category.mainImage + ')'}">
 					</div>
 					<div class="super-category__col">
 						<div class="super-category__id"><span class="super-category__label">id</span> {{category.id}}</div>
@@ -90,7 +90,7 @@ export default {
 
 			this.$firebaseRefs.categories.push({
 				id: this.id,
-				image_url: this.url,
+				mainImage: this.url,
 				sub_cats: this.jsonSubs,
 				title: this.title
 			});

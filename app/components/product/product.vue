@@ -3,18 +3,17 @@
 	<header-nav nav-style="black" v-bind:nav-cats="categories"></header-nav>
 		<div class="product">
 			<h1 class="product__title">{{this.title}}</h1>
-			<div class="product__image"><img v-bind:src='table'></div>
+			<div class="product__image"><img v-bind:src='mainImage'></div>
 			<div class="product__section product__section_1">
 				<div class="product__section_left">
-					<div class="product__inner-image" v-on:click="showFullImage($event, table)"><img v-bind:src='table'></div>
+					<div class="product__inner-image" v-on:click="showFullImage($event, section1.image1)"><img v-bind:src='section1.image1'></div>
 					<div class="product__text-block">
-						<h2 class="product__text-heading">Lorem ipsum dolor sit.</h2>
-						<p class="product__text-p">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit accusamus reiciendis quas nemo qui perferendis provident, laborum impedit velit voluptates corporis quam tempora, deleniti distinctio vitae nisi neque repellendus amet!
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit accusamus reiciendis quas nemo qui perferendis provident, laborum impedit velit voluptates corporis quam tempora, deleniti distinctio vitae nisi neque repellendus amet!</p>
+						<h2 class="product__text-heading">{{section1.title}}</h2>
+						<p class="product__text-p">{{section1.description}}</p>
 					</div>
 				</div>
 				<div class="product__section_right">
-					<div class="product__inner-image" v-on:click="showFullImage($event, table)"><img v-bind:src='table'></div>
+					<div class="product__inner-image" v-on:click="showFullImage($event, section1.image2)"><img v-bind:src='section1.image2'></div>
 				</div>
 			</div>
 			<div class="product__section product__section_2">
@@ -70,7 +69,7 @@ export default {
 				src: null,
 				offsetData: null
 			},
-			categories: ['tables']
+			categories: null
 		}
 	},
 	mounted: function () {
@@ -80,7 +79,6 @@ export default {
 
 		db.ref('products')
 			.once('value', snapshot => {
-				console.log('loaded');
 				this.loading = false;
 		});
 	},
@@ -115,6 +113,29 @@ export default {
 			}
 
 			return 'loading...';
+		},
+		mainImage () {
+			if (!this.loading) {
+				return this.product[0].mainImage;
+			}
+
+			if (!this.itemId) {
+				return this.table;
+			}
+		},
+		section1 () {
+			if (this.loading) {
+				return;
+			}
+
+			const section1 = this.product[0].sections[0];
+
+			return {
+				title: section1.title,
+				description: section1.description,
+				image1: section1.image1,
+				image2: section1.image2
+			}
 		}
 	},
 	watch: {

@@ -3,3 +3,33 @@
   &__content-wrapper
     margin-top: 50px
     padding: 20px
+  &__list
+    display: flex
+    margin: 20px 0 40px 0
+    justify-content: center
+    padding: 0
+  &__item
+    list-style: none
+    margin: 0 20px
+  &__link
+    text-decoration: none
+    position: relative
+    color: #ccc
+    font-size: 1.5em
+    transition: color .3s ease-in-out
+    &:before
+      content: ''
+      position: absolute
+      width: 100%
+      border-bottom: 1px solid #000
+      transform: translateY(10px)
+      bottom: -10px
+      opacity: 0
+      transition: all .3s ease-in-out
+    &_active
+      color: #000
+      &:before
+        opacity: 1
+        transform: translateY(0px)
+
+
