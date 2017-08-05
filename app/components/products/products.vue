@@ -9,7 +9,7 @@
 						v-on:click="moveTo"
 						v-bind:data-id="item.id"
 						v-bind:data-title="item.title"
-						v-bind:style="{'background-image': 'url(' + item.image_url + ')'}"
+						v-bind:style="{'background-image': 'url(' + item.mainImage + ')'}"
 						v-for='item in section'>
 					</div>
 				</div>
@@ -79,6 +79,11 @@ export default {
 					.filter(item => ~this.categoryFilter.indexOf(item.id));
 			}
 
+			if (this.categoryFilter && this.depth === 'products') {
+				return this.rawProducts
+					.filter(item => ~this.categoryFilter.indexOf(item.cat));
+			}
+
 			return this.rawProducts;
 		},
 		totalSections () {
@@ -121,10 +126,14 @@ export default {
 			const categoryName = this.$route.params.cat;
 
 			if (!depthLevel) {
+				this.categories = null;
+
 				return bind
 					? this.$bindAsArray('rawProducts', db.ref(DEFAULT_REF_NAME))
 					: db.ref(DEFAULT_REF_NAME);
 			}
+
+			this.categories = [categoryName];
 
 			if (depthLevel === 'super') {
 				db.ref(DEFAULT_REF_NAME)
@@ -133,19 +142,36 @@ export default {
 					.once('child_added', snapshot => {
 						const cats = snapshot.val().sub_cats;
 
-						this.$bindAsArray('rawProducts', db.ref('subCat'));
-
 						this.categoryFilter = cats.reduce((result, item) => {
 							result.push(item.id);
 							return result;
 						}, []);
+
+						if (bind) {
+							this.$bindAsArray('rawProducts', db.ref('subCat'));
+						}
 					});
 
-				return db.ref(DEFAULT_REF_NAME);
+				if (!bind) {
+					return db.ref('subCat');
+				}
 			}
 
 			if (depthLevel === 'products') {
-				this.$bindAsArray('rawProducts', db.ref('products'));
+				db.ref('subCat')
+					.orderByChild('id')
+					.equalTo(categoryName)
+					.once('child_added', snapshot => {
+						const cat = snapshot.val().id;
+
+						this.categoryFilter = [cat];
+
+						if (bind) {
+							this.$bindAsArray('rawProducts', db.ref('products'));
+						}
+					});
+
+				return db.ref('products');
 			}
 		},
 		moveTo (e) {
