@@ -10,10 +10,6 @@
 						<div class="super-category__title"><span class="super-category__label">title</span> {{category.title}}</div>
 					</div>
 					<div class="super-category__col">
-						<div class="super-category__sub" v-for='sub in category.sub_cats'>
-							<span class="super-category__label">sub category</span>
-							{{sub.id}}
-						</div>
 					</div>
 				</div>
 			</div>
@@ -23,12 +19,6 @@
 				<input type="text" v-model="id" name="id" placeholder="id">
 				<input type="text" v-model="title" name="title" placeholder="title">
 				<input type="text" v-model="url" name="url" placeholder="image url">
-				<div class="super-categories__check-field">
-					<label v-for="sub in subCategories">
-						{{sub.id}}
-						<input type="checkbox" v-bind:value="JSON.stringify(sub)" @change='change'>
-					</label>
-				</div>
 				<button type="submit" v-on:click.stop="submit">Create new</button>
 			</form>
 		</div>

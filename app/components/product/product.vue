@@ -2,29 +2,33 @@
 	<div id='product'>
 	<header-nav nav-style="black" v-bind:nav-cats="categories"></header-nav>
 		<div class="product">
-			<h1 class="product__title">{{this.title}}</h1>
-			<div class="product__image"><img v-bind:src='mainImage'></div>
-			<div class="product__section product__section_1">
-				<div class="product__section_left">
-					<div class="product__inner-image" v-on:click="showFullImage($event, section1.image1)"><img v-bind:src='section1.image1'></div>
+			<h1 class="product__title">{{product.title}}</h1>
+			<div class="product__image"><img v-bind:src='product.mainImage'></div>
+			<div class="product__section"
+				v-bind:class="section.type === 'left'
+					? {product__section_1: true}
+					: {product__section_2: true}"
+				v-for="section in product.sections">
+
+				<div class="product__section_left" v-if="section.type === 'left'">
+					<div class="product__inner-image" v-on:click="showFullImage($event, section.image1)"><img v-bind:src='section.image1'></div>
 					<div class="product__text-block">
-						<h2 class="product__text-heading">{{section1.title}}</h2>
-						<p class="product__text-p">{{section1.description}}</p>
+						<h2 class="product__text-heading">{{section.title}}</h2>
+						<p class="product__text-p">{{section.description}}</p>
 					</div>
 				</div>
-				<div class="product__section_right">
-					<div class="product__inner-image" v-on:click="showFullImage($event, section1.image2)"><img v-bind:src='section1.image2'></div>
+				<div class="product__section_right" v-if="section.type === 'left'">
+					<div class="product__inner-image" v-on:click="showFullImage($event, section.image2)"><img v-bind:src='section.image2'></div>
 				</div>
-			</div>
-			<div class="product__section product__section_2">
-				<div class="product__section_left">
-					<div class="product__inner-image" v-on:click="showFullImage($event, table)"><img v-bind:src='table'></div>
+
+				<div class="product__section_left" v-if="section.type === 'right'">
+					<div class="product__inner-image" v-on:click="showFullImage($event, section.image1)"><img v-bind:src='section.image1'></div>
 				</div>
-				<div class="product__section_right">
-					<div class="product__inner-image" v-on:click="showFullImage($event, table)"><img v-bind:src='table'></div>
+				<div class="product__section_right" v-if="section.type === 'right'">
+					<div class="product__inner-image" v-on:click="showFullImage($event, section.image2)"><img v-bind:src='section.image2'></div>
 					<div class="product__text-block">
-						<h2 class="product__text-heading">Lorem ipsum dolor sit.</h2>
-						<p class="product__text-p">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit accusamus reiciendis quas nemo qui perferendis provident, laborum impedit velit voluptates corporis quam tempora, deleniti distinctio vitae nisi neque repellendus amet!</p>
+						<h2 class="product__text-heading">{{section.title}}</h2>
+						<p class="product__text-p">{{section.description}}</p>
 					</div>
 				</div>
 			</div>
@@ -53,7 +57,7 @@ export default {
 		}
 
 		return {
-			product: db.ref('products')
+			productRaw: db.ref('products')
 				.orderByChild('id')
 				.equalTo(this.itemId)
 		};
@@ -100,42 +104,11 @@ export default {
 		}
 	},
 	computed: {
+		product () {
+			return this.productRaw[0];
+		},
 		isClosed () {
 			return !this.imageController.active;
-		},
-		title () {
-			if (!this.loading) {
-				return this.product[0].title;
-			}
-
-			if (!this.itemId) {
-				return 'static page';
-			}
-
-			return 'loading...';
-		},
-		mainImage () {
-			if (!this.loading) {
-				return this.product[0].mainImage;
-			}
-
-			if (!this.itemId) {
-				return this.table;
-			}
-		},
-		section1 () {
-			if (this.loading) {
-				return;
-			}
-
-			const section1 = this.product[0].sections[0];
-
-			return {
-				title: section1.title,
-				description: section1.description,
-				image1: section1.image1,
-				image2: section1.image2
-			}
 		}
 	},
 	watch: {

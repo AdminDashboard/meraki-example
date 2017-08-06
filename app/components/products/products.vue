@@ -133,27 +133,17 @@ export default {
 					: db.ref(DEFAULT_REF_NAME);
 			}
 
-			this.categories = [categoryName];
-
 			if (depthLevel === 'super') {
-				db.ref(DEFAULT_REF_NAME)
-					.orderByChild('id')
-					.equalTo(categoryName)
-					.once('child_added', snapshot => {
-						const cats = snapshot.val().sub_cats;
+				const superRef = db.ref('subCat')
+					.orderByChild('parentCat')
+					.equalTo(categoryName);
 
-						this.categoryFilter = cats.reduce((result, item) => {
-							result.push(item.id);
-							return result;
-						}, []);
-
-						if (bind) {
-							this.$bindAsArray('rawProducts', db.ref('subCat'));
-						}
-					});
+				this.categories = [categoryName];
 
 				if (!bind) {
-					return db.ref('subCat');
+					return superRef;
+				} else {
+					this.$bindAsArray('rawProducts', superRef);
 				}
 			}
 
@@ -163,7 +153,9 @@ export default {
 					.equalTo(categoryName)
 					.once('child_added', snapshot => {
 						const cat = snapshot.val().id;
+						const parentCat = snapshot.val().parentCat;
 
+						this.categories = [parentCat, cat];
 						this.categoryFilter = [cat];
 
 						if (bind) {
