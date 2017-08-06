@@ -16,6 +16,7 @@
 		</div>
 		<div class="super-categories__form">
 			<form action="">
+				<h2>Main data</h2>
 				<input type="text" v-model="id" name="id" placeholder="id">
 				<input type="text" v-model="title" name="title" placeholder="title">
 				<input type="text" v-model="url" name="url" placeholder="image url">

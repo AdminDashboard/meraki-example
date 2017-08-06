@@ -17,10 +17,12 @@
 		</div>
 		<div class="sub-categories__form">
 			<form action="">
+				<h2>Main data</h2>
 				<input type="text" v-model="id" name="id" placeholder="id">
 				<input type="text" v-model="title" name="title" placeholder="title">
 				<input type="text" v-model="url" name="url" placeholder="image url">
 				<div class="sub-categories__parents">
+					<h2>Parent category</h2>
 					<label v-for="parentCat in parentCategories">
 						{{parentCat.id}}
 						<input type="radio" v-bind:value="parentCat.id" @change='change' name="parentCat">
