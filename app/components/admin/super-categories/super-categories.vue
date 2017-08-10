@@ -20,6 +20,7 @@
 				<input type="text" v-model="id" name="id" placeholder="id">
 				<input type="text" v-model="title" name="title" placeholder="title">
 				<input type="text" v-model="url" name="url" placeholder="image url">
+				<textarea placeholder="description" v-model="description"></textarea>
 				<button type="submit" v-on:click.stop="submit">Create new</button>
 			</form>
 		</div>
@@ -42,7 +43,8 @@ export default {
 			id: null,
 			url: null,
 			subs: [],
-			title: null
+			title: null,
+			description: null
 		};
 	},
 	computed: {
@@ -83,6 +85,7 @@ export default {
 				id: this.id,
 				mainImage: this.url,
 				sub_cats: this.jsonSubs,
+				description: this.description,
 				title: this.title
 			});
 		}

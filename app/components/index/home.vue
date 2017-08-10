@@ -15,46 +15,102 @@
 				<a href="#" class="read-more-button">read more</a>
 				<div class="back-button" v-on:click='jumpBack'>back</div>
 			</div>
+
 			<div class="content__item tables">
-				<p class="tables__text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit magni debitis officia, architecto nemo laboriosam dicta! Mollitia repellat recusandae, exercitationem porro, itaque accusantium, repellendus similique quaerat nobis nihil rerum vel voluptate necessitatibus sunt inventore possimus.</p>
-				<div class="product-button">view products</div>
-				<div class="table-image"><img v-bind:src='tableImage'></div>
+				<div v-if='tableCat'>
+					<p class="tables__text">{{tableCat.description}}</p>
+					<a v-bind:href="`/#/products/${tableCat.id}`" class="product-button">view products</a>
+					<div class="table-image"><img v-bind:src='tableCat.mainImage'></div>
+				</div>
+				<div v-else>
+					<p class="tables__text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit magni debitis officia, architecto nemo laboriosam dicta! Mollitia repellat recusandae, exercitationem porro, itaque accusantium, repellendus similique quaerat nobis nihil rerum vel voluptate necessitatibus sunt inventore possimus.</p>
+					<coming-soon></coming-soon>
+					<div class="table-image"><img v-bind:src='tableImage'></div>
+				</div>
 				<div class="back-button" v-on:click='jumpBack'>back</div>
 			</div>
+
 			<div class="content__item seating">
-				<p class="seating__text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit magni debitis officia, architecto nemo laboriosam dicta! Mollitia repellat recusandae, exercitationem porro, itaque accusantium, repellendus similique quaerat nobis nihil rerum vel voluptate necessitatibus sunt inventore possimus.</p>
-				<div class="product-button">view products</div>
-				<div class="table-image"><img v-bind:src='tableImage'></div>
+				<div v-if='seatingCat'>
+					<p class="seating__text">{{seatingCat.description}}</p>
+					<a v-bind:href="`/#/products/${seatingCat.id}`" class="product-button">view products</a>
+					<div class="table-image"><img v-bind:src='seatingCat.mainImage'></div>
+				</div>
+				<div v-else>
+					<p class="tables__text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit magni debitis officia, architecto nemo laboriosam dicta! Mollitia repellat recusandae, exercitationem porro, itaque accusantium, repellendus similique quaerat nobis nihil rerum vel voluptate necessitatibus sunt inventore possimus.</p>
+					<coming-soon></coming-soon>
+					<div class="table-image"><img v-bind:src='tableImage'></div>
+				</div>
 				<div class="back-button" v-on:click='jumpBack'>back</div>
 			</div>
+
 			<div class="content__item beds">
-				<p class="tables__text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit magni debitis officia, architecto nemo laboriosam dicta! Mollitia repellat recusandae, exercitationem porro, itaque accusantium, repellendus similique quaerat nobis nihil rerum vel voluptate necessitatibus sunt inventore possimus.</p>
-				<div class="product-button">view products</div>
-				<div class="table-image"><img v-bind:src='tableImage'></div>
+				<div v-if='bedsCat'>
+					<p class="tables__text">{{bedsCat.description}}</p>
+					<a v-bind:href="`/#/products/${bedsCat.id}`" class="product-button">view products</a>
+					<div class="table-image"><img v-bind:src='bedsCat.mainImage'></div>
+				</div>
+				<div v-else>
+					<p class="tables__text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit magni debitis officia, architecto nemo laboriosam dicta! Mollitia repellat recusandae, exercitationem porro, itaque accusantium, repellendus similique quaerat nobis nihil rerum vel voluptate necessitatibus sunt inventore possimus.</p>
+					<coming-soon></coming-soon>
+					<div class="table-image"><img v-bind:src='tableImage'></div>
+				</div>
 				<div class="back-button" v-on:click='jumpBack'>back</div>
 			</div>
+
 			<div class="content__item decor">
-				<p class="decor__text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit magni debitis officia, architecto nemo laboriosam dicta! Mollitia repellat recusandae, exercitationem porro, itaque accusantium, repellendus similique quaerat nobis nihil rerum vel voluptate necessitatibus sunt inventore possimus.</p>
-				<div class="product-button">view products</div>
-				<div class="table-image"><img v-bind:src='tableImage'></div>
+				<div v-if='decorCat'>
+					<p class="decor__text">{{decorCat.description}}</p>
+					<a v-bind:href="`/#/products/${decorCat.id}`" class="product-button">view products</a>
+					<div class="table-image"><img v-bind:src='decorCat.mainImage'></div>
+				</div>
+				<div v-else>
+					<p class="decor__text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit magni debitis officia, architecto nemo laboriosam dicta! Mollitia repellat recusandae, exercitationem porro, itaque accusantium, repellendus similique quaerat nobis nihil rerum vel voluptate necessitatibus sunt inventore possimus.</p>
+					<coming-soon></coming-soon>
+					<div class="table-image"><img v-bind:src='tableImage'></div>
+				</div>
 				<div class="back-button" v-on:click='jumpBack'>back</div>
 			</div>
+
 			<div class="content__item lighting">
-				<p class="lighting__text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit magni debitis officia, architecto nemo laboriosam dicta! Mollitia repellat recusandae, exercitationem porro, itaque accusantium, repellendus similique quaerat nobis nihil rerum vel voluptate necessitatibus sunt inventore possimus.</p>
-				<div class="product-button">view products</div>
-				<div class="table-image"><img v-bind:src='tableImage'></div>
+				<div v-if='lightingCat'>
+					<p class="lighting__text">{{lightingCat.description}}</p>
+					<a v-bind:href="`/#/products/${lightingCat.id}`" class="product-button">view products</a>
+					<div class="table-image"><img v-bind:src='lightingCat.mainImage'></div>
+				</div>
+				<div v-else>
+					<p class="lighting__text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit magni debitis officia, architecto nemo laboriosam dicta! Mollitia repellat recusandae, exercitationem porro, itaque accusantium, repellendus similique quaerat nobis nihil rerum vel voluptate necessitatibus sunt inventore possimus.</p>
+					<coming-soon></coming-soon>
+					<div class="table-image"><img v-bind:src='tableImage'></div>
+				</div>
 				<div class="back-button" v-on:click='jumpBack'>back</div>
 			</div>
+
 			<div class="content__item kitchen">
-				<p class="kitchen__text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit magni debitis officia, architecto nemo laboriosam dicta! Mollitia repellat recusandae, exercitationem porro, itaque accusantium, repellendus similique quaerat nobis nihil rerum vel voluptate necessitatibus sunt inventore possimus.</p>
-				<div class="product-button">view products</div>
-				<div class="table-image"><img v-bind:src='tableImage'></div>
+				<div v-if='kitchenCat'>
+					<p class="kitchen__text">{{kitchenCat.description}}</p>
+					<a v-bind:href="`/#/products/${kitchenCat.id}`" class="product-button">view products</a>
+					<div class="table-image"><img v-bind:src='kitchenCat.mainImage'></div>
+				</div>
+				<div v-else>
+					<p class="kitchen__text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit magni debitis officia, architecto nemo laboriosam dicta! Mollitia repellat recusandae, exercitationem porro, itaque accusantium, repellendus similique quaerat nobis nihil rerum vel voluptate necessitatibus sunt inventore possimus.</p>
+					<coming-soon></coming-soon>
+					<div class="table-image"><img v-bind:src='tableImage'></div>
+				</div>
 				<div class="back-button" v-on:click='jumpBack'>back</div>
 			</div>
+
 			<div class="content__item bathroom">
-				<p class="bathroom__text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit magni debitis officia, architecto nemo laboriosam dicta! Mollitia repellat recusandae, exercitationem porro, itaque accusantium, repellendus similique quaerat nobis nihil rerum vel voluptate necessitatibus sunt inventore possimus.</p>
-				<div class="product-button">view products</div>
-				<div class="table-image"><img v-bind:src='tableImage'></div>
+				<div v-if='bathroomCat'>
+					<p class="bathroom__text">{{bathroomCat.description}}</p>
+					<a v-bind:href="`/#/products/${bathroomCat.id}`" class="product-button">view products</a>
+					<div class="table-image"><img v-bind:src='bathroomCat.mainImage'></div>
+				</div>
+				<div v-else>
+					<p class="bathroom__text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit magni debitis officia, architecto nemo laboriosam dicta! Mollitia repellat recusandae, exercitationem porro, itaque accusantium, repellendus similique quaerat nobis nihil rerum vel voluptate necessitatibus sunt inventore possimus.</p>
+					<coming-soon></coming-soon>
+					<div class="table-image"><img v-bind:src='tableImage'></div>
+				</div>
 				<div class="back-button" v-on:click='jumpBack'>back</div>
 			</div>
 		</div>
@@ -68,10 +124,17 @@ import videoFile from './BG.mp4';
 import TIMING from './timing.js';
 import tableImage from './table.png';
 import aboutLogo from './logo-2.png';
+import db from '../database-controller/database-controller.js';
 
 import Nav from '../nav/nav.vue';
+import ComingSoon from './coming-soon/coming-soon.vue';
 
 export default {
+	firebase ()  {
+		return {
+			categories: db.ref('parentCat')
+		}
+	},
 	data () {
 		return {
 			videoFile: videoFile,
@@ -114,12 +177,45 @@ export default {
 			}, 50);
 		});
 	},
+	computed: {
+		tableCat () {
+			return this.getCategory('tables');
+		},
+		seatingCat () {
+			return this.getCategory('seating');
+		},
+		bedsCat () {
+			return this.getCategory('beds');
+		},
+		decorCat () {
+			return this.getCategory('decor');
+		},
+		lightingCat () {
+			return this.getCategory('lighting');
+		},
+		kitchenCat () {
+			return this.getCategory('kitchen');
+		},
+		bathroomCat () {
+			return this.getCategory('bathroom');
+		}
+	},
 	methods: {
 		goToNeutral () {
 			this.playItem = this.lastItem;
 			this.playItemMode = 'fadeDuration';
 			this.lastItem = null;
 			this.$refs.video.play();
+		},
+		getCategory (category) {
+			let result = null;
+			const rawCat = this.categories.filter(item => item.id === category);
+
+			if (rawCat.length > 0) {
+				result = rawCat[0];
+			}
+
+			return result;
 		},
 		jumpBack () {
 			$('.content__item').hide();
@@ -160,7 +256,8 @@ export default {
 		}
 	},
 	components: {
-		'header-nav': Nav
+		'header-nav': Nav,
+		'coming-soon': ComingSoon
 	}
 }
 </script>
