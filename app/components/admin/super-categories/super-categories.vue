@@ -17,7 +17,15 @@
 		<div class="super-categories__form">
 			<form action="">
 				<h2>Main data</h2>
-				<input type="text" v-model="id" name="id" placeholder="id">
+				<select v-model="id">
+					<option value="tables">tables</option>
+					<option value="seating">seating</option>
+					<option value="beds">beds</option>
+					<option value="decor">decor</option>
+					<option value="lighting">lighting</option>
+					<option value="kitchen">kitchen</option>
+					<option value="bathroom">bathroom</option>
+				</select>
 				<input type="text" v-model="title" name="title" placeholder="title">
 				<input type="text" v-model="url" name="url" placeholder="image url">
 				<textarea placeholder="description" v-model="description"></textarea>
@@ -31,6 +39,8 @@
 import './super-categories.sass';
 import db from '../../database-controller/database-controller.js';
 
+const DEFAULT_ID_CAT = 'tables';
+
 export default {
 	firebase ()  {
 		return {
@@ -40,7 +50,7 @@ export default {
 	},
 	data () {
 		return {
-			id: null,
+			id: DEFAULT_ID_CAT,
 			url: null,
 			subs: [],
 			title: null,
