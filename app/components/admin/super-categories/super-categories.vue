@@ -97,6 +97,8 @@ export default {
 			if (confirm('Are you sure you want to delete this category?')) {
 				this.$firebaseRefs.categories.child(this.currentItem['.key']).remove();
 			}
+
+			this.cancel();
 		},
 		submit (e) {
 			e.preventDefault();
