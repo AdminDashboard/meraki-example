@@ -3,7 +3,7 @@
 		<div class="super-categories__items">
 			<div class='super-categories__item' v-for='category in categories'>
 				<div class="super-category">
-					<div class="super-category__image" @click="deleteItem(category)" v-bind:style="{'background-image': 'url(' + category.mainImage + ')'}">
+					<div class="super-category__image" @click="editItem(category)" v-bind:style="{'background-image': 'url(' + category.mainImage + ')'}">
 					</div>
 					<div class="super-category__col">
 						<div class="super-category__id"><span class="super-category__label">id</span> {{category.id}}</div>
@@ -15,7 +15,7 @@
 			</div>
 		</div>
 		<div class="super-categories__form">
-			<form action="">
+			<form>
 				<h2>Main data</h2>
 				<select v-model="id">
 					<option value="tables">tables</option>
@@ -29,7 +29,9 @@
 				<input type="text" v-model="title" name="title" placeholder="title">
 				<input type="text" v-model="url" name="url" placeholder="image url">
 				<textarea placeholder="description" v-model="description"></textarea>
-				<button type="submit" v-on:click.stop="submit">Create new</button>
+				<button v-if="mode === 'create'" type="submit" v-on:click.prevent.stop="submit">Create new</button>
+				<button v-if="mode === 'edit'" type="submit" v-on:click.prevent.stop="edit">Edit</button>
+				<button v-if="mode === 'edit'" type="submit" v-on:click.prevent.stop="cancel">Cancel</button>
 			</form>
 		</div>
 	</div>
@@ -52,33 +54,45 @@ export default {
 		return {
 			id: DEFAULT_ID_CAT,
 			url: null,
-			subs: [],
 			title: null,
-			description: null
+			description: null,
+			mode: 'create',
+			currentItem: null
 		};
 	},
-	computed: {
-		jsonSubs () {
-			return this.subs.map(sub => {
-				var newSub = JSON.parse(sub);
-				delete newSub['.key'];
-				return newSub;
-			});
-		}
-	},
 	methods: {
-		change (e) {
-			var val = e.target.value;
-			if (e.target.checked) {
-				if (!~this.subs.indexOf(val)) {
-					this.subs.push(val);
-				}
-			} else {
-				var index = this.subs.indexOf(val);
-				this.subs.splice(index, 1);
-			}
+		editItem (item) {
+			this.mode = 'edit';
+			this.id = item.id;
+			this.url = item.mainImage;
+			this.description = item.description;
+			this.title = item.title;
+
+			this.currentItem = item;
 		},
-		deleteItem: function (item) {
+		cancel () {
+			this.mode = 'create';
+			this.id = DEFAULT_ID_CAT;
+			this.url = null;
+			this.title = null;
+			this.description = null;
+			this.currentItem = null;
+		},
+		edit () {
+			if (!this.currentItem) {
+				alert('no item specified');
+			}
+
+			this.$firebaseRefs.categories.child(this.currentItem['.key']).set({
+				id: this.id,
+				mainImage: this.url,
+				description: this.description,
+				title: this.title
+			});
+
+			this.cancel();
+		},
+		deleteItem (item) {
 			if (confirm('Are you sure you want to delete this category?')) {
 				this.$firebaseRefs.categories.child(item['.key']).remove();
 			}
@@ -94,7 +108,6 @@ export default {
 			this.$firebaseRefs.categories.push({
 				id: this.id,
 				mainImage: this.url,
-				sub_cats: this.jsonSubs,
 				description: this.description,
 				title: this.title
 			});
