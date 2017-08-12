@@ -31,6 +31,7 @@
 				<textarea placeholder="description" v-model="description"></textarea>
 				<button v-if="mode === 'create'" type="submit" v-on:click.prevent.stop="submit">Create new</button>
 				<button v-if="mode === 'edit'" type="submit" v-on:click.prevent.stop="edit">Edit</button>
+				<button v-if="mode === 'edit'" type="submit" v-on:click.prevent.stop="deleteItem">Delete</button>
 				<button v-if="mode === 'edit'" type="submit" v-on:click.prevent.stop="cancel">Cancel</button>
 			</form>
 		</div>
@@ -92,9 +93,9 @@ export default {
 
 			this.cancel();
 		},
-		deleteItem (item) {
+		deleteItem () {
 			if (confirm('Are you sure you want to delete this category?')) {
-				this.$firebaseRefs.categories.child(item['.key']).remove();
+				this.$firebaseRefs.categories.child(this.currentItem['.key']).remove();
 			}
 		},
 		submit (e) {
