@@ -3,7 +3,7 @@
 		<div class="sub-categories__items">
 			<div class='sub-categories__item' v-for='category in subCategories'>
 				<div class="sub-category">
-					<div class="sub-category__image" @click="deleteItem(category)" v-bind:style="{'background-image': 'url(' + category.mainImage + ')'}">
+					<div class="sub-category__image" @click="editItem(category)" v-bind:style="{'background-image': 'url(' + category.mainImage + ')'}">
 					</div>
 					<div class="sub-category__col">
 						<div class="sub-category__id"><span class="sub-category__label">id</span> {{category.id}}</div>
@@ -23,12 +23,17 @@
 				<input type="text" v-model="url" name="url" placeholder="image url">
 				<div class="sub-categories__parents">
 					<h2>Parent category</h2>
-					<label v-for="parentCat in parentCategories">
-						{{parentCat.id}}
-						<input type="radio" v-bind:value="parentCat.id" @change='change' name="parentCat">
+					<label v-for="cat in parentCategories">
+						{{cat.id}}
+						<input type="radio" v-model="parentCat" v-bind:value="cat.id" @change='change' name="parentCat">
 					</label>
 				</div>
-				<button type="submit" v-on:click.stop="submit">Create new</button>
+				<div v-if="mode === 'edit'">
+					<button type="submit" v-on:click.prevent.stop="edit">Edit</button>
+					<button type="submit" v-on:click.prevent.stop="deleteItem">Delete</button>
+					<button type="submit" v-on:click.prevent.stop="cancel">Cancel</button>
+				</div>
+				<button v-else type="submit" v-on:click.prevent.stop="submit">Create new</button>
 			</form>
 		</div>
 	</div>
@@ -50,17 +55,52 @@ export default {
 			id: null,
 			url: null,
 			title: null,
-			parentCat: null
+			parentCat: null,
+			mode: 'create',
+			currentItem: null
 		};
 	},
 	methods: {
 		change (e) {
 			this.parentCat = e.target.value;
 		},
-		deleteItem: function (item) {
-			if (confirm('Are you sure you want to delete this sub category?')) {
-				this.$firebaseRefs.subCategories.child(item['.key']).remove();
+		editItem (item) {
+			this.mode = 'edit';
+			this.id = item.id;
+			this.url = item.mainImage;
+			this.title = item.title;
+			this.parentCat = item.parentCat;
+
+			this.currentItem = item;
+		},
+		cancel () {
+			this.mode = 'create';
+			this.id = null;
+			this.url = null;
+			this.title = null;
+			this.parentCat = null;
+			this.currentItem = null;
+		},
+		edit () {
+			if (!this.currentItem) {
+				alert('no item was specified');
+				return;
 			}
+
+			this.$firebaseRefs.subCategories.child(this.currentItem['.key']).set({
+				id: this.id,
+				mainImage: this.url,
+				title: this.title
+			});
+
+			this.cancel();
+		},
+		deleteItem () {
+			if (confirm('Are you sure you want to delete this sub category?')) {
+				this.$firebaseRefs.subCategories.child(this.currentItem['.key']).remove();
+			}
+
+			this.cancel();
 		},
 		submit (e) {
 			e.preventDefault();

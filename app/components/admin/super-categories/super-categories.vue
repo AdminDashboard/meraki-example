@@ -29,10 +29,12 @@
 				<input type="text" v-model="title" name="title" placeholder="title">
 				<input type="text" v-model="url" name="url" placeholder="image url">
 				<textarea placeholder="description" v-model="description"></textarea>
-				<button v-if="mode === 'create'" type="submit" v-on:click.prevent.stop="submit">Create new</button>
-				<button v-if="mode === 'edit'" type="submit" v-on:click.prevent.stop="edit">Edit</button>
-				<button v-if="mode === 'edit'" type="submit" v-on:click.prevent.stop="deleteItem">Delete</button>
-				<button v-if="mode === 'edit'" type="submit" v-on:click.prevent.stop="cancel">Cancel</button>
+				<div v-if="mode === 'edit'">
+					<button type="submit" v-on:click.prevent.stop="edit">Edit</button>
+					<button type="submit" v-on:click.prevent.stop="deleteItem">Delete</button>
+					<button type="submit" v-on:click.prevent.stop="cancel">Cancel</button>
+				</div>
+				<button v-else type="submit" v-on:click.prevent.stop="submit">Create new</button>
 			</form>
 		</div>
 	</div>
@@ -82,6 +84,7 @@ export default {
 		edit () {
 			if (!this.currentItem) {
 				alert('no item specified');
+				return;
 			}
 
 			this.$firebaseRefs.categories.child(this.currentItem['.key']).set({

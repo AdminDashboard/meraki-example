@@ -3,7 +3,7 @@
 		<div class="products__items">
 			<div class='products__item' v-for='product in products'>
 				<div class="admin-product">
-					<div class="admin-product__image" @click="deleteItem(product)" v-bind:style="{'background-image': 'url(' + product.mainImage + ')'}">
+					<div class="admin-product__image" @click="editItem(product)" v-bind:style="{'background-image': 'url(' + product.mainImage + ')'}">
 					</div>
 					<div class="admin-product__col">
 						<div class="admin-product__id"><span class="admin-product__label">id</span> {{product.id}}</div>
@@ -53,11 +53,19 @@
 				<div class="products__check-field">
 					<label v-for="sub in subCategories">
 						{{sub.id}}
-						<input type="radio" v-bind:value="sub.id" @change='change' name="cat">
+						<input type="radio" v-model="cat" v-bind:value="sub.id" @change='change' name="cat">
 					</label>
 				</div>
-				<button v-on:click.prevent.stop="addSection">Add section</button><br/><br/>
-				<button type="submit" v-on:click.prevent.stop="submit">Create</button>
+				<div v-if="mode === 'edit'">
+					<button type="submit" v-on:click.prevent.stop="edit">Edit</button>
+					<button type="submit" v-on:click.prevent.stop="deleteItem">Delete</button>
+					<button v-on:click.prevent.stop="addSection">Add section</button><br/><br/>
+					<button type="submit" v-on:click.prevent.stop="cancel">Cancel</button>
+				</div>
+				<div v-else>
+					<button v-on:click.prevent.stop="addSection">Add section</button><br/><br/>
+					<button type="submit" v-on:click.prevent.stop="submit">Create new</button>
+				</div>
 			</form>
 		</div>
 	</div>
@@ -80,7 +88,9 @@ export default {
 			url: 'https://firebasestorage.googleapis.com/v0/b/meraki-test-eb979.appspot.com/o/table2.png?alt=media&token=66b76efe-11fe-4885-a111-f7315dc6ce75',
 			cat: null,
 			title: null,
-			sections: []
+			sections: [],
+			mode: 'create',
+			currentItem: null
 		};
 	},
 	methods: {
@@ -93,6 +103,41 @@ export default {
 		change (e) {
 			this.cat = e.target.value;
 		},
+		editItem (item) {
+			this.mode = 'edit';
+			this.id = item.id;
+			this.url = item.mainImage;
+			this.title = item.title;
+			this.sections = item.sections;
+			this.cat = item.cat;
+
+			this.currentItem = item;
+		},
+		cancel () {
+			this.mode = 'create';
+			this.id = null;
+			this.url = null;
+			this.title = null;
+			this.sections = [];
+			this.cat = null;
+			this.currentItem = null;
+		},
+		edit () {
+			if (!this.currentItem) {
+				alert('no item was specified');
+				return;
+			}
+
+			this.$firebaseRefs.products.child(this.currentItem['.key']).set({
+				id: this.id,
+				mainImage: this.url,
+				title: this.title,
+				cat: this.cat,
+				sections: this.sections
+			});
+
+			this.cancel();
+		},
 		addSection () {
 			this.sections.push({
 				title: null,
@@ -102,9 +147,9 @@ export default {
 				image2: 'https://firebasestorage.googleapis.com/v0/b/meraki-test-eb979.appspot.com/o/table2.png?alt=media&token=66b76efe-11fe-4885-a111-f7315dc6ce75'
 			});
 		},
-		deleteItem: function (item) {
+		deleteItem () {
 			if (confirm('Are you sure you want to delete this product?')) {
-				this.$firebaseRefs.products.child(item['.key']).remove();
+				this.$firebaseRefs.products.child(this.currentItem['.key']).remove();
 			}
 		},
 		submit (e) {
