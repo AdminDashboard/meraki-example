@@ -125,9 +125,10 @@ export default {
 		depthResolver (depthLevel, bind) {
 			const categoryName = this.$route.params.cat;
 
-			if (!depthLevel) {
-				this.categories = null;
+			this.categoryFilter = null;
+			this.categories = null;
 
+			if (!depthLevel) {
 				return bind
 					? this.$bindAsArray('rawProducts', db.ref(DEFAULT_REF_NAME))
 					: db.ref(DEFAULT_REF_NAME);
