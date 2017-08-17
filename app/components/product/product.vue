@@ -1,14 +1,14 @@
 <template>
 	<div id='product'>
-	<header-nav nav-style="black" v-bind:nav-cats="categories"></header-nav>
+	<header-nav nav-style="black" v-bind:nav-cats="computedBread"></header-nav>
 		<div class="product">
-			<h1 class="product__title">{{product.title}}</h1>
-			<div class="product__image"><img v-bind:src='product.mainImage'></div>
+			<h1 class="product__title">{{productTitle}}</h1>
+			<div class="product__image"><img v-bind:src='productMainImage'></div>
 			<div class="product__section"
 				v-bind:class="section.type === 'left'
 					? {product__section_1: true}
 					: {product__section_2: true}"
-				v-for="section in product.sections">
+				v-for="section in productSections">
 
 				<div class="product__section_left" v-if="section.type === 'left'">
 					<div class="product__inner-image" v-on:click="showFullImage($event, section.image1)"><img v-bind:src='section.image1'></div>
@@ -59,7 +59,8 @@ export default {
 		return {
 			productRaw: db.ref('products')
 				.orderByChild('id')
-				.equalTo(this.itemId)
+				.equalTo(this.itemId),
+			subCat: db.ref('subCat')
 		};
 	},
 	data () {
@@ -72,8 +73,7 @@ export default {
 				active: false,
 				src: null,
 				offsetData: null
-			},
-			categories: null
+			}
 		}
 	},
 	mounted: function () {
@@ -105,7 +105,34 @@ export default {
 	},
 	computed: {
 		product () {
-			return this.productRaw[0];
+			if (this.productRaw.length) {
+				return this.productRaw[0];
+			}
+
+			return null;
+		},
+		productTitle () {
+			return this.product ? this.product.title : null;
+		},
+		productMainImage () {
+			return this.product ? this.product.mainImage : null;
+		},
+		productSections () {
+			return this.product ? this.product.sections : null;
+		},
+		parentCat () {
+			const cat = this.subCat.filter(cat => {
+				return cat.id === this.product.cat;
+			});
+
+			return cat.length ? cat[0].parentCat : null;
+		},
+		computedBread () {
+			if (this.parentCat) {
+				return [this.parentCat, this.product.cat, this.itemId];
+			}
+
+			return null;
 		},
 		isClosed () {
 			return !this.imageController.active;
