@@ -9,8 +9,10 @@
   &__item
     list-style: none
     display: flex
+    position: relative
+    cursor: pointer
     align-items: center
-    &:first-child:after
+    &:after
       content: '\f054'
       font-family: 'FontAwesome'
       font-size: .5em
@@ -19,9 +21,15 @@
       margin-right: 10px
       position: relative
       top: 2px
+    &:nth-child(3)
+      cursor: default
+      &:after
+        content: none
+    &:hover
+      .breadcrumbs-menu__sub-menu
+        display: block
   &__link
     display: block
-    cursor: pointer
     text-decoration: none
     text-transform: uppercase
     letter-spacing: 1px
@@ -32,3 +40,19 @@
     transition: transform .2s ease-in-out
     &:hover
       opacity: 1
+  &__sub-menu
+    position: absolute
+    width: 100%
+    display: none
+    animation: .5s fadeUp forwards
+    > a
+      display: inline-block
+      text-decoration: none
+      white-space: nowrap
+      line-height: 40px
+      font-size: .8em
+      color: #000
+      &:hover
+        background: #000
+        color: #fff
+
