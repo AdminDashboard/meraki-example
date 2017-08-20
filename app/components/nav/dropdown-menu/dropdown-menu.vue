@@ -38,6 +38,12 @@ export default {
 	methods: {
 		toggleDropdown() {
 			this.dropdown = this.dropdown ? false : true;
+
+			if (this.dropdown) {
+				$('#app').addClass('app_shrink');
+			} else {
+				$('#app').removeClass('app_shrink');
+			}
 		}
 	}
 }
