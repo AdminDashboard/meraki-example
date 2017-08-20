@@ -19,6 +19,7 @@
 				<input type="text" v-model="id" name="id" placeholder="id">
 				<input type="text" v-model="title" name="title" placeholder="title">
 				<input type="text" v-model="url" name="url" placeholder="image url">
+				<input type="text" v-model="url2" name="url" placeholder="second image url">
 				<div class="admin-product__section"
 					v-for="(section, index) in sections">
 					<h2>Section: {{index + 1}}</h2>
@@ -86,6 +87,7 @@ export default {
 		return {
 			id: null,
 			url: 'https://firebasestorage.googleapis.com/v0/b/meraki-test-eb979.appspot.com/o/table2.png?alt=media&token=66b76efe-11fe-4885-a111-f7315dc6ce75',
+			url2: 'https://firebasestorage.googleapis.com/v0/b/meraki-test-eb979.appspot.com/o/table2.png?alt=media&token=66b76efe-11fe-4885-a111-f7315dc6ce75',
 			cat: null,
 			title: null,
 			sections: [],
@@ -107,6 +109,7 @@ export default {
 			this.mode = 'edit';
 			this.id = item.id;
 			this.url = item.mainImage;
+			this.url2 = item.secondImage;
 			this.title = item.title;
 			this.sections = item.sections;
 			this.cat = item.cat;
@@ -117,6 +120,7 @@ export default {
 			this.mode = 'create';
 			this.id = null;
 			this.url = null;
+			this.url2 = null;
 			this.title = null;
 			this.sections = [];
 			this.cat = null;
@@ -131,6 +135,7 @@ export default {
 			this.$firebaseRefs.products.child(this.currentItem['.key']).set({
 				id: this.id,
 				mainImage: this.url,
+				secondImage: this.url2,
 				title: this.title,
 				cat: this.cat,
 				sections: this.sections
@@ -161,6 +166,7 @@ export default {
 			this.$firebaseRefs.products.push({
 				id: this.id,
 				mainImage: this.url,
+				secondImage: this.url2,
 				title: this.title,
 				cat: this.cat,
 				sections: this.sections

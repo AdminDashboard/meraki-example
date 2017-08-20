@@ -32,7 +32,8 @@
 					</div>
 				</div>
 			</div>
-			<div class="product__section product__section_form">
+			<div class="product__section product__section_form"
+				:style="{'background-image': `url(${productSecondImage})`}">
 				<form-component></form-component>
 			</div>
 		</div>
@@ -116,6 +117,9 @@ export default {
 		},
 		productMainImage () {
 			return this.product ? this.product.mainImage : null;
+		},
+		productSecondImage () {
+			return this.product ? this.product.secondImage : null;
 		},
 		productSections () {
 			return this.product ? this.product.sections : null;
