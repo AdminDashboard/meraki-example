@@ -11,8 +11,6 @@ import Admin from '../admin/admin.vue';
 import 'font-awesome/css/font-awesome.css';
 import './fonts/fonts.sass';
 
-window.$ = window.jQuery = $;
-
 let isMobile = false;
 
 if (/Android|webOS|iPhone|iPod|iPad|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {

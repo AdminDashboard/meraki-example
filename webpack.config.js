@@ -20,6 +20,11 @@ module.exports = {
 			filename: './index.html',
 			favicon: './app/components/index/favicon.ico'
 		}),
+		new webpack.ProvidePlugin({
+			$: "jquery",
+			jQuery: "jquery",
+			"window.jQuery": "jquery"
+		}),
 		new webpack.HotModuleReplacementPlugin()
 	],
 	devServer: {

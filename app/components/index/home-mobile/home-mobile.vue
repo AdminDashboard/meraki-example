@@ -1,13 +1,23 @@
 <template>
 	<div class='mobileHome'>
-		<header-nav></header-nav>
 		<h1>Mobile</h1>
+		<div class="owl-carousel owl-theme">
+			<div> Your Content1 </div>
+			<div> Your Content </div>
+			<div> Your Content2 </div>
+			<div> Your Content </div>
+			<div> Your Content </div>
+			<div> Your Content </div>
+			<div> Your Content </div>
+		</div>
 	</div>
 </template>
 
 <script>
 import tableImage from '../table.png';
 import aboutLogo from '../logo-2.png';
+import 'owl.carousel/dist/assets/owl.carousel.css';
+import 'imports-loader?jQuery=jquery!owl.carousel';
 import db from '../../database-controller/database-controller.js';
 
 import Nav from '../../nav/nav.vue';
@@ -37,7 +47,7 @@ export default {
 		}
 	},
 	mounted () {
-
+		$('.owl-carousel').owlCarousel();
 	},
 	computed: {
 		tableCat () {
@@ -63,7 +73,6 @@ export default {
 		}
 	},
 	methods: {
-
 	},
 	components: {
 		'header-nav': Nav,
@@ -72,4 +81,7 @@ export default {
 }
 </script>
 
-<style scoped lang='sass'></style>
+<style scoped lang='sass'>
+	.owl-carousel
+		touch-action: manipulation
+</style>
