@@ -92,11 +92,11 @@ export default {
 			}
 
 			if (index === 0) {
-				this.bgPos = '200px 50%';
+				this.bgPos = '50px 50%';
 			}
 
 			if (index === 2) {
-				this.bgPos = '-200px 50%';
+				this.bgPos = '-100px 50%';
 			}
 		});
 	},
@@ -142,7 +142,7 @@ export default {
 			right: 0
 			bottom: 0
 			left: 0
-			transition: background .5s ease-in-out
+			transition: background .7s ease-in-out
 			opacity: .2
 			background-size: 110%
 			background-repeat: no-repeat
@@ -201,8 +201,6 @@ export default {
 			font-family: 'Ailerons'
 			font-size: 35px
 			opacity: .8
-		&:hover
-			background: red
 
 	@keyframes slideLeft
 		0%
