@@ -143,7 +143,7 @@ export default {
 			bottom: 0
 			left: 0
 			transition: background .5s ease-in-out
-			opacity: .3
+			opacity: .2
 			background-size: 110%
 			background-repeat: no-repeat
 	.owl-carousel
