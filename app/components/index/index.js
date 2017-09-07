@@ -15,7 +15,7 @@ import isMobile from '../utils/mobile-detect';
 const NotFound = {template: '<p>Page not found</p>'};
 
 const routes = [
-  {path: '/', component: isMobile ? MobileHome : Home},
+  {path: '/', component: isMobile() ? MobileHome : Home},
   {path: '/products', component: Products, props: {depth: null}},
   {path: '/products/:cat', component: Products, props: {depth: 'super'}},
   {path: '/products/:cat/items', component: Products, props: {depth: 'products'}},
