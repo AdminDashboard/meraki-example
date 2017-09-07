@@ -72,3 +72,20 @@
     padding: 40px
     box-sizing: border-box
     width: 50%
+
+@media only screen and (max-width: 1024px)
+  .product
+    &__section
+      width: 90%
+      flex-wrap: wrap
+    &__section_form
+      margin: 30px auto
+      padding-top: 150px
+      background-size: 90%
+      background-position: 50% 0
+  .product__section_right, .product__section_left
+    width: 100% !important
+    transform: none !important
+  .form-wrapper
+    width: 100% !important
+    padding: 10px !important

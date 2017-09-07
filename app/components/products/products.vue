@@ -25,6 +25,7 @@ import 'fullpage.js/dist/jquery.fullpage.js';
 import table from './table2.png';
 import hover from './hover.png';
 import db from '../database-controller/database-controller.js';
+import isMobile from '../utils/mobile-detect';
 
 import Nav from '../nav/nav.vue';
 
@@ -44,6 +45,7 @@ export default {
 		const categoryType = this.$route.params.cat;
 
 		return {
+			isMobile: isMobile,
 			itemsPerSection: 9,
 			currentSection: 0,
 			categories: null,

@@ -10,12 +10,7 @@ import Product from '../product/product.vue';
 import Admin from '../admin/admin.vue';
 import 'font-awesome/css/font-awesome.css';
 import './fonts/fonts.sass';
-
-let isMobile = false;
-
-if (/Android|webOS|iPhone|iPod|iPad|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-	isMobile = true;
-}
+import isMobile from '../utils/mobile-detect';
 
 const NotFound = {template: '<p>Page not found</p>'};
 
