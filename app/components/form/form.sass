@@ -1,5 +1,6 @@
 .form-wrapper
   position: relative
+  font-family: 'Raleway'
   &_sent
     .form
       filter: blur(10px)
@@ -10,6 +11,9 @@
       color: red
     .form__group_invalid
       border-bottom: 1px solid red !important
+  &_phone
+    .form__type-label
+      font-size: 20px
 
 .form
   display: block
@@ -20,6 +24,8 @@
     display: flex
     flex-wrap: wrap
     justify-content: space-between
+  &__description
+    margin: 20px 0
   &__group
     position: relative
     border-bottom: 1px solid #ccc
@@ -117,12 +123,17 @@
       margin-bottom: 10px
     &__fields
       margin-top: 30px
+      > label
+        width: 100%
+        margin-bottom: 30px
     &__check-buttons
       flex-wrap: wrap
+      margin-top: 0
       > *
         width: 100%
         margin-bottom: 30px
     &__submit
       position: relative
       right: 5px
-
+    &__group_message
+      margin-top: 0px

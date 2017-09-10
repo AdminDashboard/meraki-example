@@ -34,7 +34,7 @@
 			</div>
 			<div class="product__section product__section_form"
 				:style="{'background-image': `url(${productSecondImage})`}">
-				<form-component></form-component>
+				<form-component :confirm="true" :type="'product'"></form-component>
 			</div>
 		</div>
 		<image-modal v-bind:image-data='imageController'></image-modal>

@@ -1,16 +1,31 @@
 <template>
 	<div class="form-wrapper" v-bind:class="wrapperMod">
 		<form class="form">
-			<div class="form__type-fields">
-				<label class="form__type-group">
-					<input v-model="type" type="radio" value="order" name="type">
-					<span class="form__type-label">custom order</span>
-				</label>
-				<label class="form__type-group">
-					<input v-model="type" type="radio" value="info" name="type">
-					<span class="form__type-label">request more info</span>
-				</label>
+			<div v-if="!formType">
+				<div class="form__type-fields">
+					<label class="form__type-group">
+						<input v-model="type" type="radio" value="order" name="type">
+						<span class="form__type-label">custom order</span>
+					</label>
+					<label class="form__type-group">
+						<input v-model="type" type="radio" value="info" name="type">
+						<span class="form__type-label">request more info</span>
+					</label>
+				</div>
 			</div>
+			<div v-if="formType === 'phone'">
+				<div class="form__type-fields">
+					<label class="form__type-group">
+						<input v-model="type" type="radio" value="contact" name="type">
+						<span class="form__type-label">contact us</span>
+					</label>
+					<label class="form__type-group">
+						<input v-model="type" type="radio" value="order" name="type">
+						<span class="form__type-label">custom order</span>
+					</label>
+				</div>
+			</div>
+			<div v-if="formDescription" class="form__description">{{formDescription}}</div>
 			<div class="form__fields">
 				<label class="form__group form__group_name" v-bind:class="{'form__group_invalid': !name}">
 					<input required type="text" v-model="name" class="form__input" v-bind:class="{'form__input_has_value': name}" name="name">
@@ -29,7 +44,7 @@
 					<span class="form__label">Message</span>
 				</label>
 			</div>
-			<div class="form__check-buttons">
+			<div v-if="confirm" class="form__check-buttons">
 				<label class="form__check-group" v-bind:class="{'form__group_check-invalid': !processing}">
 					<span class="form__check-label">i accept the processing of personal data</span>
 					<span class="form__check">
@@ -70,20 +85,36 @@ export default {
 			sentMod: false
 		}
 	},
+	props: ['confirm' , 'formType', 'formDescription'],
 	computed: {
 		isValid() {
-			return this.name
-				&& this.email
-				&& this.phone
-				&& this.message
-				&& this.human
-				&& this.processing;
+			let valid = true;
+
+			if (!this.name || !this.email || !this.phone || !this.message) {
+				valid = false;
+			}
+
+			if (this.confirm && (!this.human || !this.processing)) {
+				valid = false;
+			}
+
+			return valid;
 		},
 		wrapperMod () {
-			return {
+			let defaultMods = {
 				'form-wrapper_check': this.invalidationCheck,
 				'form-wrapper_sent': this.sentMod
+			};
+
+			let computedMods = defaultMods;
+
+			if (this.formType) {
+				computedMods = Object.assign(defaultMods, {
+					['form-wrapper_' + this.formType]: true
+				})
 			}
+
+			return computedMods;
 		}
 	},
 	methods: {
