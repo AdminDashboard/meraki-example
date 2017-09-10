@@ -6,7 +6,7 @@
 		</div>
 		<div class="nav__right-side">
 			<div class="nav-logo">
-				<img v-bind:src="logo">
+				<a href="/"><img v-bind:src="logo"></a>
 			</div>
 			<dropdown-menu v-bind:d-style="this.navStyle"></dropdown-menu>
 		</div>
