@@ -2,7 +2,6 @@ import 'normalize.css';
 import Vue from 'vue';
 import VueFire from 'vuefire';
 import VueRouter from 'vue-router';
-import $ from 'jquery';
 import Home from './home.vue';
 import MobileHome from './home-mobile/home-mobile.vue';
 import Products from '../products/products.vue';

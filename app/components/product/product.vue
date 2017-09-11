@@ -1,6 +1,6 @@
 <template>
 	<div id='product'>
-	<header-nav nav-style="black" v-bind:nav-cats="computedBread"></header-nav>
+		<header-nav nav-style="black" v-bind:nav-cats="computedBread"></header-nav>
 		<div class="product">
 			<h1 class="product__title">{{productTitle}}</h1>
 			<div class="product__image"><img v-bind:src='productMainImage'></div>
@@ -38,16 +38,19 @@
 			</div>
 		</div>
 		<image-modal v-bind:image-data='imageController'></image-modal>
+		<phone-form v-if="isMobile" :fixed="true"></phone-form>
 	</div>
 </template>
 
 <script>
 import './product.sass';
 import table from '../index/table.png';
+import isMobile from '../utils/mobile-detect';
 
 import Nav from '../nav/nav.vue';
 import Form from '../form/form.vue';
 import ImageModal from '../image-modal/image-modal.vue';
+import PhoneForm from '../phone-form/phone-form.vue';
 
 import db from '../database-controller/database-controller.js';
 
@@ -66,6 +69,7 @@ export default {
 	},
 	data () {
 		return {
+			isMobile: isMobile,
 			table: table,
 			recentImage: null,
 			loading: true,
@@ -152,7 +156,8 @@ export default {
 	components: {
 		'header-nav': Nav,
 		'form-component': Form,
-		'image-modal': ImageModal
+		'image-modal': ImageModal,
+		'phone-form': PhoneForm
 	}
 }
 </script>

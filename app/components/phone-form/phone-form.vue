@@ -1,5 +1,5 @@
 <template>
-	<div class="phone-form">
+	<div class="phone-form" :class="formWrapperClasses">
 		<div class="phone-form__trigger" v-on:click="toggleMenu"></div>
 		<div :class="formClasses">
 			<div class="phone-form__close" v-on:click="toggleMenu"></div>
@@ -18,7 +18,16 @@ export default {
 			formText: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Incidunt repudiandae accusantium ipsum, facilis odit culpa dolor a aliquid officiis, cum!'
 		}
 	},
+	props: ['fixed'],
 	computed: {
+		formWrapperClasses () {
+			const computedClasses = {
+				'phone-form': true,
+				'phone-form_fixed': this.fixed
+			};
+
+			return computedClasses;
+		},
 		formClasses () {
 			const computedClasses = {
 				'phone-form__form': true,
@@ -56,6 +65,9 @@ export default {
 		      display: inline-block
 		      font-family: FontAwesome
 		      transition: transform .3s ease-in-out
+		&_fixed
+			.phone-form__trigger
+				position: fixed
 		&__form
 			position: fixed
 			top: 50px

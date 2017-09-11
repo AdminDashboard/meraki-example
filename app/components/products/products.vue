@@ -16,6 +16,7 @@
 			</div>
 		</div>
 		<div v-bind:class="arrowDownMods" v-on:click="moveDown"></div>
+		<phone-form v-if="isMobile"></phone-form>
 	</div>
 </template>
 
@@ -26,6 +27,7 @@ import table from './table2.png';
 import hover from './hover.png';
 import db from '../database-controller/database-controller.js';
 import isMobile from '../utils/mobile-detect';
+import PhoneForm from '../phone-form/phone-form.vue';
 
 import Nav from '../nav/nav.vue';
 
@@ -202,7 +204,8 @@ export default {
 		}
 	},
 	components: {
-		'header-nav': Nav
+		'header-nav': Nav,
+		'phone-form': PhoneForm
 	}
 }
 </script>
