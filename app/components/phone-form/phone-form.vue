@@ -70,7 +70,7 @@ export default {
 				position: fixed
 		&__form
 			position: fixed
-			top: 50px
+			top: 10px
 			bottom: 0
 			padding: 20px
 			box-sizing: border-box
