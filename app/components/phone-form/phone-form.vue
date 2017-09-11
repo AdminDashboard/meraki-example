@@ -58,6 +58,7 @@ export default {
 			height: 40px
 			z-index: 10
 			font-size: 2em
+			opacity: .7
 			right: 10px
 			&:after
 		      content: '\f095'

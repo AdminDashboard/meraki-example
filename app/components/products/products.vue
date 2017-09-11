@@ -16,8 +16,6 @@
 			</div>
 		</div>
 		<div v-bind:class="arrowDownMods" v-on:click="moveDown"></div>
-		<phone-footer v-if="isMobile"></phone-footer>
-		<phone-form v-if="isMobile" :fixed="true"></phone-form>
 	</div>
 </template>
 

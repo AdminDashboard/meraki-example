@@ -40,7 +40,7 @@
 			</div>
 		</div>
 		<phone-footer></phone-footer>
-		<phone-form></phone-form>
+		<phone-form :fixed="true"></phone-form>
 	</div>
 </template>
 

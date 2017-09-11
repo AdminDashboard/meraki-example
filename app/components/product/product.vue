@@ -38,8 +38,6 @@
 			</div>
 		</div>
 		<image-modal v-bind:image-data='imageController'></image-modal>
-		<phone-footer v-if="isMobile"></phone-footer>
-		<phone-form v-if="isMobile" :fixed="true"></phone-form>
 	</div>
 </template>
 
