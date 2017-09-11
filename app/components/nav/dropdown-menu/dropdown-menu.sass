@@ -4,9 +4,8 @@
   &__content
     background: rgba(0,0,0,.5)
     position: fixed
-    right: -200px
+    right: 0
     width: 200px
-    padding-top: 20px
     height: 100vh
     top: 0
     display: none
@@ -30,9 +29,10 @@
     top: -5px
     display: inline-block
     position: relative
+    z-index: 10
     width: 35px
     height: 3px
-    transition: all .3s ease-in-out
+    transition: all .2s ease-in-out
     &_white
       background: #fff
       &:before, &:after
@@ -62,9 +62,17 @@
       &:after
         opacity: 0
 
+.app_shrink
+  .dropdown-menu
+    &__link
+  .nav-logo
+    transform: translateX(-200px)
+  .dropdown-menu__trigger
+    transform: translateX(-200px) rotate(45deg)
+
 .dropdown-menu__content_active
   display: block
-  animation: .2s slideRight forwards
+  animation: .3s slideRight forwards
 
 @keyframes slideRight
   0%
