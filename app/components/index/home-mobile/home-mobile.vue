@@ -39,6 +39,7 @@
 				</div>
 			</div>
 		</div>
+		<phone-footer></phone-footer>
 		<phone-form></phone-form>
 	</div>
 </template>
@@ -54,6 +55,7 @@ import db from '../../database-controller/database-controller.js';
 import Dropdown from '../../nav/dropdown-menu/dropdown-menu.vue';
 import ComingSoon from '../coming-soon/coming-soon.vue';
 import PhoneForm from '../../phone-form/phone-form.vue';
+import PhoneFooter from '../../phone-footer/phone-footer.vue';
 
 export default {
 	firebase ()  {
@@ -130,7 +132,8 @@ export default {
 	components: {
 		'header-nav': Dropdown,
 		'coming-soon': ComingSoon,
-		'phone-form': PhoneForm
+		'phone-form': PhoneForm,
+		'phone-footer': PhoneFooter
 	}
 }
 </script>

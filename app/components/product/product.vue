@@ -38,6 +38,7 @@
 			</div>
 		</div>
 		<image-modal v-bind:image-data='imageController'></image-modal>
+		<phone-footer v-if="isMobile"></phone-footer>
 		<phone-form v-if="isMobile" :fixed="true"></phone-form>
 	</div>
 </template>
@@ -51,6 +52,7 @@ import Nav from '../nav/nav.vue';
 import Form from '../form/form.vue';
 import ImageModal from '../image-modal/image-modal.vue';
 import PhoneForm from '../phone-form/phone-form.vue';
+import PhoneFooter from '../phone-footer/phone-footer.vue';
 
 import db from '../database-controller/database-controller.js';
 
@@ -157,7 +159,8 @@ export default {
 		'header-nav': Nav,
 		'form-component': Form,
 		'image-modal': ImageModal,
-		'phone-form': PhoneForm
+		'phone-form': PhoneForm,
+		'phone-footer': PhoneFooter
 	}
 }
 </script>
