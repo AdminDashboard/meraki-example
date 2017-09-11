@@ -58,7 +58,9 @@
 					</span>
 				</label>
 			</div>
-			<button type="submit" v-on:click.stop="submit" class="form__submit">Send</button>
+			<button type="submit"
+				v-on:click.stop="submit"
+				class="form__submit">Send</button>
 		</form>
 		<div class="form__dialog">
 			<div class="form__message">
@@ -70,6 +72,7 @@
 
 <script>
 import './form.sass';
+import fingerprint from '../index/f2.png';
 
 export default {
 	data () {
@@ -81,6 +84,7 @@ export default {
 			message: null,
 			human: null,
 			processing: null,
+			fingerprint: fingerprint,
 			invalidationCheck: false,
 			sentMod: false
 		}
