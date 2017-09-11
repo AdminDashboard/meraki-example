@@ -30,6 +30,26 @@ Vue.use(VueRouter);
 const router = new VueRouter({routes});
 
 new Vue({
-  el: '#app',
-  router
+	el: '#app',
+	router,
+	mounted () {
+		if (isMobile()) {
+			document.addEventListener('click', event => {
+				const xPosition = event.clientX;
+				const yPosition = event.clientY;
+
+				const tapImage = document.createElement('div');
+
+				tapImage.className = 'mouse-tap';
+				tapImage.style.top = yPosition + 'px';
+				tapImage.style.left = xPosition + 'px';
+
+				document.getElementById('app').appendChild(tapImage);
+
+				setTimeout(() => {
+					tapImage.remove();
+				}, 200);
+			});
+		}
+	}
 });

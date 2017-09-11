@@ -38,3 +38,20 @@
     top: 15px
     right: 10px
     z-index: 2
+
+.mouse-tap
+  position: absolute
+  width: 60px
+  height: 60px
+  background-image: url(../index/fingerprint.png)
+  background-size: 100%
+  transform: translate(-50%, -50%) scale(.5)
+  z-index: 20
+  transition: all .2s ease-in-out
+  animation: .2s scaleUp forwards
+
+@keyframes scaleUp
+  0%
+    transform: translate(-50%, -50%) scale(.5)
+  100%
+    transform: translate(-50%, -50%) scale(1)

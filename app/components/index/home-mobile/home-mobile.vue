@@ -164,6 +164,7 @@ export default {
 			display: flex
 			align-items: center
 			box-sizing: border-box
+			flex-wrap: wrap
 			padding: 20px
 			height: 100vh
 			overflow: hidden

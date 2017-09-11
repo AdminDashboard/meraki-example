@@ -21,13 +21,12 @@ export default {
 		}
 	},
 	mounted () {
-		document.addEventListener('keyup', (event) => {
-			if (event.keyCode === ESCAPE_KEY) {
-				this.closeDropdown();
-			}
-		});
-
-		document.addEventListener('click', () => this.closeDropdown());
+		document.addEventListener('keyup', this.handleKeyUp, true);
+		document.addEventListener('click', this.handleClickOut, true);
+	},
+	beforeDestroy () {
+		document.removeEventListener('keyup', this.handleKeyUp, true);
+		document.removeEventListener('click', this.handleClickOut, true);
 	},
 	props: ['dStyle'],
 	computed: {
@@ -60,6 +59,14 @@ export default {
 		closeDropdown () {
 			$('#app').removeClass('app_shrink');
 			this.dropdown = false;
+		},
+		handleKeyUp (event) {
+			if (event.keyCode === ESCAPE_KEY) {
+				this.closeDropdown();
+			}
+		},
+		handleClickOut () {
+			this.closeDropdown();
 		}
 	}
 }
