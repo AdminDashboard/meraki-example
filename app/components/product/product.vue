@@ -71,7 +71,7 @@ export default {
 	},
 	data () {
 		return {
-			isMobile: isMobile,
+			isMobile: isMobile(),
 			table: table,
 			recentImage: null,
 			loading: true,

@@ -49,7 +49,7 @@ export default {
 		const categoryType = this.$route.params.cat;
 
 		return {
-			isMobile: isMobile,
+			isMobile: isMobile(),
 			itemsPerSection: 9,
 			currentSection: 0,
 			categories: null,
