@@ -1,7 +1,7 @@
 <template>
 	<div class="form-wrapper" v-bind:class="wrapperMod">
 		<form class="form">
-			<div v-if="!formType">
+			<!-- <div v-if="!formType"> -->
 				<div class="form__type-fields">
 					<label class="form__type-group">
 						<input v-model="type" type="radio" value="order" name="type">
@@ -12,8 +12,8 @@
 						<span class="form__type-label">request more info</span>
 					</label>
 				</div>
-			</div>
-			<div v-if="formType === 'phone'">
+			<!-- </div> -->
+			<!-- <div v-if="formType === 'phone'">
 				<div class="form__type-fields">
 					<label class="form__type-group">
 						<input v-model="type" type="radio" value="contact" name="type">
@@ -24,7 +24,7 @@
 						<span class="form__type-label">custom order</span>
 					</label>
 				</div>
-			</div>
+			</div> -->
 			<div v-if="formDescription" class="form__description">{{formDescription}}</div>
 			<div class="form__fields">
 				<label class="form__group form__group_name" v-bind:class="{'form__group_invalid': !name}">
