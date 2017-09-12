@@ -29,6 +29,9 @@
 				</div>
 			</div>
 			<div class="owl-carousel__item">
+				<div class="mobile-home-main__additional-title">
+					products
+				</div>
 				<div class="mobile-home-products">
 					<a :href="`#/products/${cat.id}`" class="mobile-home-product" v-for="cat in categories">
 						<div class="mobile-home-product__title">{{cat.id}}</div>
@@ -172,6 +175,12 @@ export default {
 	.mobile-home-main
 		width: 80%
 		margin: 0 auto
+		&__additional-title
+			position: absolute
+			font-family: 'Ailerons'
+			top: 10px
+			left: 10px
+			font-size: 1.5em
 		&__description
 			font-family: 'Raleway'
 			text-align: justify
