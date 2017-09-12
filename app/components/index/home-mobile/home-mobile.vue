@@ -178,9 +178,10 @@ export default {
 		&__additional-title
 			position: absolute
 			font-family: 'Ailerons'
-			top: 10px
-			left: 10px
-			font-size: 1.5em
+			top: 5px
+			left: 50%
+			transform: translateX(-50%)
+			font-size: 1.8em
 		&__description
 			font-family: 'Raleway'
 			text-align: justify
