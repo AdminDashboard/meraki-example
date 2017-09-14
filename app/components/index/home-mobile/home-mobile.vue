@@ -170,7 +170,7 @@ export default {
 			flex-wrap: wrap
 			padding: 20px
 			height: 100vh
-			overflow: hidden
+			overflow-y: scroll
 
 	.mobile-home-main
 		width: 80%
@@ -218,6 +218,17 @@ export default {
 			font-family: 'Ailerons'
 			font-size: 35px
 			opacity: .8
+
+	@media only screen and (orientation : landscape)
+		.owl-carousel__item
+			align-items: flex-start
+		.mobile-home-main__image
+			width: 60%
+			margin: 0 auto
+		.mobile-home-main__text_main
+			margin-top: 20%
+		.mobile-home-products
+			margin-top: 80px
 
 	@keyframes slideLeft
 		0%
