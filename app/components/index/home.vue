@@ -5,7 +5,9 @@
 			<ul>
 				<li class='control__item'
 					v-on:click='jumpTo(item)'
-					v-for='item in navItems'>{{item}}</li>
+					v-for='item in navItems'>
+					<div :class="'control__' + item">{{item}}</div>
+				</li>
 			</ul>
 		</div>
 		<div class="content">
@@ -120,6 +122,7 @@
 
 <script>
 import './index.sass';
+import './home-adjustments.css';
 import videoFile from './BG.mp4';
 import TIMING from './timing.js';
 import tableImage from './table.png';

@@ -1,0 +1,94 @@
+/* inner content of home section */
+
+.about {
+	/* property is just for example, should delete it */
+	background: red;
+	/* if changes on certain properties don't appear try adding !important */
+	/* background: red !important; */
+}
+
+.tables {
+
+}
+
+.seating {
+
+}
+
+.beds {
+
+}
+
+.descor {
+
+}
+
+.lighting {
+
+}
+
+.kitchen {
+
+}
+
+.bathroom {
+
+}
+
+/* circle links */
+
+.control__about {
+	/* property is just for example, should delete it */
+	background: red;
+}
+
+.control__tables {
+
+}
+
+.control__seating {
+
+}
+
+.control__beds {
+
+}
+
+.control__descor {
+
+}
+
+.control__lighting {
+
+}
+
+.control__kitchen {
+
+}
+
+.control__bathroom {
+
+}
+
+/* product button */
+
+.product-button {
+  background: linear-gradient(135deg, #0a0809 0%,#0a0e0a 52%, #6e7774 52% ,lighten(#cccccc, 20%) 52%);
+  color: transparent;
+  background-clip: text;
+  font-size: 2em;
+  -webkit-background-clip: text;
+  display: inline-block;
+  cursor: pointer;
+  font-family: sans-serif;
+  text-transform: uppercase;
+  font-weight: lighter;
+  letter-spacing: 3px;
+}
+
+/*
+steps to upload changes
+1) git add .
+2) git commit -m 'your_commit_message'
+3) git push
+*/
