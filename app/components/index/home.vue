@@ -122,7 +122,6 @@
 
 <script>
 import './index.sass';
-import './home-adjustments.css';
 import videoFile from './BG.mp4';
 import TIMING from './timing.js';
 import tableImage from './table.png';

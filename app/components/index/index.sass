@@ -139,6 +139,34 @@ $blocks: 8
     right: -100px
     top: 50%
 
+.product-button
+  color: rgba(0,0,0, .5)
+  font-size: 2em
+  display: inline-block
+  cursor: pointer
+  font-family: sans-serif
+  text-decoration: none
+  text-transform: uppercase
+  margin-bottom: 20px
+  font-weight: lighter
+  letter-spacing: 3px
+  position: relative
+  &:before
+    content: 'view products'
+    text-align: left
+    box-sizing: border-box
+    white-space: nowrap
+    position: absolute
+    top: 0
+    left: 0
+    width: 0
+    z-index: 2
+    color: #000
+    overflow: hidden
+    transition: width .4s ease-in-out
+  &:hover:before
+    width: 100%
+
 .tables
   padding-left: 200px
   .table-image
