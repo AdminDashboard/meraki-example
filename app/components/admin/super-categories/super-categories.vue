@@ -29,6 +29,13 @@
 				<input type="text" v-model="title" name="title" placeholder="title">
 				<input type="text" v-model="url" name="url" placeholder="image url">
 				<textarea placeholder="description" v-model="description"></textarea>
+				<div>
+					<label>
+						Show its products
+						<input type="checkbox" v-model="showItsChilds" name="showItsChilds">
+					</label>
+					<br/><br/>
+				</div>
 				<div v-if="mode === 'edit'">
 					<button type="submit" v-on:click.prevent.stop="edit">Edit</button>
 					<button type="submit" v-on:click.prevent.stop="deleteItem">Delete</button>
@@ -59,6 +66,7 @@ export default {
 			url: null,
 			title: null,
 			description: null,
+			showItsChilds: true,
 			mode: 'create',
 			currentItem: null
 		};
@@ -70,6 +78,7 @@ export default {
 			this.url = item.mainImage;
 			this.description = item.description;
 			this.title = item.title;
+			this.showItsChilds = item.showItsChilds;
 
 			this.currentItem = item;
 		},
@@ -79,6 +88,7 @@ export default {
 			this.url = null;
 			this.title = null;
 			this.description = null;
+			this.showItsChilds = true;
 			this.currentItem = null;
 		},
 		edit () {
@@ -91,6 +101,7 @@ export default {
 				id: this.id,
 				mainImage: this.url,
 				description: this.description,
+				showItsChilds: this.showItsChilds,
 				title: this.title
 			});
 
@@ -115,7 +126,8 @@ export default {
 				id: this.id,
 				mainImage: this.url,
 				description: this.description,
-				title: this.title
+				title: this.title,
+				showItsChilds: this.showItsChilds
 			});
 		}
 	}

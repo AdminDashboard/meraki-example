@@ -10,7 +10,8 @@
 						v-bind:data-id="item.id"
 						v-bind:data-title="item.title"
 						v-bind:style="{'background-image': 'url(' + item.mainImage + ')'}"
-						v-for='item in section'>
+						v-for="item in section"
+						v-if="canShow(item)">
 					</div>
 				</div>
 			</div>
@@ -201,6 +202,13 @@ export default {
 		},
 		moveUp () {
 			$.fn.fullpage.moveSectionUp();
+		},
+		canShow (item) {
+			if (this.depth === null) {
+				return item.showItsChilds;
+			}
+
+			return true;
 		}
 	},
 	components: {

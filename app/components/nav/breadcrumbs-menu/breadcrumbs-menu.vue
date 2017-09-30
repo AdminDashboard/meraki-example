@@ -5,7 +5,7 @@
 				<a class="breadcrumbs-menu__link">
 					{{category}}
 					<span class="breadcrumbs-menu__sub-menu" v-if="index === 0 || index === 1">
-						<sub-item :key="index" v-for="subItem in (index === 0 ? superLevel : subLevel)" :sub-data="{index: index, item: subItem}"></sub-item>
+						<sub-item :key="index" v-if="subItem.showItsChilds === true || index !== 0" v-for="subItem in (index === 0 ? superLevel : subLevel)" :sub-data="{index: index, item: subItem}"></sub-item>
 					</span>
 				</a>
 			</li>
