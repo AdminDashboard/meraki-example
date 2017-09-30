@@ -2,7 +2,7 @@
 	<div id='products'>
 		<header-nav nav-style="black" v-bind:nav-cats="categories"></header-nav>
 		<div v-bind:class="arrowTopMods" v-on:click="moveUp"></div>
-		<div id='fullpage-grid'>
+		<div id='fullpage-grid' v-if="loaded === true">
 			<div class='section' v-for='section in sections'>
 				<div class="products-grid">
 					<div class='products-grid__item'
@@ -40,7 +40,12 @@ export default {
 	// to fill products
 	firebase () {
 		return {
-			rawProducts: this.depthResolver(this.depth)
+			rawProducts: {
+				source: this.depthResolver(this.depth),
+				readyCallback: function () {
+					this.loaded = true;
+				}
+			}
 		};
 	},
 	// start: end related stuff
@@ -53,20 +58,11 @@ export default {
 			currentSection: 0,
 			categories: null,
 			categoryType: categoryType,
-			categoryFilter: null
+			categoryFilter: null,
+			loaded: false
 		}
 	},
 	props: ['depth'],
-	mounted () {
-		const _this = this;
-
-		$('#fullpage-grid').fullpage({
-			css3: true,
-			onLeave (index, nextIndex, direction) {
-				_this.currentSection = nextIndex;
-			}
-		});
-	},
 	destroyed () {
 		if ($.fn.fullpage.length) {
 			$.fn.fullpage.destroy('all');
@@ -75,6 +71,19 @@ export default {
 	watch: {
 		$route () {
 			this.depthResolver(this.depth, true);
+		},
+
+		loaded () {
+			const _this = this;
+
+			setTimeout(function () {
+				$('#fullpage-grid').fullpage({
+					css3: true,
+					onLeave (index, nextIndex, direction) {
+						_this.currentSection = nextIndex;
+					}
+				});
+			}, 100);
 		}
 	},
 	computed: {
@@ -109,7 +118,7 @@ export default {
 			return sections;
 		},
 		canMoveDown () {
-			return this.totalSections > 1 && this.currentSection < this.totalSections;
+			return this.totalSections > 0 && this.currentSection <= this.totalSections;
 		},
 		arrowDownMods () {
 			return {
@@ -122,7 +131,7 @@ export default {
 			return {
 				products__arrow: true,
 				products__arrow_top: true,
-				products__arrow_hidden: this.canMoveDown || this.totalSections < 1
+				products__arrow_hidden: this.currentSection < 2
 			}
 		}
 	},
