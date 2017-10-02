@@ -99,6 +99,7 @@ $blocks: 8
   font-style: normal
   p
     line-height: 25px
+    font-size: .9em
   &__item
     z-index: 2
     position: absolute
@@ -168,10 +169,14 @@ $blocks: 8
     width: 100%
 
 .tables
-  padding-left: 200px
+  text-align: center
+  p
+    padding-left: 150px
+    text-align: left
   .table-image
     opacity: .7
-    margin-left: -150px
+    width: 600px
+    margin: 0 auto
     img
       width: 100%
       opacity: 0
@@ -183,7 +188,6 @@ $blocks: 8
     bottom: 100px
     animation: 1s fadeIn forwards
   .product-button
-    margin-top: 20px
     opacity: 0
     animation: 1s fadeIn forwards 1s
   &__text
@@ -211,10 +215,8 @@ $blocks: 8
     margin: 0 auto
 
 .beds
-  padding-right: 200px
   .table-image
     opacity: .7
-    margin-right: -150px
     img
       width: 90%
       opacity: 0
@@ -235,10 +237,8 @@ $blocks: 8
     animation: 1s fadeIn forwards 1s
 
 .decor
-  padding-right: 250px
   .table-image
     opacity: .7
-    margin-right: -150px
     img
       width: 100%
       opacity: 0
@@ -260,10 +260,8 @@ $blocks: 8
     animation: 1s fadeIn forwards 1s
 
 .lighting
-  padding-right: 250px
   .table-image
     opacity: .7
-    margin-right: -150px
     img
       width: 100%
       opacity: 0
@@ -307,11 +305,9 @@ $blocks: 8
     margin: 0 auto
 
 .bathroom
-  padding-left: 250px
   text-align: right
   .table-image
     opacity: .7
-    margin-left: -150px
     img
       width: 100%
       opacity: 0
@@ -320,7 +316,7 @@ $blocks: 8
     position: absolute
     right: -50px
     opacity: 0
-    bottom: 50px
+    top: -20px
     animation: 1s fadeIn forwards
   .product-button
     white-space: nowrap
@@ -362,6 +358,62 @@ $blocks: 8
     transition: all 200ms ease
     left: -15px
     transform: translate3d(0,-50%,0) rotate(-135deg)
+
+.home-item
+  display: flex
+  flex-wrap: wrap
+  align-items: center
+  height: 60vh
+  &_upper, &_middle, &_bottom
+    height: 33%
+    width: 100%
+    position: relative
+    display: flex
+    align-items: center
+    box-sizing: border-box
+  &_upper
+    background: rgba(255, 0, 0, .5)
+    opacity: 0
+    animation: 1s fadeIn forwards 1s
+    overflow: hidden
+  &_middle
+    background: rgba(255, 255, 0, .5)
+  &_bottom
+    background: rgba(255, 0, 255, .5)
+    opacity: 0
+    animation: 1s fadeIn forwards
+  &__image
+    text-align: center
+    img
+      width: 90%
+  .product-button
+    margin: 0 auto
+    z-index: 1
+    top: -20px
+  &_tables
+    .home-item_upper
+      padding-left: 120px
+      text-align: left
+  &_beds
+    .home-item_upper
+      padding-right: 120px
+      text-align: right
+  &_decor
+    .home-item_upper
+      text-align: center
+  &_lighting
+    .home-item_upper
+      text-align: center
+  &_kitchen
+    .home-item_upper
+      text-align: center
+  &_bathroom
+    .home-item_upper
+      text-align: center
+  .coming-soon
+    text-align: center
+    margin: 0 auto
+    padding-bottom: 40px
 
 @keyframes fadeIn
   0%

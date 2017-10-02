@@ -19,12 +19,20 @@
 			</div>
 
 			<div class="content__item tables">
-				<div v-if='tableCat'>
-					<p class="tables__text">{{tableCat.content.description}}</p>
-					<a v-if='tableCat.hasProducts' v-bind:href="`/#/products/${tableCat.content.id}`" class="product-button">view products</a>
-					<coming-soon v-else></coming-soon>
-					<div class="table-image"><img v-bind:src='tableCat.content.mainImage'></div>
+				<!-- if tableCat -->
+				<div class="home-item home-item_tables" v-if='tableCat'>
+					<div class="home-item_upper">
+						<div class="home-item__text">{{tableCat.content.description}}</div>
+					</div>
+					<div class="home-item_middle">
+						<a v-if='tableCat.hasProducts' v-bind:href="`/#/products/${tableCat.content.id}`" class="product-button">view products</a>
+						<coming-soon v-else></coming-soon>
+					</div>
+					<div class="home-item_bottom">
+						<div class="home-item__image"><img v-bind:src='tableCat.content.mainImage'></div>
+					</div>
 				</div>
+				<!-- else -->
 				<div v-else>
 					<coming-soon></coming-soon>
 					<div class="table-image"><img v-bind:src='tableImage'></div>
@@ -33,12 +41,20 @@
 			</div>
 
 			<div class="content__item seating">
-				<div v-if='seatingCat'>
-					<p class="seating__text">{{seatingCat.content.description}}</p>
-					<a v-if='seatingCat.hasProducts' v-bind:href="`/#/products/${seatingCat.content.id}`" class="product-button">view products</a>
-					<coming-soon v-else></coming-soon>
-					<div class="table-image"><img v-bind:src='seatingCat.content.mainImage'></div>
+				<!-- if seatingCat -->
+				<div class="home-item home-item_seating" v-if='seatingCat'>
+					<div class="home-item_upper">
+						<div class="home-item__text">{{seatingCat.content.description}}</div>
+					</div>
+					<div class="home-item_middle">
+						<a v-if='seatingCat.hasProducts' v-bind:href="`/#/products/${seatingCat.content.id}`" class="product-button">view products</a>
+						<coming-soon v-else></coming-soon>
+					</div>
+					<div class="home-item_bottom">
+						<div class="home-item__image"><img v-bind:src='seatingCat.content.mainImage'></div>
+					</div>
 				</div>
+				<!-- else -->
 				<div v-else>
 					<coming-soon></coming-soon>
 					<div class="table-image"><img v-bind:src='tableImage'></div>
@@ -47,12 +63,20 @@
 			</div>
 
 			<div class="content__item beds">
-				<div v-if='bedsCat'>
-					<p class="tables__text">{{bedsCat.content.description}}</p>
-					<a v-if='bedsCat.hasProducts' v-bind:href="`/#/products/${bedsCat.content.id}`" class="product-button">view products</a>
-					<coming-soon v-else></coming-soon>
-					<div class="table-image"><img v-bind:src='bedsCat.content.mainImage'></div>
+				<!-- if bedsCat -->
+				<div class="home-item home-item_beds" v-if='bedsCat'>
+					<div class="home-item_upper">
+						<div class="home-item__text">{{bedsCat.content.description}}</div>
+					</div>
+					<div class="home-item_middle">
+						<a v-if='bedsCat.hasProducts' v-bind:href="`/#/products/${bedsCat.content.id}`" class="product-button">view products</a>
+						<coming-soon v-else></coming-soon>
+					</div>
+					<div class="home-item_bottom">
+						<div class="home-item__image"><img v-bind:src='bedsCat.content.mainImage'></div>
+					</div>
 				</div>
+				<!-- else -->
 				<div v-else>
 					<coming-soon></coming-soon>
 					<div class="table-image"><img v-bind:src='tableImage'></div>
@@ -61,12 +85,20 @@
 			</div>
 
 			<div class="content__item decor">
-				<div v-if='decorCat'>
-					<p class="decor__text">{{decorCat.content.description}}</p>
-					<a v-if='decorCat.hasProducts' v-bind:href="`/#/products/${decorCat.content.id}`" class="product-button">view products</a>
-					<coming-soon v-else></coming-soon>
-					<div class="table-image"><img v-bind:src='decorCat.content.mainImage'></div>
+				<!-- if decorCat -->
+				<div class="home-item home-item_decor" v-if='decorCat'>
+					<div class="home-item_upper">
+						<div class="home-item__text">{{decorCat.content.description}}</div>
+					</div>
+					<div class="home-item_middle">
+						<a v-if='decorCat.hasProducts' v-bind:href="`/#/products/${decorCat.content.id}`" class="product-button">view products</a>
+						<coming-soon v-else></coming-soon>
+					</div>
+					<div class="home-item_bottom">
+						<div class="home-item__image"><img v-bind:src='decorCat.content.mainImage'></div>
+					</div>
 				</div>
+				<!-- else -->
 				<div v-else>
 					<coming-soon></coming-soon>
 					<div class="table-image"><img v-bind:src='tableImage'></div>
@@ -75,12 +107,20 @@
 			</div>
 
 			<div class="content__item lighting">
-				<div v-if='lightingCat'>
-					<p class="lighting__text">{{lightingCat.content.description}}</p>
-					<a v-if='lightingCat.hasProducts' v-bind:href="`/#/products/${lightingCat.content.id}`" class="product-button">view products</a>
-					<coming-soon v-else></coming-soon>
-					<div class="table-image"><img v-bind:src='lightingCat.content.mainImage'></div>
+				<!-- if lightingCat -->
+				<div class="home-item home-item_lighting" v-if='lightingCat'>
+					<div class="home-item_upper">
+						<div class="home-item__text">{{lightingCat.content.description}}</div>
+					</div>
+					<div class="home-item_middle">
+						<a v-if='lightingCat.hasProducts' v-bind:href="`/#/products/${lightingCat.content.id}`" class="product-button">view products</a>
+						<coming-soon v-else></coming-soon>
+					</div>
+					<div class="home-item_bottom">
+						<div class="home-item__image"><img v-bind:src='lightingCat.content.mainImage'></div>
+					</div>
 				</div>
+				<!-- else -->
 				<div v-else>
 					<coming-soon></coming-soon>
 					<div class="table-image"><img v-bind:src='tableImage'></div>
@@ -89,12 +129,20 @@
 			</div>
 
 			<div class="content__item kitchen">
-				<div v-if='kitchenCat'>
-					<p class="kitchen__text">{{kitchenCat.content.description}}</p>
-					<a v-if='kitchenCat.hasProducts' v-bind:href="`/#/products/${kitchenCat.content.id}`" class="product-button">view products</a>
-					<coming-soon v-else></coming-soon>
-					<div class="table-image"><img v-bind:src='kitchenCat.content.mainImage'></div>
+				<!-- if kitchenCat -->
+				<div class="home-item home-item_kitchen" v-if='kitchenCat'>
+					<div class="home-item_upper">
+						<div class="home-item__text">{{kitchenCat.content.description}}</div>
+					</div>
+					<div class="home-item_middle">
+						<a v-if='kitchenCat.hasProducts' v-bind:href="`/#/products/${lightingCat.content.id}`" class="product-button">view products</a>
+						<coming-soon v-else></coming-soon>
+					</div>
+					<div class="home-item_bottom">
+						<div class="home-item__image"><img v-bind:src='kitchenCat.content.mainImage'></div>
+					</div>
 				</div>
+				<!-- else -->
 				<div v-else>
 					<coming-soon></coming-soon>
 					<div class="table-image"><img v-bind:src='tableImage'></div>
@@ -103,12 +151,20 @@
 			</div>
 
 			<div class="content__item bathroom">
-				<div v-if='bathroomCat'>
-					<p class="bathroom__text">{{bathroomCat.content.description}}</p>
-					<a v-if='bathroomCat.hasProducts' v-bind:href="`/#/products/${bathroomCat.content.id}`" class="product-button">view products</a>
-					<coming-soon v-else></coming-soon>
-					<div class="table-image"><img v-bind:src='bathroomCat.content.mainImage'></div>
+				<!-- if bathroomCat -->
+				<div class="home-item home-item_bathroom" v-if='bathroomCat'>
+					<div class="home-item_upper">
+						<div class="home-item__text">{{bathroomCat.content.description}}</div>
+					</div>
+					<div class="home-item_middle">
+						<a v-if='bathroomCat.hasProducts' v-bind:href="`/#/products/${bathroomCat.content.id}`" class="product-button">view products</a>
+						<coming-soon v-else></coming-soon>
+					</div>
+					<div class="home-item_bottom">
+						<div class="home-item__image"><img v-bind:src='bathroomCat.content.mainImage'></div>
+					</div>
 				</div>
+				<!-- else -->
 				<div v-else>
 					<coming-soon></coming-soon>
 					<div class="table-image"><img v-bind:src='tableImage'></div>
