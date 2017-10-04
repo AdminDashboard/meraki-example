@@ -45,7 +45,7 @@ export default {
 			font-family: 'Futura pt'
 			font-size: 2.3em
 			position: absolute
-			bottom: 20%
+			bottom: 5%
 
 	@keyframes fadeInDelayed
 		0%
