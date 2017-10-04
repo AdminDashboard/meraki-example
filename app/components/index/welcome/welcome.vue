@@ -42,7 +42,7 @@ export default {
 			color: lighten(#000, 20%)
 			text-transform: uppercase
 			font-family: 'Futura pt'
-			font-size: 2.6em
+			font-size: 2.3em
 			text-shadow: 0 0 20px #fff
 			position: absolute
 			bottom: 23%
