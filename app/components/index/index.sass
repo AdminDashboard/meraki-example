@@ -22,6 +22,38 @@ video
     &:hover
       opacity: 1
 
+.control-wrapper
+  position: absolute
+  width: 65%
+  height: 100%
+  margin: auto
+  top: 0
+  bottom: 0
+  left: 0
+  right: 0
+  transition: .3s all
+  z-index: 9
+  &:hover
+    .control
+      opacity: 1
+      transform: scale(1)
+    .welcome
+      opacity: 0
+      transform: scale(.4)
+  .welcome
+    transition: all .3s ease-in-out
+  &.disabled
+    .control
+      pointer-events: none
+      opacity: 0
+      &:before
+        animation: pulse 3s infinite
+      .control__item
+        opacity: 0 !important
+        pointer-events: none
+    .welcome
+      opacity: 0 !important
+
 .control
   position: absolute
   text-align: center
@@ -48,15 +80,8 @@ video
     left: 0
     right: 0
     bottom: 0
-
-  &.disabled
-    pointer-events: none
-    opacity: 0
-    &:before
-      animation: pulse 3s infinite
-    .control__item
-      opacity: 0 !important
-      pointer-events: none
+  transform: scale(.4)
+  opacity: 0
 
 
 .control ul
@@ -87,7 +112,6 @@ video
   transition-delay: 0s
   opacity: 1
 
-
 $blocks: 8
 @for $i from 0 through ($blocks - 1)
   .control__item:nth-child(#{$i + 1})
@@ -97,6 +121,7 @@ $blocks: 8
   .control .control__item:nth-child(#{$i + 1})
     transform: rotate(#{360/$blocks*$i - 90}deg) translateX(250%) rotate(#{-360/$blocks*$i + 90}deg)
     transition-delay: #{$i * 0.04}s, #{$i * 0.08}
+
 
 .content
   font-family: 'Raleway'
@@ -109,6 +134,7 @@ $blocks: 8
     z-index: 2
     position: absolute
     display: none
+    z-index: 11
     box-sizing: border-box
     width: 50%
     top: 50%

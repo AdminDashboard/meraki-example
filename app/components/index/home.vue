@@ -1,14 +1,17 @@
 <template>
 	<div class='videoComponent'>
 		<header-nav nav-style="white"></header-nav>
-		<div class='control'>
-			<ul>
-				<li class='control__item'
-					v-on:click='jumpTo(item)'
-					v-for='item in navItems'>
-					<div :class="'control__' + item">{{item}}</div>
-				</li>
-			</ul>
+		<div class="control-wrapper">
+			<welcome></welcome>
+			<div class='control'>
+				<ul>
+					<li class='control__item'
+						v-on:click='jumpTo(item)'
+						v-for='item in navItems'>
+						<div :class="'control__' + item">{{item}}</div>
+					</li>
+				</ul>
+			</div>
 		</div>
 		<div class="content">
 			<div class="content__item about">
@@ -186,6 +189,7 @@ import db from '../database-controller/database-controller.js';
 
 import Nav from '../nav/nav.vue';
 import ComingSoon from './coming-soon/coming-soon.vue';
+import Welcome from './welcome/welcome.vue';
 
 export default {
 	firebase ()  {
@@ -283,13 +287,13 @@ export default {
 		},
 		jumpBack () {
 			$('.content__item').hide();
-			$('.control').removeClass('disabled');
+			$('.control-wrapper').removeClass('disabled');
 			this.goToNeutral();
 		},
 		jumpTo (to) {
 			const video = this.$refs.video;
 
-			$('.control').addClass('disabled');
+			$('.control-wrapper').addClass('disabled');
 			setTimeout(() => $('.' + to).show(), 1000);
 
 			if (this.lastItem) {
@@ -321,7 +325,8 @@ export default {
 	},
 	components: {
 		'header-nav': Nav,
-		'coming-soon': ComingSoon
+		'coming-soon': ComingSoon,
+		'welcome': Welcome
 	}
 }
 </script>
