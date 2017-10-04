@@ -29,6 +29,7 @@ export default {
 		flex-wrap: wrap
 		text-align: center
 		align-items: center
+		animation: 2s fadeInDelayed
 		height: 100%
 		&__logo
 			width: 100%
@@ -41,5 +42,16 @@ export default {
 			text-transform: uppercase
 			font-family: 'Futura pt'
 			font-size: 2.6em
-			text-shadow: 0 0 10px #fff
+			text-shadow: 0 0 8px #fff
+
+	@keyframes fadeInDelayed
+		0%
+			opacity: 0
+			transform: translateY(10px)
+		30%
+			opacity: 0
+			transform: translateY(10px)
+		100%
+			opacity: 1
+			transform: translateY(0)
 </style>
