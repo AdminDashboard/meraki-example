@@ -1,6 +1,6 @@
 <template>
 	<div class='videoComponent'>
-		<header-nav></header-nav>
+		<header-nav nav-style="white"></header-nav>
 		<div class='control'>
 			<ul>
 				<li class='control__item'
