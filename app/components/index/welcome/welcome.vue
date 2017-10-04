@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import aboutLogo from './../logo-2.png';
+import aboutLogo from './../logo-3.png';
 
 export default {
 	data () {
@@ -39,13 +39,13 @@ export default {
 		&__tap
 			text-decoration: center
 			width: 100%
-			color: #000
+			color: lighten(#000, 20%)
 			text-transform: uppercase
 			font-family: 'Futura pt'
 			font-size: 2.6em
 			text-shadow: 0 0 20px #fff
 			position: absolute
-			bottom: 140px
+			bottom: 23%
 
 	@keyframes fadeInDelayed
 		0%
