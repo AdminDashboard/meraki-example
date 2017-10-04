@@ -39,13 +39,13 @@ export default {
 		&__tap
 			text-decoration: center
 			width: 100%
-			color: lighten(#000, 20%)
+			color: #000
+			opacity: .5
 			text-transform: uppercase
 			font-family: 'Futura pt'
 			font-size: 2.3em
-			text-shadow: 0 0 20px #fff
 			position: absolute
-			bottom: 23%
+			bottom: 20%
 
 	@keyframes fadeInDelayed
 		0%
