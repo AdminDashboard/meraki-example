@@ -30,6 +30,7 @@ export default {
 		text-align: center
 		align-items: center
 		animation: 2s fadeInDelayed
+		position: relative
 		height: 100%
 		&__logo
 			width: 100%
@@ -42,7 +43,9 @@ export default {
 			text-transform: uppercase
 			font-family: 'Futura pt'
 			font-size: 2.6em
-			text-shadow: 0 0 8px #fff
+			text-shadow: 0 0 20px #fff
+			position: absolute
+			bottom: 140px
 
 	@keyframes fadeInDelayed
 		0%
