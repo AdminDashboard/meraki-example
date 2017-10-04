@@ -41,4 +41,5 @@ export default {
 			text-transform: uppercase
 			font-family: 'Futura pt'
 			font-size: 2.6em
+			text-shadow: 0 0 10px #fff
 </style>
