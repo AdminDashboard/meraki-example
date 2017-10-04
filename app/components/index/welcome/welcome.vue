@@ -3,7 +3,7 @@
 		<div class="welcome__logo">
 			<img :src="aboutLogo" alt="">
 		</div>
-		<div class="welcome__tap">Tap into uniqness</div>
+		<div class="welcome__tap">Tap into uniqueness</div>
 	</div>
 </template>
 
