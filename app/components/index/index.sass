@@ -32,6 +32,7 @@ video
   left: 0
   right: 0
   transition: .3s all
+  animation: 2s delayHover
   z-index: 9
   &:hover
     .control
@@ -472,6 +473,13 @@ $blocks: 8
   100%
     opacity: 1
     transform: translateY(0)
+
+
+@keyframes delayHover
+  0%
+    pointer-events: none
+  100%
+    pointer-events: none
 
 
 @keyframes about_line
