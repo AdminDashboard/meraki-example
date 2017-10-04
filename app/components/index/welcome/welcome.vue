@@ -23,7 +23,7 @@ export default {
 	.welcome
 		width: 600px
 		margin: 0 auto
-		padding: 22% 0
+		padding: 12% 0
 		display: flex
 		box-sizing: border-box
 		flex-wrap: wrap
