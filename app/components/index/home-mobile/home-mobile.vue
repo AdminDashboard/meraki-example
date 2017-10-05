@@ -33,7 +33,7 @@
 					products
 				</div>
 				<div class="mobile-home-products">
-					<a :href="`#/products/${cat.id}`" class="mobile-home-product" v-for="cat in categories">
+					<a :href="`#/products/${cat.id}`" class="mobile-home-product" v-for="cat in categories" v-if="cat.showItsChilds">
 						<div class="mobile-home-product__title">{{cat.id}}</div>
 						<div class="mobile-home-product__image">
 							<img :src="cat.mainImage" alt="">
@@ -106,31 +106,6 @@ export default {
 				this.bgPos = '-100px 50%';
 			}
 		});
-	},
-	computed: {
-		tableCat () {
-			return this.getCategory('tables');
-		},
-		seatingCat () {
-			return this.getCategory('seating');
-		},
-		bedsCat () {
-			return this.getCategory('beds');
-		},
-		decorCat () {
-			return this.getCategory('decor');
-		},
-		lightingCat () {
-			return this.getCategory('lighting');
-		},
-		kitchenCat () {
-			return this.getCategory('kitchen');
-		},
-		bathroomCat () {
-			return this.getCategory('bathroom');
-		}
-	},
-	methods: {
 	},
 	components: {
 		'header-nav': Dropdown,
