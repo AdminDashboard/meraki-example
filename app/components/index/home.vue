@@ -22,13 +22,14 @@
 			</div>
 
 			<div class="content__item tables">
+				<div class="back-button" v-on:click='jumpBack'>back</div>
 				<!-- if tableCat -->
 				<div class="home-item home-item_tables" v-if='tableCat'>
 					<div class="home-item_upper">
 						<div class="home-item__text">{{tableCat.content.description}}</div>
 					</div>
 					<div class="home-item_middle">
-						<a v-if='tableCat.hasProducts' v-bind:href="`/#/products/${tableCat.content.id}`" class="product-button">view products</a>
+						<a v-if='tableCat.hasProducts && tableCat.content.showItsChilds' v-bind:href="`/#/products/${tableCat.content.id}`" class="product-button">view products</a>
 						<coming-soon v-else></coming-soon>
 					</div>
 					<div class="home-item_bottom">
@@ -40,17 +41,17 @@
 					<coming-soon></coming-soon>
 					<div class="table-image"><img v-bind:src='tableImage'></div>
 				</div>
-				<div class="back-button" v-on:click='jumpBack'>back</div>
 			</div>
 
 			<div class="content__item seating">
+				<div class="back-button" v-on:click='jumpBack'>back</div>
 				<!-- if seatingCat -->
 				<div class="home-item home-item_seating" v-if='seatingCat'>
 					<div class="home-item_upper">
 						<div class="home-item__text">{{seatingCat.content.description}}</div>
 					</div>
 					<div class="home-item_middle">
-						<a v-if='seatingCat.hasProducts' v-bind:href="`/#/products/${seatingCat.content.id}`" class="product-button">view products</a>
+						<a v-if='seatingCat.hasProducts && seatingCat.content.showItsChilds' v-bind:href="`/#/products/${seatingCat.content.id}`" class="product-button">view products</a>
 						<coming-soon v-else></coming-soon>
 					</div>
 					<div class="home-item_bottom">
@@ -62,17 +63,17 @@
 					<coming-soon></coming-soon>
 					<div class="table-image"><img v-bind:src='tableImage'></div>
 				</div>
-				<div class="back-button" v-on:click='jumpBack'>back</div>
 			</div>
 
 			<div class="content__item beds">
+				<div class="back-button" v-on:click='jumpBack'>back</div>
 				<!-- if bedsCat -->
 				<div class="home-item home-item_beds" v-if='bedsCat'>
 					<div class="home-item_upper">
 						<div class="home-item__text">{{bedsCat.content.description}}</div>
 					</div>
 					<div class="home-item_middle">
-						<a v-if='bedsCat.hasProducts' v-bind:href="`/#/products/${bedsCat.content.id}`" class="product-button">view products</a>
+						<a v-if='bedsCat.hasProducts && bedsCat.content.showItsChilds' v-bind:href="`/#/products/${bedsCat.content.id}`" class="product-button">view products</a>
 						<coming-soon v-else></coming-soon>
 					</div>
 					<div class="home-item_bottom">
@@ -84,17 +85,17 @@
 					<coming-soon></coming-soon>
 					<div class="table-image"><img v-bind:src='tableImage'></div>
 				</div>
-				<div class="back-button" v-on:click='jumpBack'>back</div>
 			</div>
 
 			<div class="content__item decor">
+				<div class="back-button" v-on:click='jumpBack'>back</div>
 				<!-- if decorCat -->
 				<div class="home-item home-item_decor" v-if='decorCat'>
 					<div class="home-item_upper">
 						<div class="home-item__text">{{decorCat.content.description}}</div>
 					</div>
 					<div class="home-item_middle">
-						<a v-if='decorCat.hasProducts' v-bind:href="`/#/products/${decorCat.content.id}`" class="product-button">view products</a>
+						<a v-if='decorCat.hasProducts && decorCat.content.showItsChilds' v-bind:href="`/#/products/${decorCat.content.id}`" class="product-button">view products</a>
 						<coming-soon v-else></coming-soon>
 					</div>
 					<div class="home-item_bottom">
@@ -106,17 +107,17 @@
 					<coming-soon></coming-soon>
 					<div class="table-image"><img v-bind:src='tableImage'></div>
 				</div>
-				<div class="back-button" v-on:click='jumpBack'>back</div>
 			</div>
 
 			<div class="content__item lighting">
+				<div class="back-button" v-on:click='jumpBack'>back</div>
 				<!-- if lightingCat -->
 				<div class="home-item home-item_lighting" v-if='lightingCat'>
 					<div class="home-item_upper">
 						<div class="home-item__text">{{lightingCat.content.description}}</div>
 					</div>
 					<div class="home-item_middle">
-						<a v-if='lightingCat.hasProducts' v-bind:href="`/#/products/${lightingCat.content.id}`" class="product-button">view products</a>
+						<a v-if='lightingCat.hasProducts && lightingCat.content.showItsChilds' v-bind:href="`/#/products/${lightingCat.content.id}`" class="product-button">view products</a>
 						<coming-soon v-else></coming-soon>
 					</div>
 					<div class="home-item_bottom">
@@ -128,7 +129,6 @@
 					<coming-soon></coming-soon>
 					<div class="table-image"><img v-bind:src='tableImage'></div>
 				</div>
-				<div class="back-button" v-on:click='jumpBack'>back</div>
 			</div>
 
 			<div class="content__item kitchen">
@@ -138,7 +138,7 @@
 						<div class="home-item__text">{{kitchenCat.content.description}}</div>
 					</div>
 					<div class="home-item_middle">
-						<a v-if='kitchenCat.hasProducts' v-bind:href="`/#/products/${lightingCat.content.id}`" class="product-button">view products</a>
+						<a v-if='kitchenCat.hasProducts && kitchenCat.content.showItsChilds' v-bind:href="`/#/products/${lightingCat.content.id}`" class="product-button">view products</a>
 						<coming-soon v-else></coming-soon>
 					</div>
 					<div class="home-item_bottom">
@@ -160,7 +160,7 @@
 						<div class="home-item__text">{{bathroomCat.content.description}}</div>
 					</div>
 					<div class="home-item_middle">
-						<a v-if='bathroomCat.hasProducts' v-bind:href="`/#/products/${bathroomCat.content.id}`" class="product-button">view products</a>
+						<a v-if='bathroomCat.hasProducts && bathroomCat.content.showItsChilds' v-bind:href="`/#/products/${bathroomCat.content.id}`" class="product-button">view products</a>
 						<coming-soon v-else></coming-soon>
 					</div>
 					<div class="home-item_bottom">
