@@ -22,8 +22,12 @@ export default {
 <style lang='sass'>
 	.phone-footer
 		position: fixed
-		left: 10px
-		bottom: 15px
+		left: 0
+		background: #fff
+		border-top: 1px solid lightgray
+		width: 100%
+		bottom: 0
+		padding: 20px
 		z-index: 2
 		font-family: 'Raleway'
 		&__row

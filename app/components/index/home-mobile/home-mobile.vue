@@ -28,7 +28,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="owl-carousel__item">
+			<div class="owl-carousel__item owl-carousel__item_mobile-products">
 				<div class="mobile-home-main__additional-title">
 					products
 				</div>
@@ -153,10 +153,16 @@ export default {
 		&__additional-title
 			position: absolute
 			font-family: 'Ailerons'
-			top: 5px
-			left: 50%
-			transform: translateX(-50%)
+			padding: 5px 0
+			border-bottom: 1px solid lightgray
+			z-index: 1
+			top: 0
+			left: 0
+			width: 100%
+			text-align: center
 			font-size: 1.8em
+			background: #fff
+			left: 0
 		&__description
 			font-family: 'Raleway'
 			text-align: justify
