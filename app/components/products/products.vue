@@ -16,6 +16,9 @@
 				</div>
 			</div>
 		</div>
+		<div v-if="loaded && !products.length">
+			<coming-soon :cat="currentCat"></coming-soon>
+		</div>
 		<div v-bind:class="arrowDownMods" v-on:click="moveDown"></div>
 	</div>
 </template>
@@ -29,6 +32,7 @@ import db from '../database-controller/database-controller.js';
 import isMobile from '../utils/mobile-detect';
 import PhoneForm from '../phone-form/phone-form.vue';
 import PhoneFooter from '../phone-footer/phone-footer.vue';
+import ComingSoon from './coming-soon/coming-soon.vue';
 
 import Nav from '../nav/nav.vue';
 
@@ -58,6 +62,7 @@ export default {
 			currentSection: 0,
 			categories: null,
 			categoryType: categoryType,
+			currentCat: categoryType,
 			categoryFilter: null,
 			loaded: false
 		}
@@ -71,6 +76,7 @@ export default {
 	watch: {
 		$route () {
 			this.depthResolver(this.depth, true);
+			this.currentCat = this.$route.params.cat;
 		},
 
 		loaded () {
@@ -223,7 +229,8 @@ export default {
 	components: {
 		'header-nav': Nav,
 		'phone-form': PhoneForm,
-		'phone-footer': PhoneFooter
+		'phone-footer': PhoneFooter,
+		'coming-soon': ComingSoon
 	}
 }
 </script>
