@@ -2,8 +2,11 @@
 	<div class="coming-soon-overlay">
 		<div class="coming-soon-overlay__image" :style="{'background-image': `url(${bg})`}"></div>
 		<div class="coming-soon-overlay__title">
-			coming<br/>soon
+			coming<br/>soon {{kek}}
 		</div>
+		<!-- <div class="coming-soon-overlay__form">
+			coming-soon form
+		</div> -->
 		<div class="coming-soon-overlay__description">{{description}}</div>
 	</div>
 </template>
@@ -74,6 +77,8 @@ export default {
 		background-position: 50%
 		opacity: .2
 		filter: grayscale(100%)
+	&__form
+		width: 100%
 	&__title
 		width: 100%
 		font-size: 4em
