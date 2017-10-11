@@ -2,17 +2,20 @@
 	<div class="coming-soon-overlay">
 		<div class="coming-soon-overlay__image" :style="{'background-image': `url(${bg})`}"></div>
 		<div class="coming-soon-overlay__title">
-			coming<br/>soon {{kek}}
+			coming<br/>soon
 		</div>
-		<!-- <div class="coming-soon-overlay__form">
-			coming-soon form
-		</div> -->
+		<div class="coming-soon-overlay__form-wrapper">
+			<div class="coming-soon-overlay__form">
+				<coming-soon-form></coming-soon-form>
+			</div>
+		</div>
 		<div class="coming-soon-overlay__description">{{description}}</div>
 	</div>
 </template>
 
 <script>
 import db from '../../database-controller/database-controller.js';
+import ComingSoonForm from '../coming-soon-form/coming-soon-form.vue';
 
 export default {
 	firebase () {
@@ -52,6 +55,9 @@ export default {
 	},
 	data () {
 		return {};
+	},
+	components: {
+		'coming-soon-form': ComingSoonForm
 	}
 }
 </script>
@@ -71,14 +77,21 @@ export default {
 		top: 0
 		left: 0
 		right: 0
+		z-index: -1
 		bottom: 0
 		background-size: 80%
 		background-repeat: no-repeat
 		background-position: 50%
 		opacity: .2
 		filter: grayscale(100%)
-	&__form
+	&__form-wrapper
 		width: 100%
+	&__form
+		max-width: 350px
+		padding: 0 20px
+		box-sizing: border-box
+		margin: 0 auto
+		text-align: left
 	&__title
 		width: 100%
 		font-size: 4em

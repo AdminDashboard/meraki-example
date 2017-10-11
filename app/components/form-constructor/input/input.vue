@@ -30,6 +30,8 @@ export default {
 .input
 	position: relative
 	border-bottom: 1px solid #ccc
+	display: block
+	margin-top: 25px
 	&__field
 		box-sizing: border-box
 		width: 100%
