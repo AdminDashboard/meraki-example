@@ -4,12 +4,12 @@
 		<div class="coming-soon-overlay__title">
 			coming<br/>soon
 		</div>
+		<div class="coming-soon-overlay__description">{{description}}</div>
 		<div class="coming-soon-overlay__form-wrapper">
 			<div class="coming-soon-overlay__form">
 				<coming-soon-form></coming-soon-form>
 			</div>
 		</div>
-		<div class="coming-soon-overlay__description">{{description}}</div>
 	</div>
 </template>
 
