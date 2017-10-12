@@ -32,6 +32,9 @@
 					</div>
 				</div>
 			</div>
+			<div class="product__price" v-if="productPrice">
+				<price :price="productPrice"></price>
+			</div>
 			<div class="product__section product__section_form"
 				:style="{'background-image': `url(${productSecondImage})`}">
 				<form-component :confirm="true" :type="'product'"></form-component>
@@ -51,6 +54,7 @@ import Form from '../form/form.vue';
 import ImageModal from '../image-modal/image-modal.vue';
 import PhoneForm from '../phone-form/phone-form.vue';
 import PhoneFooter from '../phone-footer/phone-footer.vue';
+import Price from './price/price.vue';
 
 import db from '../database-controller/database-controller.js';
 
@@ -128,6 +132,9 @@ export default {
 		productSections () {
 			return this.product ? this.product.sections : null;
 		},
+		productPrice () {
+			return this.product ? this.product.price : null;
+		},
 		parentCat () {
 			const cat = this.subCat.filter(cat => {
 				return cat.id === this.product.cat;
@@ -158,7 +165,8 @@ export default {
 		'form-component': Form,
 		'image-modal': ImageModal,
 		'phone-form': PhoneForm,
-		'phone-footer': PhoneFooter
+		'phone-footer': PhoneFooter,
+		'price': Price
 	}
 }
 </script>

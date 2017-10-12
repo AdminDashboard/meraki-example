@@ -18,6 +18,7 @@
 				<h2>Main data</h2>
 				<input type="text" v-model="id" name="id" placeholder="id">
 				<input type="text" v-model="title" name="title" placeholder="title">
+				<input type="text" v-model="price" name="title" placeholder="price">
 				<input type="text" v-model="url" name="url" placeholder="image url">
 				<input type="text" v-model="url2" name="url" placeholder="second image url">
 				<div class="admin-product__section"
@@ -90,6 +91,7 @@ export default {
 			url2: 'https://firebasestorage.googleapis.com/v0/b/meraki-test-eb979.appspot.com/o/table2.png?alt=media&token=66b76efe-11fe-4885-a111-f7315dc6ce75',
 			cat: null,
 			title: null,
+			price: null,
 			sections: [],
 			mode: 'create',
 			currentItem: null
@@ -113,6 +115,7 @@ export default {
 			this.title = item.title;
 			this.sections = item.sections;
 			this.cat = item.cat;
+			this.price = item.price;
 
 			this.currentItem = item;
 		},
@@ -124,6 +127,7 @@ export default {
 			this.title = null;
 			this.sections = [];
 			this.cat = null;
+			this.price = null;
 			this.currentItem = null;
 		},
 		edit () {
@@ -137,6 +141,7 @@ export default {
 				mainImage: this.url,
 				secondImage: this.url2,
 				title: this.title,
+				price: this.price,
 				cat: this.cat,
 				sections: this.sections
 			});
@@ -159,7 +164,7 @@ export default {
 		},
 		submit (e) {
 			if (!this.id || !this.title) {
-				alert('id nor title shoulnt be empty');
+				alert('id nor title shouldnt be empty');
 				return;
 			}
 
@@ -167,6 +172,7 @@ export default {
 				id: this.id,
 				mainImage: this.url,
 				secondImage: this.url2,
+				price: this.price,
 				title: this.title,
 				cat: this.cat,
 				sections: this.sections
