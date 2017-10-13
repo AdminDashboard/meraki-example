@@ -16,11 +16,13 @@
 		<div class="admin-product__form">
 			<form action="">
 				<h2>Main data</h2>
-				<input type="text" v-model="id" name="id" placeholder="id">
-				<input type="text" v-model="title" name="title" placeholder="title">
-				<input type="text" v-model="price" name="title" placeholder="price">
-				<input type="text" v-model="url" name="url" placeholder="image url">
-				<input type="text" v-model="url2" name="url" placeholder="second image url">
+				<form-input v-model="id" :passedLabel="'id'" :passedValue="id"></form-input>
+				<form-input v-model="title" :passedLabel="'Title'" :passedValue="title"></form-input>
+				<form-input v-model="url" :passedLabel="'image url'" :passedValue="url"></form-input>
+				<form-input v-model="url2" :passedLabel="'second image url'" :passedValue="url2"></form-input>
+				<h2>Price</h2>
+				<form-input v-model="price" :passedLabel="'Price'" :passedValue="price"></form-input>
+				<form-input v-model="priceText" :passedLabel="'Price text'" :passedValue="priceText"></form-input>
 				<div class="admin-product__section"
 					v-for="(section, index) in sections">
 					<h2>Section: {{index + 1}}</h2>
@@ -76,6 +78,7 @@
 <script>
 import './products.sass';
 import db from '../../database-controller/database-controller.js';
+import Input from '../../form-constructor/input/input.vue';
 
 export default {
 	firebase ()  {
@@ -92,6 +95,7 @@ export default {
 			cat: null,
 			title: null,
 			price: null,
+			priceText: null,
 			sections: [],
 			mode: 'create',
 			currentItem: null
@@ -116,6 +120,7 @@ export default {
 			this.sections = item.sections;
 			this.cat = item.cat;
 			this.price = item.price;
+			this.priceText = item.priceText;
 
 			this.currentItem = item;
 		},
@@ -128,6 +133,7 @@ export default {
 			this.sections = [];
 			this.cat = null;
 			this.price = null;
+			this.priceText = null;
 			this.currentItem = null;
 		},
 		edit () {
@@ -142,6 +148,7 @@ export default {
 				secondImage: this.url2,
 				title: this.title,
 				price: this.price,
+				priceText: this.priceText,
 				cat: this.cat,
 				sections: this.sections
 			});
@@ -173,11 +180,15 @@ export default {
 				mainImage: this.url,
 				secondImage: this.url2,
 				price: this.price,
+				priceText: this.priceText,
 				title: this.title,
 				cat: this.cat,
 				sections: this.sections
 			});
 		}
+	},
+	components: {
+		'form-input': Input
 	}
 }
 </script>

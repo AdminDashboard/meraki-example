@@ -1,7 +1,8 @@
 <template>
 	<div class="price">
-		<div class="price__sum">price: ${{price}}</div>
-		<div class="price__menu">
+		<div class="price__text" v-if="text">{{text}}</div>
+		<div class="price__sum" v-if="price">price: ${{price}}</div>
+		<div class="price__menu" v-if="price">
 			<div class="price__menu-item">Add to cart</div>
 			<div class="price__menu-item">Create price alert</div>
 			<div class="price__menu-item"><i class="fa fa-heart-o" aria-hidden="true"></i> Add to wishlist</div>
@@ -17,14 +18,14 @@ export default {
 
 		}
 	},
-	props: ['price']
+	props: ['price', 'text']
 }
 </script>
 
 <style scoped lang='sass'>
 .price
 	display: inline-block
-	&__sum
+	&__sum, &__text
 		font-family: 'Ailerons'
 		font-size: 70px
 	&__menu

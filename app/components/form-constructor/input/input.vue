@@ -17,6 +17,9 @@ export default {
 	watch: {
 		value () {
 			this.$emit('input', this.value);
+		},
+		passedValue () {
+			this.value = this.passedValue;
 		}
 	},
 	created: function() {
@@ -38,6 +41,7 @@ export default {
 		background: none
 		border: none
 		font-size: .8em
+		margin: 0
 		&:focus
 			outline: none
 			+ .input__label

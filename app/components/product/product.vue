@@ -32,8 +32,8 @@
 					</div>
 				</div>
 			</div>
-			<div class="product__price" v-if="productPrice">
-				<price :price="productPrice"></price>
+			<div class="product__price" v-if="productPrice || productPriceText">
+				<price :price="productPrice" :text="productPriceText"></price>
 			</div>
 			<div class="product__section product__section_form"
 				:style="{'background-image': `url(${productSecondImage})`}">
@@ -134,6 +134,9 @@ export default {
 		},
 		productPrice () {
 			return this.product ? this.product.price : null;
+		},
+		productPriceText () {
+			return this.product ? this.product.priceText : null;
 		},
 		parentCat () {
 			const cat = this.subCat.filter(cat => {

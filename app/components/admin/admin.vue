@@ -6,6 +6,11 @@
 				<ul class="admin__list">
 					<li class="admin__item">
 						<a href="#" class="admin__link"
+						v-bind:class="{admin__link_active: this.mode === 'settings'}"
+						v-on:click.stop.prevent="showMode('settings')">Settings</a>
+					</li>
+					<li class="admin__item">
+						<a href="#" class="admin__link"
 						v-bind:class="{admin__link_active: this.mode === 'super'}"
 						v-on:click.stop.prevent="showMode('super')">Super categories</a>
 					</li>
@@ -21,6 +26,7 @@
 					</li>
 				</ul>
 			</div>
+			<settings v-if="this.mode === 'settings'"></settings>
 			<super-categories v-if="this.mode === 'super'"></super-categories>
 			<sub-categories v-if="this.mode === 'sub'"></sub-categories>
 			<products v-if="this.mode === 'products'"></products>
@@ -34,6 +40,7 @@ import Nav from '../nav/nav.vue';
 import SuperCategories from './super-categories/super-categories.vue';
 import SubCategories from './sub-categories/sub-categories.vue';
 import Products from './products/products.vue';
+import Settings from './settings/settings.vue';
 
 export default {
 	data () {
@@ -50,7 +57,8 @@ export default {
 		'header-nav': Nav,
 		'super-categories': SuperCategories,
 		'sub-categories': SubCategories,
-		products: Products
+		products: Products,
+		settings: Settings
 	}
 }
 </script>
