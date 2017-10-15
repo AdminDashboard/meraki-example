@@ -3,6 +3,11 @@
 		<div class="dropdown-menu__trigger" v-bind:class="mods"></div>
 		<div class="dropdown-menu__content" v-on:click.stop="stop" v-bind:class="{'dropdown-menu__content_active': dropdown}">
 			<ul class="dropdown-menu__list" v-on:click="closeDropdown">
+				<li class="dropdown-menu__item add-items">
+					<div class="wishlist"><i class="fa fa-heart-o" aria-hidden="true"></i>6</div>
+					<div class="cart"><i class="fa fa-shopping-cart" aria-hidden="true"></i>1</div>
+					<div class="search"><i class="fa fa-search" aria-hidden="true"></i></div>
+				</li>
 				<li class="dropdown-menu__item"><a href="#/" class="dropdown-menu__link">home</a></li>
 				<li class="dropdown-menu__item"><a href="#/products" class="dropdown-menu__link">products</a></li>
 			</ul>
@@ -71,3 +76,20 @@ export default {
 	}
 }
 </script>
+
+<style scoped lang="sass">
+.add-items
+	color: #fff
+	display: flex
+	border-bottom: 1px solid #fff
+	padding-top: 10px
+	padding-bottom: 10px
+	> div
+		width: 33.3%
+		text-align: center
+		font-size: 1.7em
+		font-family: 'Ailerons'
+		transition: all .2s ease-in-out
+		&:hover
+			transform: scale(1.2)
+</style>

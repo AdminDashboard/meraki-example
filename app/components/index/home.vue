@@ -16,7 +16,7 @@
 		<div class="content">
 			<div class="content__item about">
 				<div class="about__image"><img v-bind:src='aboutLogo'></div>
-				<p class="about__text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Incidunt quasi cum aut iure, quidem cumque velit repudiandae, laboriosam laudantium culpa maiores quam ad beatae atque voluptate autem. Quas facere itaque temporibus. Assumenda quasi nemo porro debitis, maiores dolorem error non totam vel, saepe eveniet provident nulla eos illum. Optio, iure laudantium. Delectus itaque fuga fugiat. Provident doloribus natus, ipsum commodi repellendus quo quaerat incidunt ducimus, consectetur ut inventore magnam, odio.</p>
+				<p class="about__text" v-text="aboutText"></p>
 				<a href="#" class="read-more-button">read more</a>
 				<div class="back-button" v-on:click='jumpBack'>back</div>
 			</div>
@@ -194,6 +194,7 @@ import Welcome from './welcome/welcome.vue';
 export default {
 	firebase ()  {
 		return {
+			settings: db.ref('general'),
 			categories: db.ref('parentCat'),
 			subCats: db.ref('subCat')
 		}
@@ -261,6 +262,12 @@ export default {
 		},
 		bathroomCat () {
 			return this.getCategory('bathroom');
+		},
+		aboutItem () {
+			return this.settings.length && this.settings[0];
+		},
+		aboutText () {
+			return this.aboutItem && this.aboutItem.text;
 		}
 	},
 	methods: {

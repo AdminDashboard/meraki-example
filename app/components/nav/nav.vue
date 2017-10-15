@@ -22,13 +22,31 @@ import boxMenu from './box-menu/box-menu.vue';
 import dropdown from './dropdown-menu/dropdown-menu.vue';
 import breadMenu from './breadcrumbs-menu/breadcrumbs-menu.vue';
 
+import db from '../database-controller/database-controller.js';
+
 export default {
 	data () {
 		return {
 			logoWhite: logoWhite,
 			logoBlack: logoBlack,
 			dropdown: false,
-			items: []
+			items: [],
+			loaded: false
+		}
+	},
+	firebase ()  {
+		return {
+			settings: {
+				source: db.ref('general'),
+				readyCallback: function () {
+					this.loaded = true;
+				}
+			}
+		}
+	},
+	watch: {
+		loaded () {
+			this.logo = this.logoUrl;
 		}
 	},
 	props: ['navStyle', 'navCats'],
@@ -50,9 +68,19 @@ export default {
 			return 'nav_' + this.navStyle;
 		},
 		logo () {
+			if (this.logoUrl) {
+				return this.logoUrl;
+			}
+
 			return this.navStyle === 'black'
 				? logoBlack
 				: logoWhite;
+		},
+		logoItem () {
+			return this.settings.length && this.settings[1];
+		},
+		logoUrl () {
+			return this.logoItem && this.logoItem.url;
 		}
 	},
 	components: {

@@ -6,6 +6,8 @@
     padding-top: 77px
     padding-bottom: 77px
     box-sizing: border-box
+    &.disabled
+      pointer-events: none
     &__item
       flex-basis: 33.33%
       position: relative
@@ -94,6 +96,8 @@
       display: none
 
 @media only screen and (max-width: 1024px)
+  .fp-tableCell
+    overflow-y: scroll !important
   .products-grid
     &__item
       flex-basis: 100%

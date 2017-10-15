@@ -29,6 +29,11 @@
     &:hover
       .breadcrumbs-menu__sub-menu
         display: block
+      .breadcrumbs-menu__overlay
+        display: block
+  &.submenu
+    .breadcrumbs-menu__sub-menu
+      display: block
   &__link
     display: block
     text-decoration: none
@@ -41,6 +46,17 @@
     transition: transform .2s ease-in-out
     &:hover
       opacity: 1
+  &__overlay
+    display: none
+    position: fixed
+    z-index: -2
+    top: 0
+    bottom: 0
+    right: 0
+    left: 0
+    background: rgba(0,0,0,.5)
+    &:hover
+      display: none !important
   &__sub-menu
     position: absolute
     width: 100%
@@ -72,6 +88,9 @@
 
 @media only screen and (max-width: 1024px)
   .breadcrumbs-menu
+    &__overlay
+      &:hover
+        display: block !important
     &__link
       font-size: .45em
     &__item

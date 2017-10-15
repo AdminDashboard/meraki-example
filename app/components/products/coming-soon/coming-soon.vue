@@ -64,6 +64,8 @@ export default {
 
 <style scoped lang="sass">
 .coming-soon-overlay
+	overflow-y: scroll
+	padding-bottom: 20px
 	position: absolute
 	top: 60px
 	text-align: center

@@ -89,7 +89,7 @@ export default {
 						_this.currentSection = nextIndex;
 					}
 				});
-			}, 100);
+			}, 500);
 		}
 	},
 	computed: {
