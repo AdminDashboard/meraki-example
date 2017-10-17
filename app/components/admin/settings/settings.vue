@@ -1,14 +1,22 @@
 <template>
 	<div class="settings">
-		<h1>settings</h1>
-		<h2>about:</h2>
-		<textarea v-model="userText"></textarea>
-		<div class="settings__logo">
-			<form-input v-model="logo" :passedLabel="'Logo'" :passedValue="logo"></form-input>
-			<img :src="logo">
+		<!-- col 1 -->
+		<div class="settings__col">
+			<h2>About:</h2>
+			<textarea v-model="userText"></textarea>
+			<div class="settings__logo">
+				<form-input v-model="logo" :passedLabel="'Logo'" :passedValue="logo"></form-input>
+				<img :src="logo">
+			</div>
+			<div>
+				<button type="submit" v-on:click.prevent.stop="submit">Save</button>
+			</div>
 		</div>
-		<div>
-			<button type="submit" v-on:click.prevent.stop="submit">Save</button>
+
+		<!-- col 2 -->
+		<div class="settings__col">
+			<h2>Socials:</h2>
+			<social-links></social-links>
 		</div>
 	</div>
 </template>
@@ -16,6 +24,7 @@
 <script>
 import db from '../../database-controller/database-controller.js';
 import Input from '../../form-constructor/input/input.vue';
+import Socials from './social/social.vue';
 
 export default {
 	firebase ()  {
@@ -80,7 +89,8 @@ export default {
 		}
 	},
 	components: {
-		'form-input': Input
+		'form-input': Input,
+		'social-links': Socials
 	}
 }
 </script>
@@ -91,6 +101,9 @@ textarea
 	height: 200px
 
 .settings
+	display: flex
+	&__col
+		width: 33%
 	&__logo
 		width: 400px
 		img
