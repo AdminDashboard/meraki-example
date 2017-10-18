@@ -11,12 +11,17 @@
 				<li class="dropdown-menu__item"><a href="#/" class="dropdown-menu__link">home</a></li>
 				<li class="dropdown-menu__item"><a href="#/products" class="dropdown-menu__link">products</a></li>
 			</ul>
+			<div class="dropdown-menu__socials">
+				<socials></socials>
+			</div>
 		</div>
 	</div>
 </template>
 
 <script>
 import './dropdown-menu.sass';
+import Socials from '../../social-items/social-items.vue';
+
 const ESCAPE_KEY = 27;
 
 export default {
@@ -73,6 +78,9 @@ export default {
 		handleClickOut () {
 			this.closeDropdown();
 		}
+	},
+	components: {
+		socials: Socials
 	}
 }
 </script>
@@ -92,4 +100,12 @@ export default {
 		transition: all .2s ease-in-out
 		&:hover
 			transform: scale(1.2)
+
+.dropdown-menu
+	&__socials
+		position: absolute
+		bottom: 0
+		box-sizing: border-box
+		padding: 10px
+		width: 100%
 </style>

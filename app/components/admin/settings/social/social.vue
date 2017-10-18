@@ -1,8 +1,8 @@
 <template>
 	<div class="admin-socials">
-		<div class="admin-socials__title">current social items:</div>
+		<div class="admin-socials__title">current social items: {{socials.length}}</div>
 		<div class="admin-socials__items">
-			<div class="admin-socials__item" v-for='social in socials'>
+			<div class="admin-socials__item" v-for='social in socials' @click="deleteItem(social)">
 				<div class="admin-socials__item-title">
 					<i :class="getClasses(social.type)" aria-hidden="true"></i>
 				</div>
@@ -38,32 +38,27 @@
 
 <script>
 import Input from '../../../form-constructor/input/input.vue';
-
-const fontAwesomeIcons = {
-	facebook: 'fa-facebook-official',
-	instagram: 'fa-instagram',
-	twitter: 'fa-twitter',
-	google: 'fa-google-plus',
-	pinterest: 'fa-pinterest-square'
-};
+import db from '../../../database-controller/database-controller.js';
+import fontAwesomeIcons from '../../../utils/fontAwesomeIcons.js';
 
 export default {
+	firebase ()  {
+		return {
+			socials: {
+				source: db.ref('general').child('socials'),
+				readyCallback: function () {
+					this.loaded = true;
+				}
+			}
+		}
+	},
 	data () {
 		return {
-			socials: [
-				{
-					type: 'facebook',
-					url: 'facebook-url'
-				},
-				{
-					type: 'instagram',
-					url: 'instagram-url'
-				}
-			],
 			types: fontAwesomeIcons,
 			type: null,
 			url: null,
-			edit: false
+			edit: false,
+			loaded: false
 		}
 	},
 	methods: {
@@ -81,8 +76,14 @@ export default {
 			this.type = null;
 		},
 
+		deleteItem (item) {
+			if (confirm('Are you sure you want to delete this item?')) {
+				this.$firebaseRefs.socials.child(item['.key']).remove();
+			}
+		},
+
 		save () {
-			this.socials.push({
+			this.$firebaseRefs.socials.push({
 				type: this.type,
 				url: this.url
 			});
@@ -109,7 +110,8 @@ export default {
 		padding: 0 5px
 		margin: 5px 0
 		cursor: pointer
-		pointer-events: none
+		label
+			pointer-events: none
 	&__item-title
 		font-size: 45px
 		margin-right: 10px
