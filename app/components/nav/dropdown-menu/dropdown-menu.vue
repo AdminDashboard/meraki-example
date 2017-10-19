@@ -11,6 +11,7 @@
 				<li class="dropdown-menu__item"><a href="#/" class="dropdown-menu__link">home</a></li>
 				<li class="dropdown-menu__item"><a href="#/products" class="dropdown-menu__link">products</a></li>
 			</ul>
+			<feed></feed>
 			<div class="dropdown-menu__socials">
 				<socials></socials>
 			</div>
@@ -21,6 +22,7 @@
 <script>
 import './dropdown-menu.sass';
 import Socials from '../../social-items/social-items.vue';
+import Instagram from '../../instagram-feed/instagram-feed.vue';
 
 const ESCAPE_KEY = 27;
 
@@ -80,7 +82,8 @@ export default {
 		}
 	},
 	components: {
-		socials: Socials
+		socials: Socials,
+		feed: Instagram
 	}
 }
 </script>
