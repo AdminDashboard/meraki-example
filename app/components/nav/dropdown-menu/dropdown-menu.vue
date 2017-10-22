@@ -4,7 +4,11 @@
 		<div class="dropdown-menu__content" v-on:click.stop="stop" v-bind:class="{'dropdown-menu__content_active': dropdown}">
 			<ul class="dropdown-menu__list" v-on:click="closeDropdown">
 				<li class="dropdown-menu__item add-items">
-					<div class="wishlist"><i class="fa fa-heart-o" aria-hidden="true"></i>6</div>
+					<div class="wishlist">
+						<a @click="moveTo('/wishlist')">
+							<i class="fa fa-heart-o" aria-hidden="true"></i>{{wishlistItems && wishlistItems.length || ''}}
+						</a>
+					</div>
 					<div class="cart"><i class="fa fa-shopping-cart" aria-hidden="true"></i>1</div>
 					<div class="search"><i class="fa fa-search" aria-hidden="true"></i></div>
 				</li>
@@ -29,7 +33,8 @@ const ESCAPE_KEY = 27;
 export default {
 	data () {
 		return {
-			dropdown: false
+			dropdown: false,
+			wishlistItems: this.$ls.get('wishlist')
 		}
 	},
 	mounted () {
@@ -79,6 +84,9 @@ export default {
 		},
 		handleClickOut () {
 			this.closeDropdown();
+		},
+		moveTo (url) {
+			this.$router.push({path: url});
 		}
 	},
 	components: {
@@ -103,6 +111,9 @@ export default {
 		transition: all .2s ease-in-out
 		&:hover
 			transform: scale(1.2)
+		a
+			text-decoration: none
+			color: #fff
 
 .dropdown-menu
 	&__socials

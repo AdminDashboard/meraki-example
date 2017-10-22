@@ -5,7 +5,7 @@
 		<div class="price__menu" v-if="price">
 			<div class="price__menu-item">Add to cart</div>
 			<div class="price__menu-item">Create price alert</div>
-			<div class="price__menu-item"><i class="fa fa-heart-o" aria-hidden="true"></i> Add to wishlist</div>
+			<div class="price__menu-item" @click="addItem()"><i class="fa fa-heart-o" aria-hidden="true"></i> Add to wishlist</div>
 		</div>
 	</div>
 </template>
@@ -13,12 +13,15 @@
 <script>
 
 export default {
-	data () {
-		return {
+	props: ['price', 'text', 'itemData'],
+	methods: {
+		addItem () {
+			const items = Array.isArray(this.$ls.get('wishlist')) && this.$ls.get('wishlist') || [];
+			items.push(this.itemData);
 
+			this.$ls.set('wishlist', items);
 		}
-	},
-	props: ['price', 'text']
+	}
 }
 </script>
 

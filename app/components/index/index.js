@@ -7,9 +7,11 @@ import MobileHome from './home-mobile/home-mobile.vue';
 import Products from '../products/products.vue';
 import Product from '../product/product.vue';
 import Admin from '../admin/admin.vue';
+import Wishlist from '../wishlist/wishlist.vue';
 import 'font-awesome/css/font-awesome.css';
 import './fonts/fonts.sass';
 import isMobile from '../utils/mobile-detect';
+import VueLocalStorage from 'vue-ls';
 
 const NotFound = {template: '<p>Page not found</p>'};
 
@@ -21,11 +23,17 @@ const routes = [
   {path: '/products/:cat/:sub/items', component: Products, props: {depth: 'sub'}},
   {path: '/product/:item', component: Product},
   {path: '/product', component: Product},
-  {path: '/admin', component: Admin}
+  {path: '/admin', component: Admin},
+  {path: '/wishlist', component: Wishlist}
 ];
+
+const VueLocalStorageOptions = {
+  namespace: 'vuejs__'
+};
 
 Vue.use(VueFire);
 Vue.use(VueRouter);
+Vue.use(VueLocalStorage, VueLocalStorageOptions);
 
 const router = new VueRouter({routes});
 
