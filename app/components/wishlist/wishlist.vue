@@ -20,12 +20,29 @@
 			<div class="wishlist__no-items" v-if="!items.length">
 				<div class="wishlist__no-items-text">No item were added to the wishlist</div>
 			</div>
+			<div class="wishlist__footer">
+				<div class="wishlist__left-col">
+					<div class="wishlist__text">
+						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint nulla est dignissimos deleniti, alias minus. Molestiae nostrum consequuntur modi adipisci laborum quis amet minima architecto quod, dolorum ducimus recusandae officiis, nobis veritatis magni aut nesciunt magnam laudantium quae alias est nulla aliquam ratione rem? Quis qui accusamus dolores quia consectetur, ut perspiciatis accusantium nostrum? Esse.
+					</div>
+					<div class="wishlist__menu">
+						<footer-menu></footer-menu>
+					</div>
+				</div>
+				<div class="wishlist__right-col">
+					<div class="wishlist__follow">
+						<follow></follow>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 </template>
 
 <script>
 import Nav from '../nav/nav.vue';
+import FooterMenu from '../footer-menu/footer-menu.vue';
+import Follow from '../follow/follow.vue';
 
 export default {
 	data () {
@@ -43,14 +60,16 @@ export default {
 		}
 	},
 	components: {
-		'header-nav': Nav
+		'header-nav': Nav,
+		'footer-menu': FooterMenu,
+		'follow': Follow
 	}
 }
 </script>
 
 <style scoped lang='sass'>
 .wishlist
-	margin: 100px 20px
+	margin: 100px 20px 20px 20px
 	&__title
 		text-align: center
 		font-family: 'Ailerons'
@@ -105,4 +124,23 @@ export default {
 		text-transform: uppercase
 		cursor: pointer
 		justify-content: flex-end
+	&__text
+		font-family: 'Futura PT'
+		width: 100%
+		margin-right: 40px
+	&__footer
+		margin-top: 100px
+		opacity: .5
+		display: flex
+		transition: all .3s ease-in-out
+		justify-content: space-between
+		&:hover
+			opacity: 1
+	&__left-col, &__right-col
+		width: 50%
+		display: flex
+	&__right-col
+		justify-content: flex-end
+	&__menu
+		width: 200px
 </style>
