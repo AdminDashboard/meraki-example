@@ -17,7 +17,7 @@
 			</ul>
 			<feed></feed>
 			<div class="dropdown-menu__socials">
-				<socials></socials>
+				<socials :color="'#fff'"></socials>
 			</div>
 		</div>
 	</div>

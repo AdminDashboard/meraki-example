@@ -2,6 +2,7 @@
 	<div class="wishlist-wrapper">
 		<header-nav nav-style="black"></header-nav>
 		<div class="wishlist">
+			<div class="wishlist__login"><a href="#">Login</a> to save your wishlist</div>
 			<div class="wishlist__title">wishlist</div>
 			<div class="wishlist__items">
 				<div class="wishlist__item" v-for='item, index in items'>
@@ -35,6 +36,26 @@
 					</div>
 				</div>
 			</div>
+			<div class="wishlist__sub-footer">
+				<socials :color="'#cecece'"></socials>
+				<div class="wishlist__pages">
+					<div class="wishlist__page-wrapper">
+						<div class="wishlist__page">Page 1</div>
+					</div>
+					<div class="wishlist__page-wrapper">
+						<div class="wishlist__page">Page 2</div>
+					</div>
+					<div class="wishlist__page-wrapper">
+						<div class="wishlist__page">Page 3</div>
+					</div>
+					<div class="wishlist__page-wrapper">
+						<div class="wishlist__page">Page 4</div>
+					</div>
+					<div class="wishlist__page-wrapper">
+						<div class="wishlist__page">Page 5</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 </template>
@@ -43,6 +64,7 @@
 import Nav from '../nav/nav.vue';
 import FooterMenu from '../footer-menu/footer-menu.vue';
 import Follow from '../follow/follow.vue';
+import Socials from '../social-items/social-items.vue';
 
 export default {
 	data () {
@@ -62,7 +84,8 @@ export default {
 	components: {
 		'header-nav': Nav,
 		'footer-menu': FooterMenu,
-		'follow': Follow
+		'follow': Follow,
+		'socials': Socials
 	}
 }
 </script>
@@ -143,4 +166,33 @@ export default {
 		justify-content: flex-end
 	&__menu
 		width: 200px
+	&__sub-footer
+		border-top: 1px solid lightgray
+		margin-top: 50px
+		padding-top: 50px
+	&__pages
+		display: flex
+		justify-content: center
+		margin-top: 30px
+	&__page-wrapper
+		position: relative
+		&:before
+			content: '|'
+			margin: 0 20px
+			display: inline-block
+			color: lightgray
+		&:first-child:before
+			content: none
+	&__page
+		font-family: 'Futura PT'
+		display: inline-block
+		cursor: pointer
+		color: lightgray
+		&:hover
+			color: #000
+	&__login
+		text-align: center
+		font-family: 'Futura PT'
+	.social-items
+		justify-content: center
 </style>
