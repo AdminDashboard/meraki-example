@@ -1,8 +1,14 @@
 <template>
-	<label class="input">
-		<input required type="text" v-model="value" class="input__field" v-bind:class="{'input_has_value': value}">
-		<span class="input__label">{{label}}</span>
-	</label>
+	<div class="input-wrapper">
+		<label class="input" v-if="!passedType">
+			<input required type="text" v-model="value" class="input__field" v-bind:class="{'input_has_value': value}">
+			<span class="input__label">{{label}}</span>
+		</label>
+		<label class="input" v-if="passedType === 'password'">
+			<input required type="password" v-model="value" class="input__field" v-bind:class="{'input_has_value': value}">
+			<span class="input__label">{{label}}</span>
+		</label>
+	</div>
 </template>
 
 <script>
@@ -13,7 +19,7 @@ export default {
 			label: null
 		}
 	},
-	props: ['passedValue', 'passedLabel'],
+	props: ['passedValue', 'passedLabel', 'passedType'],
 	watch: {
 		value () {
 			this.$emit('input', this.value);

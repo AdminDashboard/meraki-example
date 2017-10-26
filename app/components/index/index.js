@@ -8,6 +8,7 @@ import Products from '../products/products.vue';
 import Product from '../product/product.vue';
 import Admin from '../admin/admin.vue';
 import Wishlist from '../wishlist/wishlist.vue';
+import LoginPage from '../login-page/login-page.vue';
 import 'font-awesome/css/font-awesome.css';
 import './fonts/fonts.sass';
 import isMobile from '../utils/mobile-detect';
@@ -24,6 +25,7 @@ const routes = [
   {path: '/product/:item', component: Product},
   {path: '/product', component: Product},
   {path: '/admin', component: Admin},
+  {path: '/login', component: LoginPage},
   {path: '/wishlist', component: Wishlist}
 ];
 

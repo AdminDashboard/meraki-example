@@ -2,7 +2,7 @@
 	<div class="wishlist-wrapper">
 		<header-nav nav-style="black"></header-nav>
 		<div class="wishlist">
-			<div class="wishlist__login"><a href="#">Login</a> to save your wishlist</div>
+			<div class="wishlist__login"><a href="#" @click.prevent.stop="moveTo('/login')">Login</a> to save your wishlist</div>
 			<div class="wishlist__title">wishlist</div>
 			<div class="wishlist__items">
 				<div class="wishlist__item" v-for='item, index in items'>
@@ -79,6 +79,9 @@ export default {
 		deleteItem (index) {
 			this.items.splice(index, 1);
 			this.$ls.set('wishlist', this.items);
+		},
+		moveTo (url) {
+			this.$router.push({path: url});
 		}
 	},
 	components: {
