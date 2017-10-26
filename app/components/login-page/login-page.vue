@@ -1,8 +1,10 @@
 <template>
-	<div class="login-page">
+	<div class="login-page-wrapper">
 		<header-nav nav-style="black"></header-nav>
-		<div class="login-page__form">
-			<login-form></login-form>
+		<div class="login-page">
+			<div class="login-page__form">
+				<login-form></login-form>
+			</div>
 		</div>
 	</div>
 </template>
