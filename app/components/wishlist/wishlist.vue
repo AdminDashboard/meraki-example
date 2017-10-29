@@ -2,7 +2,7 @@
 	<div class="wishlist-wrapper">
 		<header-nav nav-style="black"></header-nav>
 		<div class="wishlist">
-			<div class="wishlist__login"><a href="#" @click.prevent.stop="moveTo('/login')">Login</a> to save your wishlist</div>
+			<div class="wishlist__login"><a href="#" @click.prevent.stop="togglePopup()">Login</a> to save your wishlist</div>
 			<div class="wishlist__title">wishlist</div>
 			<div class="wishlist__items">
 				<div class="wishlist__item" v-for='item, index in items'>
@@ -56,6 +56,14 @@
 					</div>
 				</div>
 			</div>
+			<div class="wishlist__popup" :style="{display: popup === true ? 'block' : 'none'}">
+				<div class="wishlist__popup-close" @click.prevent.stop="togglePopup()">
+					<div class="wishlist__popup-close-trigger wishlist__popup-close-trigger_active"></div>
+				</div>
+				<div class="wishlist__popup-holder">
+					<login-form></login-form>
+				</div>
+			</div>
 		</div>
 	</div>
 </template>
@@ -65,11 +73,13 @@ import Nav from '../nav/nav.vue';
 import FooterMenu from '../footer-menu/footer-menu.vue';
 import Follow from '../follow/follow.vue';
 import Socials from '../social-items/social-items.vue';
+import LoginForm from '../login/login.vue';
 
 export default {
 	data () {
 		return {
-			items: []
+			items: [],
+			popup: false
 		};
 	},
 	mounted () {
@@ -80,6 +90,9 @@ export default {
 			this.items.splice(index, 1);
 			this.$ls.set('wishlist', this.items);
 		},
+		togglePopup () {
+			this.popup = this.popup ? false : true;
+		},
 		moveTo (url) {
 			this.$router.push({path: url});
 		}
@@ -88,7 +101,8 @@ export default {
 		'header-nav': Nav,
 		'footer-menu': FooterMenu,
 		'follow': Follow,
-		'socials': Socials
+		'socials': Socials,
+		'login-form': LoginForm
 	}
 }
 </script>
@@ -198,4 +212,61 @@ export default {
 		font-family: 'Futura PT'
 	.social-items
 		justify-content: center
+	&__popup
+		position: fixed
+		top: 0
+		left: 0
+		z-index: 10
+		background: rgba(255,255,255,.95)
+		right: 0
+		bottom: 0
+		&_closed
+			display: none
+	&__popup-holder
+		display: flex
+		height: 100%
+		justify-content: center
+		align-items: center
+	&__popup-close
+		position: absolute
+		right: 20px
+		top: 35px
+	&__popup-close-trigger
+	    top: -5px
+	    display: inline-block
+	    position: relative
+	    z-index: 10
+	    width: 35px
+	    background: #000
+	    height: 3px
+	    transition: all .2s ease-in-out
+	    &_white
+	      background: #fff
+	      &:before, &:after
+	        background: #fff
+	    &_black
+	      background: #000
+	      &:before, &:after
+	        background: #000
+	    &:before
+	      content: ''
+	      position: absolute
+	      width: 35px
+	      height: 3px
+	      background: #000
+	      top: -10px
+	      transition: all .3s ease-in-out
+	    &:after
+	      content: ''
+	      position: absolute
+	      width: 35px
+	      height: 3px
+	      top: 10px
+	      transition: all .3s ease-in-out
+	    &_active
+	      transform: rotate(45deg)
+	      &:before
+	        transform: rotate(90deg) translateX(10px)
+	      &:after
+	        opacity: 0
 </style>
