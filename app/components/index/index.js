@@ -8,6 +8,7 @@ import Products from '../products/products.vue';
 import Product from '../product/product.vue';
 import Admin from '../admin/admin.vue';
 import Wishlist from '../wishlist/wishlist.vue';
+import Cart from '../cart/cart.vue';
 import LoginPage from '../login-page/login-page.vue';
 import 'font-awesome/css/font-awesome.css';
 import './fonts/fonts.sass';
@@ -26,7 +27,8 @@ const routes = [
   {path: '/product', component: Product},
   {path: '/admin', component: Admin},
   {path: '/login', component: LoginPage},
-  {path: '/wishlist', component: Wishlist}
+  {path: '/wishlist', component: Wishlist},
+  {path: '/cart', component: Cart}
 ];
 
 const VueLocalStorageOptions = {

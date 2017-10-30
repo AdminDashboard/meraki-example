@@ -9,7 +9,11 @@
 							<i class="fa fa-heart-o" aria-hidden="true"></i>{{wishlistItems && wishlistItems.length || ''}}
 						</a>
 					</div>
-					<div class="cart"><i class="fa fa-shopping-cart" aria-hidden="true"></i>1</div>
+					<div class="cart">
+						<a @click="moveTo('/cart')">
+							<i class="fa fa-shopping-cart" aria-hidden="true"></i>
+						</a>
+					</div>
 					<div class="search"><i class="fa fa-search" aria-hidden="true"></i></div>
 				</li>
 				<li class="dropdown-menu__item"><a href="#/" class="dropdown-menu__link">home</a></li>
