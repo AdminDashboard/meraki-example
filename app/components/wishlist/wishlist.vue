@@ -15,7 +15,7 @@
 					<div class="wishlist__name">{{item.name}}</div>
 					<div class="wishlist__price">{{item.price}}</div>
 					<div class="wishlist__status">{{item.status}}</div>
-					<div class="wishlist__add-to-cart">add to cart</div>
+					<div class="wishlist__add-to-cart" @click="addItemToCart(item)">add to cart</div>
 				</div>
 			</div>
 			<div class="wishlist__no-items" v-if="!items.length">
@@ -92,6 +92,12 @@ export default {
 		},
 		togglePopup () {
 			this.popup = this.popup ? false : true;
+		},
+		addItemToCart (item) {
+			const items = Array.isArray(this.$ls.get('cart')) && this.$ls.get('cart') || [];
+			items.push(item);
+
+			this.$ls.set('cart', items);
 		},
 		moveTo (url) {
 			this.$router.push({path: url});

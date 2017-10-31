@@ -3,19 +3,24 @@
 		<header-nav nav-style="black"></header-nav>
 		<div class="cart">
 			<div class="cart__title" v-if="items.length">cart</div>
-			<div class="cart__items">
-				<div class="cart__item" v-for='item, index in items'>
-					<div class="cart__delete" @click='deleteItem(index)'>
-						<i class="fa fa-times" aria-hidden="true"></i>
+			<div class="cart__items-wrapper" v-if="items.length">
+				<div class="cart__items">
+					<div class="cart__items-headings">
+						<div>Products</div>
 					</div>
-					<div class="cart__image">
-						<img :src="item.image">
+					<div class="cart__item" v-for='item, index in items'>
+						<div class="cart__image">
+							<img :src="item.image">
+						</div>
+						<div class="cart__name">{{item.name}}</div>
+						<div class="cart__price">{{item.price}}</div>
+						<div class="cart__qty">1</div>
+						<div class="cart__delete" @click='deleteItem(index)'>
+							<i class="fa fa-times" aria-hidden="true"></i>
+						</div>
 					</div>
-					<div class="cart__name">{{item.name}}</div>
-					<div class="cart__price">{{item.price}}</div>
-					<div class="cart__status">{{item.status}}</div>
-					<div class="cart__add-to-cart">add to cart</div>
 				</div>
+				<div class="cart__totals"></div>
 			</div>
 			<div class="cart__no-items" v-if="!items.length">
 				<div class="cart__no-items-text">Your cart is currently empty.</div>
@@ -113,10 +118,24 @@ export default {
 		text-align: center
 		font-family: 'Ailerons'
 		font-size: 4em
+	&__totals
+		width: 38%
+		background: lightgray
+		height: 300px
+	&__items-wrapper
+		display: flex
+		justify-content: space-between
+	&__items
+		width: 60%
+	&__items-headings
+		font-family: 'Futura PT'
+		text-transform: uppercase
+		border-bottom: 1px solid lightgray
+		padding-bottom: 10px
 	&__item
 		display: flex
 		justify-content: space-between
-		border-bottom: 1px solid gray
+		border-bottom: 1px solid lightgray
 		padding: 5px
 		font-family: 'Futura PT'
 		&:last-child
