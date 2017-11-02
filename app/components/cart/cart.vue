@@ -20,7 +20,9 @@
 						</div>
 					</div>
 				</div>
-				<div class="cart__totals"></div>
+				<div class="cart__totals-wrapper">
+					<cart-totals :total='totalPrice'></cart-totals>
+				</div>
 			</div>
 			<div class="cart__no-items" v-if="!items.length">
 				<div class="cart__no-items-text">Your cart is currently empty.</div>
@@ -78,6 +80,7 @@ import FooterMenu from '../footer-menu/footer-menu.vue';
 import Follow from '../follow/follow.vue';
 import Socials from '../social-items/social-items.vue';
 import LoginForm from '../login/login.vue';
+import CartTotals from './cart-totals/cart-totals.vue';
 
 export default {
 	data () {
@@ -101,12 +104,20 @@ export default {
 			this.$router.push({path: url});
 		}
 	},
+	computed: {
+		totalPrice () {
+			return this.items.reduce((result, item) => {
+				return result += Number(item.price);
+			}, 0);
+		}
+	},
 	components: {
 		'header-nav': Nav,
 		'footer-menu': FooterMenu,
 		'follow': Follow,
 		'socials': Socials,
-		'login-form': LoginForm
+		'login-form': LoginForm,
+		'cart-totals': CartTotals
 	}
 }
 </script>
@@ -118,15 +129,13 @@ export default {
 		text-align: center
 		font-family: 'Ailerons'
 		font-size: 4em
-	&__totals
-		width: 38%
-		background: lightgray
-		height: 300px
+	&__totals-wrapper
+		width: 30%
 	&__items-wrapper
 		display: flex
 		justify-content: space-between
 	&__items
-		width: 60%
+		width: 68%
 	&__items-headings
 		font-family: 'Futura PT'
 		text-transform: uppercase
