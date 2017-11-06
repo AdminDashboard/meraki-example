@@ -7,14 +7,18 @@
 				<div class="cart__items">
 					<div class="cart__items-headings">
 						<div>Products</div>
+						<div>Qty</div>
+						<div>Total</div>
 					</div>
 					<div class="cart__item" v-for='item, index in items'>
 						<div class="cart__image">
 							<img :src="item.image">
 						</div>
 						<div class="cart__name">{{item.name}}</div>
+						<div class="cart__qty">
+							<input type="text" :value="item.qt || 1" @change='updateItemQt($event.target.value, index)'>
+						</div>
 						<div class="cart__price">{{item.price}}</div>
-						<div class="cart__qty">1</div>
 						<div class="cart__delete" @click='deleteItem(index)'>
 							<i class="fa fa-times" aria-hidden="true"></i>
 						</div>
@@ -102,12 +106,21 @@ export default {
 		},
 		moveTo (url) {
 			this.$router.push({path: url});
+		},
+		updateItemQt (qt, index) {
+			const currentItem = this.$ls.get('cart')[index];
+			currentItem.qt = Number(qt);
+
+			this.items.splice(index, 1);
+			this.items.push(currentItem)
+
+			this.$ls.set('cart', this.items);
 		}
 	},
 	computed: {
 		totalPrice () {
 			return this.items.reduce((result, item) => {
-				return result += Number(item.price);
+				return result += Number(item.price) * (item.qt || 1);
 			}, 0);
 		}
 	},
@@ -137,10 +150,16 @@ export default {
 	&__items
 		width: 68%
 	&__items-headings
+		margin-top: 20px
 		font-family: 'Futura PT'
+		display: flex
 		text-transform: uppercase
 		border-bottom: 1px solid lightgray
 		padding-bottom: 10px
+		div:nth-child(1)
+			width: 57%
+		div:nth-child(2)
+			width: 9%
 	&__item
 		display: flex
 		justify-content: space-between
@@ -161,10 +180,15 @@ export default {
 		box-sizing: border-box
 		padding: 5px
 		img
-			width: 100%
+			width: 80%
 	&__price
 		width: 20%
 		font-size: 1.5em
+	&__qty
+		width: 5%
+		margin-left: 4%
+		input
+			width: 100%
 	&__name
 		width: 20%
 		font-size: 1.5em
@@ -179,10 +203,11 @@ export default {
 		font-size: 2.5em
 		position: relative
 		&:before
-			content: '\f07a'
-			font-size: 4em
-			color: gray
-			font-family: 'FontAwesome'
+			content: ''
+			background: url('./cart__empty.png')
+			display: inline-block
+			width: 177px
+			height: 157px
 	&__add-to-cart
 		width: 30%
 		font-size: 1.5em

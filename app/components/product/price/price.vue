@@ -11,21 +11,17 @@
 </template>
 
 <script>
+import AddToLs from '../../utils/addToLocalstorage.vue';
 
 export default {
 	props: ['price', 'text', 'itemData'],
+	mixins: [AddToLs],
 	methods: {
 		addItemToWishlist () {
-			const items = Array.isArray(this.$ls.get('wishlist')) && this.$ls.get('wishlist') || [];
-			items.push(this.itemData);
-
-			this.$ls.set('wishlist', items);
+			this.addToLocalstorage('wishlist', this.itemData);
 		},
 		addItemToCart () {
-			const items = Array.isArray(this.$ls.get('cart')) && this.$ls.get('cart') || [];
-			items.push(this.itemData);
-
-			this.$ls.set('cart', items);
+			this.addToLocalstorage('cart', this.itemData);
 		}
 	}
 }

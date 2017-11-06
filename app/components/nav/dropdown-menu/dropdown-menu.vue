@@ -6,12 +6,12 @@
 				<li class="dropdown-menu__item add-items">
 					<div class="wishlist">
 						<a @click="moveTo('/wishlist')">
-							<i class="fa fa-heart-o" aria-hidden="true"></i>{{wishlistItems && wishlistItems.length || ''}}
+							<i class="fa fa-heart-o" aria-hidden="true"></i>{{wishlistItemsCount}}
 						</a>
 					</div>
 					<div class="cart">
 						<a @click="moveTo('/cart')">
-							<i class="fa fa-shopping-cart" aria-hidden="true"></i>
+							<i class="fa fa-shopping-cart" aria-hidden="true"></i>{{cartItemsCount}}
 						</a>
 					</div>
 					<div class="search"><i class="fa fa-search" aria-hidden="true"></i></div>
@@ -38,16 +38,26 @@ export default {
 	data () {
 		return {
 			dropdown: false,
-			wishlistItems: this.$ls.get('wishlist')
+			wishlistItems: this.$ls.get('wishlist'),
+			cartItems: this.$ls.get('cart')
 		}
 	},
 	mounted () {
 		document.addEventListener('keyup', this.handleKeyUp, true);
 		document.addEventListener('click', this.handleClickOut, true);
+
+		this.wishlistItemsCount = this.wishlistItems && this.wishlistItems.length;
+		this.cartItemsCount = this.cartItems && this.cartItems.length;
+
+		this.$ls.on('wishlist', this.updateItemCount);
+		this.$ls.on('cart', this.updateItemCount);
 	},
 	beforeDestroy () {
 		document.removeEventListener('keyup', this.handleKeyUp, true);
 		document.removeEventListener('click', this.handleClickOut, true);
+
+		this.$ls.off('wishlist', this.updateItemCount);
+		this.$ls.off('cart', this.updateItemCount);
 	},
 	props: ['dStyle'],
 	computed: {
@@ -62,6 +72,12 @@ export default {
 		},
 		wrapperMod () {
 			return 'dropdown-menu_' + this.dStyle;
+		},
+		wishlistItemsCount () {
+			return (this.wishlistItems && this.wishlistItems.length) || '';
+		},
+		cartItemsCount () {
+			return (this.cartItems && this.cartItems.length) || '';
 		}
 	},
 	methods: {
@@ -91,6 +107,10 @@ export default {
 		},
 		moveTo (url) {
 			this.$router.push({path: url});
+		},
+		updateItemCount () {
+			this.wishlistItems = this.$ls.get('wishlist');
+			this.cartItems = this.$ls.get('cart');
 		}
 	},
 	components: {

@@ -74,6 +74,7 @@ import FooterMenu from '../footer-menu/footer-menu.vue';
 import Follow from '../follow/follow.vue';
 import Socials from '../social-items/social-items.vue';
 import LoginForm from '../login/login.vue';
+import AddToLs from '../utils/addToLocalstorage.vue';
 
 export default {
 	data () {
@@ -82,6 +83,7 @@ export default {
 			popup: false
 		};
 	},
+	mixins: [AddToLs],
 	mounted () {
 		this.items = this.$ls.get('wishlist');
 	},
@@ -94,10 +96,7 @@ export default {
 			this.popup = this.popup ? false : true;
 		},
 		addItemToCart (item) {
-			const items = Array.isArray(this.$ls.get('cart')) && this.$ls.get('cart') || [];
-			items.push(item);
-
-			this.$ls.set('cart', items);
+			this.addToLocalstorage('cart', item);
 		},
 		moveTo (url) {
 			this.$router.push({path: url});
