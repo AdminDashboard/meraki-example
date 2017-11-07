@@ -10,8 +10,8 @@
 			<button type="submit" class="login__submit">Login</button>
 			<form-check :passedLabel="'Remember me'"></form-check>
 		</form>
-		<button class="login__button">register with facebook</button>
-		<button class="login__button">register with google</button>
+		<button class="login__button">login with facebook</button>
+		<button class="login__button">login with google</button>
 	</div>
 </template>
 

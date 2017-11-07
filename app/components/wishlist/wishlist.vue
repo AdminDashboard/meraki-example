@@ -13,7 +13,7 @@
 						<img :src="item.image">
 					</div>
 					<div class="wishlist__name">{{item.name}}</div>
-					<div class="wishlist__price">{{item.price}}</div>
+					<div class="wishlist__price">${{item.price}}</div>
 					<div class="wishlist__status">{{item.status}}</div>
 					<div v-if="!item.inCart" class="wishlist__add-to-cart" @click="addItemToCart(item)">add to cart</div>
 					<div v-if="item.inCart" class="wishlist__add-to-cart" @click="removeFromCart(item)">remove from cart</div>
@@ -168,10 +168,13 @@ export default {
 <style scoped lang='sass'>
 .wishlist
 	margin: 100px 20px 20px 20px
+	padding: 0 6vw
+	box-sizing: border-box
 	&__title
 		text-align: center
 		font-family: 'Ailerons'
 		font-size: 4em
+		margin-bottom: 50px
 	&__item
 		display: flex
 		justify-content: space-between
@@ -187,12 +190,17 @@ export default {
 		cursor: pointer
 		font-size: 1.5em
 		width: 5%
+		transition: all .2s ease-in-out
+		&:hover
+			transform: scale(1.2) translateX(.1em)
+			color: red
+			opacity: .4
 	&__image
 		width: 20%
 		box-sizing: border-box
 		padding: 5px
 		img
-			width: 100%
+			width: 80%
 	&__price
 		width: 20%
 		font-size: 1.5em
@@ -201,7 +209,7 @@ export default {
 		font-size: 1.5em
 	&__status
 		width: 30%
-		font-size: 1.5em
+		font-size: 1.4em
 		text-transform: uppercase
 	&__no-items
 		margin-top: 50px
@@ -209,16 +217,10 @@ export default {
 		font-family: 'Futura PT'
 		font-size: 2.5em
 		position: relative
-		&:before
-			content: ''
-			position: absolute
-			left: 0
-			top: 50%
-			border-bottom: 1px solid gray
-			width: 100%
 	&__add-to-cart
 		width: 30%
 		font-size: 1.5em
+		font-family: 'Ailerons'
 		text-transform: uppercase
 		cursor: pointer
 		justify-content: flex-end
@@ -287,8 +289,11 @@ export default {
 		align-items: center
 	&__popup-close
 		position: absolute
+		cursor: pointer
 		right: 20px
 		top: 35px
+		&:hover .wishlist__popup-close-trigger
+	    	transform: scale(1.2) rotate(45deg)
 	&__popup-close-trigger
 	    top: -5px
 	    display: inline-block

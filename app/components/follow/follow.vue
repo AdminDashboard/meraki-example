@@ -29,11 +29,15 @@ export default {
 	&__submit
 		background: none
 		border: none
+		cursor: pointer
 		padding: 0
-		font-family: 'Futura PT'
-		font-size: 1.2em
-		margin-top: 10px
+		font-family: 'Ailerons'
+		font-size: 1.5em
+		margin-top: 20px
 		text-transform: uppercase
+		transition: all .2s ease-in-out
 		&:focus
 			outline: none
+		&:hover
+			opacity: .5
 </style>

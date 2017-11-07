@@ -36,6 +36,9 @@ export default {
 	&__item
 		list-style: none
 		margin-bottom: 10px
+		transition: all .2s ease-in-out
+		&:hover
+			opacity: .5
 	&__link
 		text-decoration: none
 		font-family: 'Futura PT'

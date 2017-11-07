@@ -26,7 +26,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="cart__price">{{item.price}}</div>
+						<div class="cart__price">${{item.price * item.qt}}</div>
 						<div class="cart__delete" @click='deleteItem(index)'>
 							<i class="fa fa-times" aria-hidden="true"></i>
 						</div>
@@ -157,6 +157,7 @@ export default {
 <style scoped lang='sass'>
 .cart
 	margin: 100px 20px 20px 20px
+	padding: 0 6vw
 	&__title
 		text-align: center
 		font-family: 'Ailerons'
@@ -194,6 +195,11 @@ export default {
 		cursor: pointer
 		font-size: 1.5em
 		width: 5%
+		transition: all .2s ease-in-out
+		&:hover
+			transform: scale(1.2) translateX(.05em)
+			color: red
+			opacity: .4
 	&__image
 		width: 20%
 		box-sizing: border-box
