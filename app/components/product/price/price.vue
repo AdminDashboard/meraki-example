@@ -3,9 +3,11 @@
 		<div class="price__text" v-if="text">{{text}}</div>
 		<div class="price__sum" v-if="price">price: ${{price}}</div>
 		<div class="price__menu" v-if="price">
-			<div class="price__menu-item">Add to cart</div>
+			<div v-if="!itemData.inCart" class="price__menu-item" @click="addItemToCart()">Add to cart</div>
+			<div v-if="itemData.inCart" class="price__menu-item" @click="removeFromCart()">Remove from cart</div>
 			<div class="price__menu-item">Create price alert</div>
-			<div class="price__menu-item" @click="addItemToWishlist()"><i class="fa fa-heart-o" aria-hidden="true"></i> Add to wishlist</div>
+			<div v-if="!itemData.inWishlist" class="price__menu-item" @click="addItemToWishlist()"><i class="fa fa-heart-o" aria-hidden="true"></i> Add to wishlist</div>
+			<div v-if="itemData.inWishlist" class="price__menu-item" @click="removeFromWishlist()">Remove from wishlist</div>
 		</div>
 	</div>
 </template>
@@ -19,9 +21,17 @@ export default {
 	methods: {
 		addItemToWishlist () {
 			this.addToLocalstorage('wishlist', this.itemData);
+			this.$emit('add');
 		},
 		addItemToCart () {
 			this.addToLocalstorage('cart', this.itemData);
+			this.$emit('add');
+		},
+		removeFromWishlist () {
+			this.$emit('removeFromWishlist');
+		},
+		removeFromCart () {
+			this.$emit('removeFromCart');
 		}
 	}
 }

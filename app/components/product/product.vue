@@ -35,7 +35,10 @@
 			<div class="product__price" v-if="productPrice || productPriceText">
 				<price :price="productPrice"
 					:text="productPriceText"
-					:itemData="itemData"></price>
+					:itemData="itemData"
+					v-on:removeFromWishlist="removeFromWishlist()"
+					v-on:removeFromCart="removeFromCart()"
+					v-on:add="checkIfInLs()"></price>
 			</div>
 			<div class="product__section product__section_form"
 				:style="{'background-image': `url(${productSecondImage})`}">
@@ -80,6 +83,8 @@ export default {
 			recentImage: null,
 			loading: true,
 			itemId: this.$route.params.item,
+			inWishlist: false,
+			inCart: false,
 			imageController: {
 				active: false,
 				src: null,
@@ -96,6 +101,8 @@ export default {
 			.once('value', snapshot => {
 				this.loading = false;
 		});
+
+		this.checkIfInLs();
 	},
 	methods: {
 		showFullImage (event, image) {
@@ -112,6 +119,53 @@ export default {
 			this.imageController.src = image;
 			this.imageController.active = true;
 			this.recentImage = target;
+		},
+
+		checkIfInLs () {
+			const wishlist = this.$ls.get('wishlist');
+			const cart = this.$ls.get('cart');
+
+			if (Array.isArray(wishlist)) {
+				wishlist.forEach((item, index) => {
+					if (item.id === this.itemId) {
+						this.inWishlist = true;
+						this.wishListIndex = index;
+					}
+				});
+			} else {
+				this.inWishlist = false;
+				this.wishListIndex = null;
+			}
+
+			if (Array.isArray(cart)) {
+				cart.forEach((item, index) => {
+					if (item.id === this.itemId) {
+						this.inCart = true;
+						this.cartIndex = index;
+					}
+				});
+			} else {
+				this.inCart = false;
+				this.cartIndex = null;
+			}
+		},
+
+		removeFromWishlist () {
+			const wishlistItems = this.$ls.get('wishlist');
+
+			wishlistItems.splice(this.wishListIndex, 1);
+			this.$ls.set('wishlist', this.wishlistItems);
+
+			this.checkIfInLs();
+		},
+
+		removeFromCart () {
+			const cartItems = this.$ls.get('cart');
+
+			cartItems.splice(this.cartIndex, 1);
+			this.$ls.set('cart', this.cartItems);
+
+			this.checkIfInLs();
 		}
 	},
 	computed: {
@@ -145,6 +199,12 @@ export default {
 				image: this.productMainImage,
 				name: this.productTitle,
 				price: this.productPrice,
+				productId: this.productId,
+				id: this.itemId,
+				inWishlist: this.inWishlist,
+				wishListIndex: this.wishlistItems,
+				cartIndex: this.cartIndex,
+				inCart: this.inCart,
 				status: 'Available now'
 			};
 		},

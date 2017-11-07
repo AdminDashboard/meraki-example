@@ -15,7 +15,8 @@
 					<div class="wishlist__name">{{item.name}}</div>
 					<div class="wishlist__price">{{item.price}}</div>
 					<div class="wishlist__status">{{item.status}}</div>
-					<div class="wishlist__add-to-cart" @click="addItemToCart(item)">add to cart</div>
+					<div v-if="!item.inCart" class="wishlist__add-to-cart" @click="addItemToCart(item)">add to cart</div>
+					<div v-if="item.inCart" class="wishlist__add-to-cart" @click="removeFromCart(item)">remove from cart</div>
 				</div>
 			</div>
 			<div class="wishlist__no-items" v-if="!items.length">
@@ -96,7 +97,59 @@ export default {
 			this.popup = this.popup ? false : true;
 		},
 		addItemToCart (item) {
+			item.inCart = true;
+			let wishListIndex;
+			const wishlistItems = this.$ls.get('wishlist');
+
+			if (Array.isArray(wishlistItems)) {
+				wishlistItems.forEach((innerItem, index) => {
+					if (innerItem.id === item.id) {
+						wishListIndex = index;
+					}
+				});
+			} else {
+				return;
+			}
+
+			wishlistItems.splice(wishListIndex, 1);
+			this.$ls.set('wishlist', wishlistItems);
+
+			this.addToLocalstorage('wishlist', item);
 			this.addToLocalstorage('cart', item);
+		},
+		removeFromCart (item) {
+			item.inCart = false;
+			const cartItems = this.$ls.get('cart');
+			let cartIndex;
+			let wishListIndex;
+			const wishlistItems = this.$ls.get('wishlist');
+
+			if (Array.isArray(cartItems)) {
+				cartItems.forEach((innerItem, index) => {
+					if (innerItem.id === item.id) {
+						cartIndex = index;
+					}
+				});
+			} else {
+				return;
+			}
+
+			if (Array.isArray(wishlistItems)) {
+				wishlistItems.forEach((innerItem, index) => {
+					if (innerItem.id === item.id) {
+						wishListIndex = index;
+					}
+				});
+			} else {
+				return;
+			}
+
+			wishlistItems.splice(wishListIndex, 1);
+			this.$ls.set('wishlist', wishlistItems);
+
+			cartItems.splice(cartIndex, 1);
+			this.$ls.set('cart', this.cartItems);
+			this.addToLocalstorage('wishlist', item);
 		},
 		moveTo (url) {
 			this.$router.push({path: url});

@@ -16,7 +16,15 @@
 						</div>
 						<div class="cart__name">{{item.name}}</div>
 						<div class="cart__qty">
-							<input type="text" :value="item.qt || 1" @change='updateItemQt($event.target.value, index)'>
+							<div class="cart__qty-counter">{{item.qt || 1}}</div>
+							<div class="cart__qty-counters" @click='updateItemQt($event.target, index)'>
+								<div class="cart__qty-up">
+									<i data-type="inc" class="fa fa-caret-up" aria-hidden="true"></i>
+								</div>
+								<div class="cart__qty-down">
+									<i data-type="dec" class="fa fa-caret-down" aria-hidden="true"></i>
+								</div>
+							</div>
 						</div>
 						<div class="cart__price">{{item.price}}</div>
 						<div class="cart__delete" @click='deleteItem(index)'>
@@ -107,14 +115,25 @@ export default {
 		moveTo (url) {
 			this.$router.push({path: url});
 		},
-		updateItemQt (qt, index) {
+		updateItemQt (target, index) {
+			const type = target.getAttribute('data-type');
+
+			if (!type) {
+				return;
+			}
+
 			const currentItem = this.$ls.get('cart')[index];
-			currentItem.qt = Number(qt);
+
+			currentItem.qt = type === 'inc' ? currentItem.qt += 1 : currentItem.qt += -1;
 
 			this.items.splice(index, 1);
 			this.items.push(currentItem)
 
 			this.$ls.set('cart', this.items);
+
+			if (currentItem.qt === 0 && type === 'dec') {
+				this.deleteItem(index);
+			}
 		}
 	},
 	computed: {
@@ -159,7 +178,7 @@ export default {
 		div:nth-child(1)
 			width: 57%
 		div:nth-child(2)
-			width: 9%
+			width: 11%
 	&__item
 		display: flex
 		justify-content: space-between
@@ -184,11 +203,17 @@ export default {
 	&__price
 		width: 20%
 		font-size: 1.5em
+	&__qty-counters
+		display: flex
+		width: 50%
+		justify-content: space-between
 	&__qty
 		width: 5%
+		display: flex
 		margin-left: 4%
-		input
-			width: 100%
+		justify-content: space-between
+	&__qty-up, &__qty-down
+		cursor: pointer
 	&__name
 		width: 20%
 		font-size: 1.5em
