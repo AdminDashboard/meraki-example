@@ -26,7 +26,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="cart__price">${{item.price * item.qt}}</div>
+						<div class="cart__price">${{item.price * (item.qt || 1)}}</div>
 						<div class="cart__delete" @click='deleteItem(index)'>
 							<i class="fa fa-times" aria-hidden="true"></i>
 						</div>
@@ -93,6 +93,7 @@ import Follow from '../follow/follow.vue';
 import Socials from '../social-items/social-items.vue';
 import LoginForm from '../login/login.vue';
 import CartTotals from './cart-totals/cart-totals.vue';
+import AddToLs from '../utils/addToLocalstorage.vue';
 
 export default {
 	data () {
@@ -101,11 +102,34 @@ export default {
 			popup: false
 		};
 	},
+	mixins: [AddToLs],
 	mounted () {
 		this.items = this.$ls.get('cart');
 	},
 	methods: {
 		deleteItem (index) {
+			const item = this.items[index];
+
+			item.inCart = false;
+			let wishListIndex;
+			const wishlistItems = this.$ls.get('wishlist');
+
+			if (Array.isArray(wishlistItems)) {
+				wishlistItems.forEach((innerItem, index) => {
+					if (innerItem.id === item.id) {
+						wishListIndex = index;
+					}
+				});
+			} else {
+				return;
+			}
+
+			wishlistItems.splice(wishListIndex, 1);
+			this.$ls.set('wishlist', wishlistItems);
+
+			this.addToLocalstorage('wishlist', item);
+			this.addToLocalstorage('cart', item);
+
 			this.items.splice(index, 1);
 			this.$ls.set('cart', this.items);
 		},
@@ -123,6 +147,10 @@ export default {
 			}
 
 			const currentItem = this.$ls.get('cart')[index];
+
+			if (!currentItem.qt) {
+				currentItem.qt = 1;
+			}
 
 			currentItem.qt = type === 'inc' ? currentItem.qt += 1 : currentItem.qt += -1;
 
@@ -228,13 +256,14 @@ export default {
 		font-size: 1.5em
 		text-transform: uppercase
 	&__no-items
-		margin-top: 50px
+		margin-top: 170px
 		text-align: center
 		font-family: 'Futura PT'
 		font-size: 2.5em
 		position: relative
 		&:before
 			content: ''
+			margin-bottom: 20px
 			background: url('./cart__empty.png')
 			display: inline-block
 			width: 177px
