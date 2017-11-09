@@ -33,13 +33,15 @@ import Socials from '../../social-items/social-items.vue';
 import Instagram from '../../instagram-feed/instagram-feed.vue';
 
 const ESCAPE_KEY = 27;
+const INTERVAL_DELAY = 1000;
 
 export default {
 	data () {
 		return {
 			dropdown: false,
 			wishlistItems: this.$ls.get('wishlist'),
-			cartItems: this.$ls.get('cart')
+			cartItems: this.$ls.get('cart'),
+			interval: null
 		}
 	},
 	mounted () {
@@ -49,15 +51,15 @@ export default {
 		this.wishlistItemsCount = this.wishlistItems && this.wishlistItems.length;
 		this.cartItemsCount = this.cartItems && this.cartItems.length;
 
-		this.$ls.on('wishlist', this.updateItemCount);
-		this.$ls.on('cart', this.updateItemCount);
+		this.interval = setInterval(() => {
+			this.updateItemCount();
+		}, INTERVAL_DELAY);
 	},
 	beforeDestroy () {
 		document.removeEventListener('keyup', this.handleKeyUp, true);
 		document.removeEventListener('click', this.handleClickOut, true);
 
-		this.$ls.off('wishlist', this.updateItemCount);
-		this.$ls.off('cart', this.updateItemCount);
+		clearInerval(this.interval);
 	},
 	props: ['dStyle'],
 	computed: {
