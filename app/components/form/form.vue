@@ -4,7 +4,7 @@
 			<!-- <div v-if="!formType"> -->
 				<div class="form__type-fields">
 					<label class="form__type-group">
-						<input v-model="type" type="radio" value="order" name="type">
+						<input disabled v-model="type" type="radio" value="order" name="type">
 						<span class="form__type-label">custom order</span>
 					</label>
 					<label class="form__type-group">
@@ -73,11 +73,17 @@
 <script>
 import './form.sass';
 import fingerprint from '../index/f2.png';
+import db from '../database-controller/database-controller.js';
 
 export default {
+	firebase ()  {
+		return {
+			requests: db.ref('requests')
+		}
+	},
 	data () {
 		return {
-			type: 'order',
+			type: 'info',
 			name: null,
 			email: null,
 			phone: null,
@@ -131,17 +137,36 @@ export default {
 				= this.processing
 				= null;
 		},
+		submitMessage () {
+			this.sentMod = false;
+			this.invalidationCheck = false;
+			this.clearData();
+		},
+		addToRequests () {
+			this.$firebaseRefs.requests.push({
+				type: this.type,
+				name: this.name,
+				email: this.email,
+				phone: this.phone,
+				message: this.message,
+				page: window.location.href
+			})
+			.then(() => {
+				setTimeout(() => {
+					this.submitMessage();
+				}, 3000);
+			})
+			.catch(() => {
+				alert('error');
+			});
+		},
 		submit (e) {
 			e.preventDefault();
 			this.invalidationCheck = true;
 
 			if (this.isValid) {
 				this.sentMod = true;
-				setTimeout(() => {
-					this.sentMod = false;
-					this.invalidationCheck = false;
-					this.clearData();
-				}, 3000);
+				this.addToRequests();
 			}
 		}
 	}

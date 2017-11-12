@@ -24,12 +24,18 @@
 						v-bind:class="{admin__link_active: this.mode === 'products'}"
 						v-on:click.stop.prevent="showMode('products')">Products</a>
 					</li>
+					<li class="admin__item">
+						<a href="#" class="admin__link"
+						v-bind:class="{admin__link_active: this.mode === 'requests'}"
+						v-on:click.stop.prevent="showMode('requests')">Requests</a>
+					</li>
 				</ul>
 			</div>
 			<settings v-if="this.mode === 'settings'"></settings>
 			<super-categories v-if="this.mode === 'super'"></super-categories>
 			<sub-categories v-if="this.mode === 'sub'"></sub-categories>
 			<products v-if="this.mode === 'products'"></products>
+			<requests v-if="this.mode === 'requests'"></requests>
 		</div>
 	</div>
 </template>
@@ -41,6 +47,7 @@ import SuperCategories from './super-categories/super-categories.vue';
 import SubCategories from './sub-categories/sub-categories.vue';
 import Products from './products/products.vue';
 import Settings from './settings/settings.vue';
+import Requests from './requests/requests.vue';
 
 export default {
 	data () {
@@ -58,7 +65,8 @@ export default {
 		'super-categories': SuperCategories,
 		'sub-categories': SubCategories,
 		products: Products,
-		settings: Settings
+		settings: Settings,
+		requests: Requests
 	}
 }
 </script>
