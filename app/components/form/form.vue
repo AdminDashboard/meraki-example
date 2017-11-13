@@ -74,6 +74,7 @@
 import './form.sass';
 import fingerprint from '../index/f2.png';
 import db from '../database-controller/database-controller.js';
+import moment from 'moment';
 
 export default {
 	firebase ()  {
@@ -143,13 +144,17 @@ export default {
 			this.clearData();
 		},
 		addToRequests () {
+			const unixTime = moment().format('x');
+
 			this.$firebaseRefs.requests.push({
 				type: this.type,
 				name: this.name,
 				email: this.email,
 				phone: this.phone,
 				message: this.message,
-				page: window.location.href
+				page: window.location.href,
+				unixTime: unixTime,
+				formatTime: moment(Number(unixTime)).format('DD-MM-YYYY | hh:mm A')
 			})
 			.then(() => {
 				setTimeout(() => {

@@ -1,25 +1,46 @@
 <template>
 	<div class="requests-wrapper">
-		<div class="requests__item" v-for="request in requests" v-bind:class="{seen: request.seen}">
+		<div class="requests__item requests__item_headings">
 			<div class="requests__item-name">
-				<div class="requests__item-label">name:</div>
+				<div class="requests__item-label">name</div>
+			</div>
+			<div class="requests__item-email">
+				<div class="requests__item-label">email</div>
+			</div>
+			<div class="requests__item-phone">
+				<div class="requests__item-label">phone</div>
+			</div>
+			<div class="requests__item-message">
+				<div class="requests__item-label">message</div>
+			</div>
+			<div class="requests__item-page">
+				<div class="requests__item-label">page</div>
+			</div>
+			<div class="requests__item-time">
+				<div class="requests__item-label">time</div>
+			</div>
+			<div class="requests__item-mark">
+			</div>
+		</div>
+
+		<div class="requests__item" v-for="request, index in items" v-bind:class="{seen: request.seen}">
+			<div class="requests__item-name">
 				<div class="requests__item-value">{{request.name}}</div>
 			</div>
 			<div class="requests__item-email">
-				<div class="requests__item-label">email:</div>
 				<div class="requests__item-value">{{request.email}}</div>
 			</div>
 			<div class="requests__item-phone">
-				<div class="requests__item-label">phone:</div>
 				<div class="requests__item-value">{{request.phone}}</div>
 			</div>
 			<div class="requests__item-message">
-				<div class="requests__item-label">message:</div>
 				<div class="requests__item-value">{{request.message}}</div>
 			</div>
 			<div class="requests__item-page">
-				<div class="requests__item-label">page:</div>
 				<div class="requests__item-value">{{request.page}}</div>
+			</div>
+			<div class="requests__item-time">
+				<div class="requests__item-value">{{request.formatTime}}</div>
 			</div>
 			<div class="requests__item-mark">
 				<button class="requests__mark"
@@ -53,6 +74,13 @@ export default {
 			loaded: false
 		}
 	},
+	computed: {
+		items () {
+			if (this.loaded) {
+				return this.requests.sort((a, b) => b.unixTime - a.unixTime);
+			}
+		}
+	},
 	methods: {
 		edit (item, mark) {
 			this.$firebaseRefs.requests.child(item['.key']).set({
@@ -62,7 +90,9 @@ export default {
 				phone: item.phone,
 				message: item.message,
 				page: item.page,
-				seen: mark
+				seen: mark,
+				unixTime: item.unixTime,
+				formatTime: item.formatTime
 			});
 		}
 	}
@@ -86,11 +116,20 @@ export default {
 		> div:nth-child(5)
 			width: 30%
 		> div:nth-child(6)
+			width: 15%
+		> div:nth-child(7)
 			width: 10%
 		&-label
 			color: gray
+			text-transform: capitalize
 		&-value
-			margin-left: 10px
+			font-size: .9em
 		&.seen
 			background: none
+		&_headings
+			background: none
+			border-bottom: 1px solid lightgray
+	&__item-time
+		.requests__item-value
+			font-size: .8em
 </style>

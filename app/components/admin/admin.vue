@@ -27,7 +27,9 @@
 					<li class="admin__item">
 						<a href="#" class="admin__link"
 						v-bind:class="{admin__link_active: this.mode === 'requests'}"
-						v-on:click.stop.prevent="showMode('requests')">Requests</a>
+						v-on:click.stop.prevent="showMode('requests')">
+							Requests {{requestsLengthString}}
+						</a>
 					</li>
 				</ul>
 			</div>
@@ -48,12 +50,34 @@ import SubCategories from './sub-categories/sub-categories.vue';
 import Products from './products/products.vue';
 import Settings from './settings/settings.vue';
 import Requests from './requests/requests.vue';
+import db from '../database-controller/database-controller.js';
 
 export default {
+	firebase ()  {
+		return {
+			requests: {
+				source: db.ref('requests'),
+				readyCallback: function () {
+					this.loaded = true;
+				}
+			}
+		}
+	},
 	data () {
 		return {
-			mode: 'super'
-		};
+			loaded: false,
+			mode: 'settings'
+		}
+	},
+	computed: {
+		newRequestsLength () {
+			if (this.loaded) {
+				return this.requests.filter(item => !item.seen).length;
+			}
+		},
+		requestsLengthString () {
+			return this.newRequestsLength ? `(${this.newRequestsLength})` : '';
+		}
 	},
 	methods: {
 		showMode (mode) {
