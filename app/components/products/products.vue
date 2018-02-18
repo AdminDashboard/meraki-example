@@ -82,6 +82,10 @@ export default {
 		loaded () {
 			const _this = this;
 
+			if (isMobile) {
+				return;
+			}
+
 			setTimeout(function () {
 				$('#fullpage-grid').fullpage({
 					css3: true,
