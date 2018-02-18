@@ -8,12 +8,12 @@
 			}"></div>
 		<div class="owl-carousel owl-theme">
 			<div class="owl-carousel__item">
-				<div class="mobile-home-main">
+				<div class="mobile-home-main mobile-home-main_about">
 					<div class="mobile-home-main__image">
 						<img :src="aboutLogo" alt="">
 					</div>
 					<div class="mobile-home-main__description">
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit ipsum laborum sunt, deleniti odit fugiat totam debitis, nobis aut in, fuga illum ab! Architecto, blanditiis placeat enim deleniti accusamus quibusdam at eum, obcaecati odio expedita excepturi adipisci, molestiae aliquam temporibus aliquid sed vitae rem sapiente et minus! Libero possimus, ipsam?
+						{{aboutItem.text}}
 					</div>
 				</div>
 			</div>
@@ -63,6 +63,7 @@ import PhoneFooter from '../../phone-footer/phone-footer.vue';
 export default {
 	firebase ()  {
 		return {
+			settings: db.ref('general'),
 			categories: db.ref('parentCat'),
 			subCats: db.ref('subCat')
 		}
@@ -107,6 +108,11 @@ export default {
 			}
 		});
 	},
+	computed: {
+		aboutItem () {
+			return this.settings.length && this.settings[0];
+		}
+	},
 	components: {
 		'header-nav': Dropdown,
 		'coming-soon': ComingSoon,
@@ -150,6 +156,9 @@ export default {
 	.mobile-home-main
 		width: 80%
 		margin: 0 auto
+		&_about
+			align-self: flex-start
+			padding-bottom: 50px
 		&__additional-title
 			position: absolute
 			font-family: 'Ailerons'
