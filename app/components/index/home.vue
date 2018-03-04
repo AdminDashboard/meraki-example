@@ -16,7 +16,7 @@
 		<div class="content">
 			<div class="content__item about">
 				<div class="about__image"><img v-bind:src='aboutLogo'></div>
-				<p class="about__text" v-text="aboutText"></p>
+				<p class="about__text" v-html="breakify(aboutText)"></p>
 				<a href="#" class="read-more-button">read more</a>
 				<div class="back-button" v-on:click='jumpBack'>back</div>
 			</div>
@@ -26,7 +26,7 @@
 				<!-- if tableCat -->
 				<div class="home-item home-item_tables" v-if='tableCat'>
 					<div class="home-item_upper">
-						<div class="home-item__text">{{tableCat.content.description}}</div>
+						<div class="home-item__text" v-html="breakify(tableCat.content.description)"></div>
 					</div>
 					<div class="home-item_middle">
 						<a v-if='tableCat.hasProducts && tableCat.content.showItsChilds' v-bind:href="`/#/products/${tableCat.content.id}`" class="product-button">view products</a>
@@ -48,7 +48,7 @@
 				<!-- if seatingCat -->
 				<div class="home-item home-item_seating" v-if='seatingCat'>
 					<div class="home-item_upper">
-						<div class="home-item__text">{{seatingCat.content.description}}</div>
+						<div class="home-item__text" v-html="breakify(seatingCat.content.description)"></div>
 					</div>
 					<div class="home-item_middle">
 						<a v-if='seatingCat.hasProducts && seatingCat.content.showItsChilds' v-bind:href="`/#/products/${seatingCat.content.id}`" class="product-button">view products</a>
@@ -70,7 +70,7 @@
 				<!-- if bedsCat -->
 				<div class="home-item home-item_beds" v-if='bedsCat'>
 					<div class="home-item_upper">
-						<div class="home-item__text">{{bedsCat.content.description}}</div>
+						<div class="home-item__text" v-html="breakify(bedsCat.content.description)"></div>
 					</div>
 					<div class="home-item_middle">
 						<a v-if='bedsCat.hasProducts && bedsCat.content.showItsChilds' v-bind:href="`/#/products/${bedsCat.content.id}`" class="product-button">view products</a>
@@ -92,7 +92,7 @@
 				<!-- if decorCat -->
 				<div class="home-item home-item_decor" v-if='decorCat'>
 					<div class="home-item_upper">
-						<div class="home-item__text">{{decorCat.content.description}}</div>
+						<div class="home-item__text" v-html="breakify(decorCat.content.description)"></div>
 					</div>
 					<div class="home-item_middle">
 						<a v-if='decorCat.hasProducts && decorCat.content.showItsChilds' v-bind:href="`/#/products/${decorCat.content.id}`" class="product-button">view products</a>
@@ -114,7 +114,7 @@
 				<!-- if lightingCat -->
 				<div class="home-item home-item_lighting" v-if='lightingCat'>
 					<div class="home-item_upper">
-						<div class="home-item__text">{{lightingCat.content.description}}</div>
+						<div class="home-item__text" v-html="breakify(lightingCat.content.description)"></div>
 					</div>
 					<div class="home-item_middle">
 						<a v-if='lightingCat.hasProducts && lightingCat.content.showItsChilds' v-bind:href="`/#/products/${lightingCat.content.id}`" class="product-button">view products</a>
@@ -135,7 +135,7 @@
 				<!-- if kitchenCat -->
 				<div class="home-item home-item_kitchen" v-if='kitchenCat'>
 					<div class="home-item_upper">
-						<div class="home-item__text">{{kitchenCat.content.description}}</div>
+						<div class="home-item__text" v-html="breakify(kitchenCat.content.description)"></div>
 					</div>
 					<div class="home-item_middle">
 						<a v-if='kitchenCat.hasProducts && kitchenCat.content.showItsChilds' v-bind:href="`/#/products/${lightingCat.content.id}`" class="product-button">view products</a>
@@ -157,7 +157,7 @@
 				<!-- if bathroomCat -->
 				<div class="home-item home-item_bathroom" v-if='bathroomCat'>
 					<div class="home-item_upper">
-						<div class="home-item__text">{{bathroomCat.content.description}}</div>
+						<div class="home-item__text" v-html="breakify(bathroomCat.content.description)"></div>
 					</div>
 					<div class="home-item_middle">
 						<a v-if='bathroomCat.hasProducts && bathroomCat.content.showItsChilds' v-bind:href="`/#/products/${bathroomCat.content.id}`" class="product-button">view products</a>
@@ -271,6 +271,9 @@ export default {
 		}
 	},
 	methods: {
+		breakify (text) {
+			return text.replace(/(?:\r\n|\r|\n)/g, '<br/>');
+		},
 		goToNeutral () {
 			this.playItem = this.lastItem;
 			this.playItemMode = 'fadeDuration';

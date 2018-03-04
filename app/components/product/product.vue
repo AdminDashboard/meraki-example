@@ -14,7 +14,7 @@
 					<div class="product__inner-image" v-on:click="showFullImage($event, section.image1)"><img v-bind:src='section.image1'></div>
 					<div class="product__text-block">
 						<h2 class="product__text-heading">{{section.title}}</h2>
-						<p class="product__text-p">{{section.description}}</p>
+						<p class="product__text-p" v-html="breakify(section.description)"></p>
 					</div>
 				</div>
 				<div class="product__section_right" v-if="section.type === 'left'">
@@ -28,7 +28,7 @@
 					<div class="product__inner-image" v-on:click="showFullImage($event, section.image2)"><img v-bind:src='section.image2'></div>
 					<div class="product__text-block">
 						<h2 class="product__text-heading">{{section.title}}</h2>
-						<p class="product__text-p">{{section.description}}</p>
+						<p class="product__text-p" v-html="breakify(section.description)"></p>
 					</div>
 				</div>
 			</div>
@@ -120,7 +120,9 @@ export default {
 			this.imageController.active = true;
 			this.recentImage = target;
 		},
-
+		breakify (text) {
+			return text.replace(/(?:\r\n|\r|\n)/g, '<br/>');
+		},
 		checkIfInLs () {
 			const wishlist = this.$ls.get('wishlist');
 			const cart = this.$ls.get('cart');
